@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIELCHEAT OFFICIAL - Panel FF & PUBG</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0a0f;--card:#12121a;--accent:#ff0040;--accent2:#00d4ff;--accent3:#a855f7;--accent4:#f59e0b;--accent5:#10b981;--accent6:#ec4899;--text:#fff;--text2:#aaa;--border:rgba(255,255,255,0.1)}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text)}
+
+ .promo-bar{background:linear-gradient(90deg,var(--accent),var(--accent3));padding:12px;text-align:center;font-weight:700}
+ .countdown{display:flex;justify-content:center;gap:10px;margin-top:8px}
+ .count-box{background:rgba(0,0,0,0.3);padding:5px 10px;border-radius:8px;min-width:50px}
+
+  nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,15,0.9);backdrop-filter:blur(10px);padding:12px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+ .logo{font-weight:900;font-size:22px;color:var(--accent)}
+ .btn-edit{background:var(--accent3);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer;border:none}
+
+ .hero{text-align:center;padding:80px 20px}
+ .hero h2{font-size:48px;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+ .contact-box{display:flex;gap:15px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+ .contact-btn{padding:12px 25px;border-radius:12px;font-weight:700;text-decoration:none;color:#fff}
+ .contact-btn.wa{background:linear-gradient(90deg,#25D366,#128C7E)}
+ .contact-btn.tele{background:linear-gradient(90deg,#0088cc,#00aaff)}
+
+ .container{max-width:1200px;margin:auto;padding:60px 20px}
+ .section-title{text-align:center;font-size:32px;font-weight:900;margin-bottom:20px}
+ .tabs{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+ .tab-btn{padding:10px 22px;background:var(--card);border:2px solid var(--border);border-radius:12px;color:var(--text2);font-weight:700;cursor:pointer}
+ .tab-btn.active{border-color:var(--accent);color:var(--accent)}
+
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px}
+ .card{background:var(--card);padding:20px;border-radius:16px;border:1px solid var(--border);display:none}
+ .card.show{display:block;animation:fadeIn.4s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+ .card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:15px}
+ .badge{float:right;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700}
+ .badge.lite{background:var(--accent)}.badge.pro{background:var(--accent2);color:#000}.badge.flu{background:var(--accent3)}
+ .badge.drip{background:var(--accent6)}.badge.pubg{background:var(--accent4);color:#000}.badge.gbox{background:var(--accent5)}
+ .harga{font-size:22px;color:var(--accent2);font-weight:700}
+ .harga.editable{border:2px dashed var(--accent2);padding:5px;border-radius:8px;cursor:pointer}
+ .btn-beli{width:100%;margin-top:12px;padding:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer}
+ .btn-tele{width:100%;margin-top:8px;padding:10px;background:linear-gradient(90deg,#0088cc,#00aaff);border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer}
+
+ .qris-box{background:var(--card);padding:30px;border-radius:20px;border:2px solid var(--accent2);text-align:center;max-width:500px;margin:auto}
+ .qris-box img{width:100%;max-width:350px;border-radius:16px;border:4px solid var(--accent2);margin:20px 0}
+ .qris-warning{background:rgba(255,0,64,0.2);padding:12px;border-radius:10px;font-weight:700;color:var(--accent);margin-top:10px}
+
+  footer{text-align:center;padding:30px;background:var(--card);margin-top:50px;color:var(--text2)}
+ .edit-notif{position:fixed;bottom:20px;right:20px;background:var(--accent3);padding:15px 20px;border-radius:12px;font-weight:700;z-index:3000;display:none}
+</style>
+</head>
+<body>
+
+<div class="promo-bar">
+  <span>🔥 PROMO TERBATAS! BERAKHIR DALAM 🔥</span>
+  <div class="countdown">
+    <div class="count-box"><b id="hours">23</b><small>JAM</small></div>
+    <div class="count-box"><b id="minutes">59</b><small>MENIT</small></div>
+    <div class="count-box"><b id="seconds">59</b><small>DETIK</small></div>
+  </div>
+</div>
+
+<nav>
+  <div class="logo">NIELCHEAT OFFICIAL</div>
+  <button class="btn-edit" onclick="toggleEditMode()">✏️ Edit Harga</button>
+</nav>
+
+<section class="hero">
+  <h2>NIELCHEAT OFFICIAL</h2>
+  <p>Panel FREE FIRE & PUBG | Proses 1-5 Menit | 100% Aman</p>
+  <div class="contact-box">
+    <a href="https://wa.me/6285194336082" target="_blank" class="contact-btn wa">📱 WhatsApp Admin</a>
+    <a href="https://t.me/Nielllofc" target="_blank" class="contact-btn tele">✈️ Telegram Admin</a>
+  </div>
+</section>
+
+<section class="container" id="produk">
+  <h2 class="section-title">🔥 DAFTAR PRODUK</h2>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="filter('semua')">SEMUA</button>
+    <button class="tab-btn" onclick="filter('migul')">MIGUL</button>
+    <button class="tab-btn" onclick="filter('fluorite')">FLUORITE</button>
+    <button class="tab-btn" onclick="filter('drip')">DRIP</button>
+    <button class="tab-btn" onclick="filter('pubg')">PUBG</button>
+    <button class="tab-btn" onclick="filter('gbox')">GBOX</button>
+  </div>
+  <div class="grid" id="produkGrid">
+
+    <!-- MIGUL LITE -->
+    <div class="card" data-k="migul" data-id="ml1"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 1 Day</h3><p class="harga" data-h="35000">Rp 35.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="migul" data-id="ml7"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 7 Day</h3><p class="harga" data-h="100000">Rp 100.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="migul" data-id="ml30"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 30 Day</h3><p class="harga" data-h="230000">Rp 230.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+    <!-- MIGUL PRO -->
+    <div class="card" data-k="migul" data-id="mp1"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 1 Day</h3><p class="harga" data-h="40000">Rp 40.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="migul" data-id="mp7"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 7 Day</h3><p class="harga" data-h="120000">Rp 120.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="migul" data-id="mp30"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 30 Day</h3><p class="harga" data-h="270000">Rp 270.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+    <!-- FLUORITE -->
+    <div class="card" data-k="fluorite" data-id="f1"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 1 Day</h3><p class="harga" data-h="50000">Rp 50.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="fluorite" data-id="f2"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 2 Day</h3><p class="harga" data-h="150000">Rp 150.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="fluorite" data-id="f30"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 30 Day</h3><p class="harga" data-h="350000">Rp 350.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+    <!-- DRIP CLIENT -->
+    <div class="card" data-k="drip" data-id="d1"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 1 Day</h3><p class="harga" data-h="12000">Rp 12.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="drip" data-id="d3"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 3 Day</h3><p class="harga" data-h="25000">Rp 25.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="drip" data-id="d7"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 7 Day</h3><p class="harga" data-h="50000">Rp 50.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="drip" data-id="d15"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 15 Day</h3><p class="harga" data-h="90000">Rp 90.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="drip" data-id="d30"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 30 Day</h3><p class="harga" data-h="130000">Rp 130.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+    <!-- PUBG KING MOD -->
+    <div class="card" data-k="pubg" data-id="p1"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD 1 Day</h3><p class="harga" data-h="60000">Rp 60.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="pubg" data-id="p7"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD 7 Day</h3><p class="harga" data-h="170000">Rp 170.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+    <div class="card" data-k="pubg" data-id="p30"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD 30 Day</h3><p class="harga" data-h="400000">Rp 400.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+    <!-- GBOX -->
+    <div class="card" data-k="gbox" data-id="g1"><span class="badge gbox">GBOX</span><img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png"><h3>GBOX 1 TAHUN</h3><p style="color:var(--text2);font-size:14px">Garansi 30 Hari</p><p class="harga" data-h="100000">Rp 100.000</p><button class="btn-beli" onclick="order(this)">Beli via WA</button><button class="btn-tele" onclick="orderTele(this)">Beli via TELE</button></div>
+
+  </div>
+</section>
+
+<section class="container" id="qris">
+  <h2 class="section-title">💳 PEMBAYARAN QRIS</h2>
+  <div class="qris-box">
+    <h3>Scan QRIS di bawah ini</h3>
+    <p>Semua bank & e-wallet: DANA, OVO, GOPAY, ShopeePay, BCA, Mandiri, dll</p>
+    <img src="https://i.ibb.co.com/WW8Mf6Gb/Kode-QRIS-BINTANG-NURLIZA-ZASKIA-Digital-Kreatif.jpg" alt="QRIS">
+    <p style="font-weight:700;font-size:18px;color:var(--accent2)">a.n BINTANG NURLIZA ZASKIA</p>
+    <div class="qris-warning">⚠️ SELAIN NAMA INI FAKE / PENIPUAN ⚠️</div>
+    <p style="margin-top:10px">Setelah bayar wajib kirim bukti ke WA / TELE Admin</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 NIELCHEAT OFFICIAL<br>
+  WA: 6285194336082 | TELE: @Nielllofc
+</footer>
+
+<div class="edit-notif" id="editNotif">✏️ Edit Mode ON - Klik harga untuk ubah</div>
+
+<script>
+let editMode = false;
+let prices = JSON.parse(localStorage.getItem('nielHarga')) || {};
+
+function toggleEditMode(){
+  editMode =!editMode;
+  document.getElementById('editNotif').style.display = editMode? 'block' : 'none';
+  document.querySelectorAll('.harga').forEach(h => {
+    h.classList.toggle('editable', editMode);
+    h.onclick = editMode? editHarga : null;
+  });
+}
+
+function editHarga(e){
+  let el = e.target;
+  let id = el.closest('.card').dataset.id;
+  let baru = prompt('Masukkan harga baru:', el.dataset.h);
+  if(baru &&!isNaN(baru)){
+    prices[id] = parseInt(baru);
+    localStorage.setItem('nielHarga', JSON.stringify(prices));
+    updateHarga();
+  }
+}
+
+function updateHarga(){
+  document.querySelectorAll('.card').forEach(card => {
+    let id = card.dataset.id;
+    let hargaEl = card.querySelector('.harga');
+    let harga = prices[id] || parseInt(hargaEl.dataset.h);
+    hargaEl.dataset.h = harga;
+    hargaEl.innerText = 'Rp ' + harga.toLocaleString('id-ID');
+  });
+}
+
+function order(btn){
+  let card = btn.closest('.card');
+  let nama = card.querySelector('h3').innerText;
+  let harga = card.querySelector('.harga').dataset.h;
+  let pesan = `Halo Admin, saya mau order ${nama} Rp ${parseInt(harga).toLocaleString('id-ID')}`;
+  window.open(`https://wa.me/6285194336082?text=${encodeURIComponent(pesan)}`,'_blank');
+}
+
+function orderTele(btn){
+  let card = btn.closest('.card');
+  let nama = card.querySelector('h3').innerText;
+  let harga = card.querySelector('.harga').dataset.h;
+  let pesan = `Halo Admin, saya mau order ${nama} Rp ${parseInt(harga).toLocaleString('id-ID')}`;
+  window.open(`https://t.me/Nielllofc?text=${encodeURIComponent(pesan)}`,'_blank');
+}
+
+function startCountdown(){
+  let h=23,m=59,s=59;
+  setInterval(()=>{
+    s--;if(s<0){s=59;m--;}if(m<0){m=59;h--;}if(h<0){h=23;m=59;s=59;}
+    document.getElementById('hours').innerText=String(h).padStart(2,'0');
+    document.getElementById('minutes').innerText=String(m).padStart(2,'0');
+    document.getElementById('seconds').innerText=String(s).padStart(2,'0');
+  },1000);
+}
+startCountdown();
+
+function filter(kategori){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.toggle('show', kategori === 'semua' || card.dataset.k === kategori);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{filter('semua'); updateHarga();});
+</script>
+</body>
+</html>
