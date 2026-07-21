@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIELLOFC - Panel FF & PUBG Terpercaya No 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0f1a;--card:#111827;--accent:#ff4500;--accent2:#ff0000;--text:#fff;--text2:#9ca3af;--border:#1f2937;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text)}
+
+  nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(10,15,26,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:15px 5%;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:var(--accent);text-shadow:0 0 10px var(--accent)}
+  .nav-menu{display:flex;gap:30px;list-style:none}
+  .nav-menu a{color:var(--text2);text-decoration:none;font-weight:600;transition:0.3s}
+  .nav-menu a:hover{color:var(--accent)}
+
+  .hero{background:linear-gradient(135deg,#0a0f1a 0%,#330000 100%);text-align:center;padding:140px 20px 80px;border-bottom:2px solid var(--accent)}
+  .hero h1{font-family:'Orbitron',sans-serif;font-size:50px;font-weight:900;color:var(--accent);text-shadow:0 0 20px var(--accent);margin-bottom:15px}
+  .hero p{color:var(--text2);font-size:18px;margin-bottom:30px}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:15px 40px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;box-shadow:0 0 20px var(--accent);transition:0.3s}
+  .btn-primary:hover{transform:scale(1.05)}
+
+  .container{max-width:1200px;margin:auto;padding:80px 20px}
+  .section-title{text-align:center;font-size:34px;font-weight:800;margin-bottom:50px;font-family:'Orbitron',sans-serif;color:var(--accent)}
+
+  .filter-btns{display:flex;justify-content:center;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+  .filter-btn{padding:10px 25px;background:var(--card);border:2px solid var(--border);border-radius:10px;color:var(--text2);font-weight:700;cursor:pointer;transition:0.3s}
+  .filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 15px var(--accent)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:20px;transition:0.3s;display:none}
+  .card.show{display:block;animation:fadeIn 0.4s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 30px rgba(255,69,0,0.3)}
+  .card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:15px}
+  .badge{float:right;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800}
+  .badge.lite{background:var(--accent);color:#000}
+  .badge.pro{background:var(--accent2);color:#fff}
+  .badge.flu{background:#ff8800;color:#000}
+  .badge.drip{background:#ff5500;color:#000}
+  .badge.pubg{background:#ffaa00;color:#000}
+  .badge.gbox{background:#ff3300;color:#fff}
+  .card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+  .card p{color:var(--text2);font-size:14px;margin-bottom:15px;min-height:40px}
+  .harga{font-size:22px;color:var(--accent);font-weight:800;margin-bottom:15px}
+  .btn-beli{width:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:12px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px}
+
+  .notif-order{position:fixed;bottom:20px;left:20px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:15px 20px;border-radius:12px;box-shadow:0 0 20px var(--accent);z-index:9999;display:none;align-items:center;gap:12px;font-weight:700;animation:slideIn 0.5s}
+  @keyframes slideIn{from{transform:translateX(-300px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .notif-icon{font-size:24px;animation:ring 1s infinite}
+  @keyframes ring{0%,100%{transform:rotate(0)}25%{transform:rotate(15deg)}75%{transform:rotate(-15deg)}}
+
+  .fitur{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .fitur-box{background:var(--card);padding:30px;border-radius:12px;border:1px solid var(--border);text-align:center}
+  .fitur-box .icon{font-size:40px;margin-bottom:15px}
+  .fitur-box h4{color:var(--accent);margin-bottom:10px;font-size:18px;font-weight:700}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+  .step-box{text-align:center;padding:20px}
+  .step-num{width:50px;height:50px;background:var(--accent);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;margin:0 auto 15px;font-family:'Orbitron',sans-serif}
+
+  .payment-box{background:var(--card);padding:30px;border-radius:15px;border:1px solid var(--border);text-align:center;max-width:600px;margin:auto}
+  .payment-name{font-size:20px;font-weight:800;color:var(--accent);margin:10px 0}
+  .warning{color:#ff0040;font-weight:700;margin-top:15px}
+
+  footer{background:#0a0f1a;border-top:1px solid var(--border);padding:50px 20px;color:var(--text2)}
+  .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;max-width:1200px;margin:auto;margin-bottom:30px}
+  .footer-grid h4{color:var(--accent);margin-bottom:15px;font-family:'Orbitron',sans-serif}
+  .footer-grid a{color:var(--text2);text-decoration:none;display:block;margin:8px 0}
+  .footer-grid a:hover{color:var(--accent)}
+  .copyright{border-top:1px solid var(--border);padding-top:20px;text-align:center}
+
+  @media(max-width:768px){.nav-menu{display:none}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">NIELLOFC</div>
+  <ul class="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#caraorder">Cara Order</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <h1>NIELLOFC OFFICIAL</h1>
+  <p>Panel Free Fire & PUBG Terpercaya No 1 | Proses 1-5 Menit | Garansi 100%</p>
+  <a href="#produk" class="btn-primary">BELI SEKARANG</a>
+</section>
+
+<section class="container" id="produk">
+  <h2 class="section-title">DAFTAR PRODUK</h2>
+  
+  <div class="filter-btns">
+    <button class="filter-btn active" onclick="filter('semua')">SEMUA</button>
+    <button class="filter-btn" onclick="filter('migul')">MIGUL</button>
+    <button class="filter-btn" onclick="filter('fluorite')">FLUORITE</button>
+    <button class="filter-btn" onclick="filter('drip')">DRIP</button>
+    <button class="filter-btn" onclick="filter('pubg')">PUBG</button>
+    <button class="filter-btn" onclick="filter('gbox')">GBOX</button>
+  </div>
+
+  <div class="grid" id="produkGrid">
+    <!-- MIGUL LITE -->
+    <div class="card" data-k="migul"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 1 DAY</h3><p>Panel FF Full Fitur Premium</p><div class="harga">Rp 35.000</div><button class="btn-beli" onclick="order('MIGUL LITE 1 DAY',35000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="migul"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 7 DAY</h3><p>Panel FF Full Fitur Premium</p><div class="harga">Rp 100.000</div><button class="btn-beli" onclick="order('MIGUL LITE 7 DAY',100000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="migul"><span class="badge lite">LITE</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL LITE 30 DAY</h3><p>Panel FF Full Fitur Premium</p><div class="harga">Rp 230.000</div><button class="btn-beli" onclick="order('MIGUL LITE 30 DAY',230000)">BELI SEKARANG</button></div>
+
+    <!-- MIGUL PRO -->
+    <div class="card" data-k="migul"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 1 DAY</h3><p>Panel FF Pro + Fitur Lengkap Premium</p><div class="harga">Rp 40.000</div><button class="btn-beli" onclick="order('MIGUL PRO 1 DAY',40000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="migul"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 7 DAY</h3><p>Panel FF Pro + Fitur Lengkap Premium</p><div class="harga">Rp 120.000</div><button class="btn-beli" onclick="order('MIGUL PRO 7 DAY',120000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="migul"><span class="badge pro">PRO</span><img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png"><h3>MIGUL PRO 30 DAY</h3><p>Panel FF Pro + Fitur Lengkap Premium</p><div class="harga">Rp 270.000</div><button class="btn-beli" onclick="order('MIGUL PRO 30 DAY',270000)">BELI SEKARANG</button></div>
+
+    <!-- FLUORITE -->
+    <div class="card" data-k="fluorite"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 1 DAY</h3><p>Panel FF Premium Fitur Terlengkap</p><div class="harga">Rp 50.000</div><button class="btn-beli" onclick="order('FLUORITE 1 DAY',50000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="fluorite"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 2 DAY</h3><p>Panel FF Premium Fitur Terlengkap</p><div class="harga">Rp 150.000</div><button class="btn-beli" onclick="order('FLUORITE 2 DAY',150000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="fluorite"><span class="badge flu">FLUORITE</span><img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg"><h3>FLUORITE 30 DAY</h3><p>Panel FF Premium Fitur Terlengkap</p><div class="harga">Rp 350.000</div><button class="btn-beli" onclick="order('FLUORITE 30 DAY',350000)">BELI SEKARANG</button></div>
+
+    <!-- DRIP CLIENT -->
+    <div class="card" data-k="drip"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 1 DAY</h3><p>Panel FF Ringan Cocok Semua HP</p><div class="harga">Rp 12.000</div><button class="btn-beli" onclick="order('DRIP CLIENT 1 DAY',12000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="drip"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 3 DAY</h3><p>Panel FF Ringan Cocok Semua HP</p><div class="harga">Rp 25.000</div><button class="btn-beli" onclick="order('DRIP CLIENT 3 DAY',25000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="drip"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 7 DAY</h3><p>Panel FF Ringan Cocok Semua HP</p><div class="harga">Rp 50.000</div><button class="btn-beli" onclick="order('DRIP CLIENT 7 DAY',50000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="drip"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 15 DAY</h3><p>Panel FF Ringan Cocok Semua HP</p><div class="harga">Rp 90.000</div><button class="btn-beli" onclick="order('DRIP CLIENT 15 DAY',90000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="drip"><span class="badge drip">DRIP</span><img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg"><h3>DRIP CLIENT 30 DAY</h3><p>Panel FF Ringan Cocok Semua HP</p><div class="harga">Rp 130.000</div><button class="btn-beli" onclick="order('DRIP CLIENT 30 DAY',130000)">BELI SEKARANG</button></div>
+
+    <!-- PUBG KING MOD -->
+    <div class="card" data-k="pubg"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD PUBG 1 DAY</h3><p>Panel PUBG Mobile Premium</p><div class="harga">Rp 60.000</div><button class="btn-beli" onclick="order('KING MOD PUBG 1 DAY',60000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="pubg"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD PUBG 7 DAY</h3><p>Panel PUBG Mobile Premium</p><div class="harga">Rp 170.000</div><button class="btn-beli" onclick="order('KING MOD PUBG 7 DAY',170000)">BELI SEKARANG</button></div>
+    <div class="card" data-k="pubg"><span class="badge pubg">PUBG</span><img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg"><h3>KING MOD PUBG 30 DAY</h3><p>Panel PUBG Mobile Premium</p><div class="harga">Rp 400.000</div><button class="btn-beli" onclick="order('KING MOD PUBG 30 DAY',400000)">BELI SEKARANG</button></div>
+
+    <!-- GBOX -->
+    <div class="card" data-k="gbox"><span class="badge gbox">GBOX</span><img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png"><h3>GBOX 1 TAHUN</h3><p>Injector Multi Game Garansi 30 Hari</p><div class="harga">Rp 100.000</div><button class="btn-beli" onclick="order('GBOX 1 TAHUN',100000)">BELI SEKARANG</button></div>
+  </div>
+</section>
+
+<section class="container" id="tentang">
+  <h2 class="section-title">KENAPA PILIH NIELLOFC</h2>
+  <div class="fitur">
+    <div class="fitur-box"><div class="icon">⚡</div><h4>PROSES CEPAT</h4><p>Order masuk langsung diproses 1-5 menit</p></div>
+    <div class="fitur-box"><div class="icon">🛡️</div><h4>100% AMAN</h4><p>Sudah teruji ribuan customer</p></div>
+    <div class="fitur-box"><div class="icon">💬</div><h4>CS 24 JAM</h4><p>Admin siap bantu kapan saja via WhatsApp & Telegram</p></div>
+    <div class="fitur-box"><div class="icon">💳</div><h4>PEMBAYARAN MUDAH</h4><p>Transfer Bank, DANA, OVO, GOPAY</p></div>
+  </div>
+</section>
+
+<section class="container" id="caraorder">
+  <h2 class="section-title">CARA ORDER</h2>
+  <div class="steps">
+    <div class="step-box"><div class="step-num">1</div><h4>Pilih Produk</h4><p>Pilih produk yang kamu mau</p></div>
+    <div class="step-box"><div class="step-num">2</div><h4>Klik Beli</h4><p>Klik tombol beli dan otomatis ke WhatsApp</p></div>
+    <div class="step-box"><div class="step-num">3</div><h4>Lakukan Pembayaran</h4><p>Transfer ke rekening yang tertera</p></div>
+    <div class="step-box"><div class="step-num">4</div><h4>Kirim Bukti</h4><p>Kirim bukti TF ke admin</p></div>
+  </div>
+</section>
+
+<section class="container" id="kontak">
+  <h2 class="section-title">PEMBAYARAN</h2>
+  <div class="payment-box">
+    <h3 style="color:var(--accent);margin-bottom:15px">Transfer ke:</h3>
+    <p style="color:var(--text2)">Semua Bank & E-Wallet</p>
+    <div class="payment-name">a.n BINTANG NURLIZA ZASKIA</div>
+    <div class="warning">⚠️ SELAIN NAMA INI PENIPUAN ⚠️</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><h4>TENTANG KAMI</h4><p>NIELLOFC adalah toko panel FF & PUBG terpercaya</p></div>
+    <div><h4>MENU</h4><a href="#home">Home</a><a href="#produk">Produk</a><a href="#tentang">Tentang</a></div>
+    <div><h4>KONTAK</h4><a href="https://wa.me/6285194336082">WhatsApp: 0851-9433-6082</a><a href="https://t.me/Nielllofc">Telegram: @Nielllofc</a></div>
+  </div>
+  <div class="copyright">© 2026 NIELLOFC. All Rights Reserved.</div>
+</footer>
+
+<div class="notif-order" id="notifOrder">
+  <span class="notif-icon">🔔</span>
+  <span id="notifText">Order Baru Masuk!</span>
+</div>
+
+<script>
+let namaOrder = ["Budi JKT","Riko BDG","Andi SBY","Dika MLG","Fajar TGR"];
+let produkOrder = ["MIGUL LITE 7 DAY","FLUORITE 30 DAY","DRIP CLIENT 30 DAY","KING MOD PUBG 1 DAY","GBOX 1 TAHUN"];
+
+function filter(kategori){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.toggle('show', kategori === 'semua' || card.dataset.k === kategori);
+  });
+}
+
+function order(nama,harga){
+  showNotif(`Order: ${nama} - Rp ${harga.toLocaleString('id-ID')}`);
+  let pesan = `Halo Admin NIELLOFC, saya mau order ${nama} Rp ${harga.toLocaleString('id-ID')}`;
+  window.open(`https://wa.me/6285194336082?text=${encodeURIComponent(pesan)}`,'_blank');
+}
+
+function showNotif(text){
+  let notif = document.getElementById('notifOrder');
+  document.getElementById('notifText').innerText = text;
+  notif.style.display = 'flex';
+  setTimeout(()=>{notif.style.display = 'none'}, 4000);
+}
+
+setInterval(()=>{
+  let randomNama = namaOrder[Math.floor(Math.random()*namaOrder.length)];
+  let randomProduk = produkOrder[Math.floor(Math.random()*produkOrder.length)];
+  showNotif(`${randomNama} baru order ${randomProduk}`);
+}, Math.random()*15000 + 15000);
+
+document.addEventListener('DOMContentLoaded', ()=>{filter('semua')});
+</script>
+
+</body>
+</html>
