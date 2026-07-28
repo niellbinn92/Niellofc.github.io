@@ -3,108 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIELofc</title>
+<title>NIELofc - Jual Voucher Game</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body{background:#0A0A0A;color:#fff;font-family:Inter}
-.card{background:#121212;border-radius:16px}
-.btn{background:#00D1FF;color:#000;font-weight:700}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:99;align-items:center;justify-content:center}
-.modal-content{background:#1A1A1A;padding:20px;border-radius:16px;width:90%;max-width:400px}
-.durasi-btn{border:1px solid #333;padding:8px;border-radius:8px;text-align:center;cursor:pointer}
-.durasi-btn.active{border-color:#00D1FF;background:#00D1FF20}
+.header{position:sticky;top:0;z-index:50;background:#000}
+.banner{background:linear-gradient(135deg,#7C3AED 0%,#EC4899 100%)}
+.card{background:#121212;border-radius:12px}
+.page{display:none}
+.page.active{display:block}
+.durasi-btn{border:1px solid #333;padding:10px;border-radius:8px;cursor:pointer}
+.durasi-btn.active{border-color:#A855F7;background:#A855F720}
 </style>
 </head>
 <body>
 
-<!-- HEADER + BANNER SAMA SEPERTI SEBELUMNYA -->
-<div class="flex justify-between items-center p-4 bg-black"><div class="text-xl font-black">NIEL<span class="text-[#00D1FF]">ofc</span></div><div>☰</div></div>
-<div class="bg-gradient-to-r from-purple-900 to-black p-5"><h1 class="text-3xl font-black">Flourite Plans</h1></div>
-
-<!-- PRODUK -->
-<div class="p-4 grid grid-cols-2 gap-3">
-
-  <!-- CARD MIGUL -->
-  <div class="card p-3">
-    <span class="bg-purple-700 text-[10px] px-2 py-1 rounded">ANDROID</span>
-    <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-full h-24 object-contain my-2">
-    <p class="font-bold">MIGUL LITE & PRO</p>
-    <p class="text-xs text-gray-400">Mulai dari Rp35.000</p>
-    <button onclick="openModal('MIGUL', {lite1:35000,lite7:100000,lite30:230000,pro1:40000,pro7:120000,pro30:270000})" class="btn w-full py-2 rounded mt-2">Beli Sekarang</button>
-  </div>
-
-  <!-- CARD FLUORITE -->
-  <div class="card p-3">
-    <span class="bg-pink-600 text-[10px] px-2 py-1 rounded">IOS</span>
-    <img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg" class="w-full h-24 object-contain my-2">
-    <p class="font-bold">FLUORITE</p>
-    <p class="text-xs text-gray-400">Mulai dari Rp50.000</p>
-    <button onclick="openModal('FLUORITE', {d1:50000,d2:150000,d30:350000})" class="btn w-full py-2 rounded mt-2">Beli Sekarang</button>
-  </div>
-
-  <!-- CARD PUBG KING -->
-  <div class="card p-3">
-    <span class="bg-yellow-700 text-[10px] px-2 py-1 rounded">PUBG</span>
-    <img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg" class="w-full h-24 object-contain my-2">
-    <p class="font-bold">PUBG KING MOD</p>
-    <p class="text-xs text-gray-400">Mulai dari Rp60.000</p>
-    <button onclick="openModal('PUBG KING', {d1:60000,d7:170000,d30:400000})" class="btn w-full py-2 rounded mt-2">Beli Sekarang</button>
-  </div>
-
-  <!-- CARD DRIP -->
-  <div class="card p-3">
-    <span class="bg-purple-700 text-[10px] px-2 py-1 rounded">ANDROID</span>
-    <img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg" class="w-full h-24 object-contain my-2">
-    <p class="font-bold">DRIP CLIENT</p>
-    <p class="text-xs text-gray-400">Mulai dari Rp12.000</p>
-    <button onclick="openModal('DRIP', {d1:12000,d3:25000,d7:50000,d15:90000,d30:130000})" class="btn w-full py-2 rounded mt-2">Beli Sekarang</button>
-  </div>
-
+<!-- HEADER -->
+<div class="header p-3 flex justify-between items-center">
+  <h1 class="text-xl font-black">NIEL<span class="text-purple-400">ofc</span></h1>
+  <div>☰</div>
 </div>
 
-<!-- POPUP PILIH DURASI -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h2 id="modalTitle" class="font-bold text-lg mb-3"></h2>
-    <div id="durasiList" class="grid grid-cols-2 gap-2 mb-4"></div>
-    <p class="text-center text-xl font-bold mb-3">Total: <span id="totalHarga">Rp0</span></p>
-    <button onclick="orderWA()" class="btn w-full py-3 rounded">Order via WhatsApp</button>
-    <button onclick="closeModal()" class="w-full py-2 mt-2 text-gray-400">Batal</button>
+<!-- PAGE 1: HOME -->
+<div id="home" class="page active">
+  <div class="banner p-5">
+    <h2 class="text-2xl font-black">JUALAN CHEAT & VOUCHER GAME</h2>
+    <p class="text-sm">DI NIELofc</p>
+  </div>
+
+  <div class="p-2 flex gap-2 overflow-x-auto">
+    <button class="bg-purple-700 px-4 py-1 rounded">SEMUA</button>
+    <button class="bg-[#222] px-4 py-1 rounded">ANDROID</button>
+    <button class="bg-[#222] px-4 py-1 rounded">IOS</button>
+  </div>
+
+  <h3 class="p-3 font-bold">🔥 Produk Unggulan</h3>
+  <div class="grid grid-cols-2 gap-3 p-3">
+
+    <!-- MIGUL -->
+    <div class="card p-2" onclick="showProduct('migul')">
+      <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-full h-24 object-contain">
+      <p class="text-sm font-bold mt-1">MIGUL LITE & PRO</p>
+      <p class="text-xs text-gray-400">FF Android</p>
+    </div>
+
+    <!-- FLUORITE -->
+    <div class="card p-2" onclick="showProduct('fluorite')">
+      <img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg" class="w-full h-24 object-contain">
+      <p class="text-sm font-bold mt-1">FLUORITE</p>
+      <p class="text-xs text-gray-400">FF iOS</p>
+    </div>
+
+    <!-- PUBG KING -->
+    <div class="card p-2" onclick="showProduct('pubg')">
+      <img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg" class="w-full h-24 object-contain">
+      <p class="text-sm font-bold mt-1">PUBG KING MOD</p>
+      <p class="text-xs text-gray-400">PUBG Mobile</p>
+    </div>
+
+    <!-- GBOX -->
+    <div class="card p-2" onclick="showProduct('gbox')">
+      <img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png" class="w-full h-24 object-contain">
+      <p class="text-sm font-bold mt-1">GBOX 1 TAHUN</p>
+      <p class="text-xs text-gray-400">Garansi 30 Hari</p>
+    </div>
+
+    <!-- DRIP -->
+    <div class="card p-2" onclick="showProduct('drip')">
+      <img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg" class="w-full h-24 object-contain">
+      <p class="text-sm font-bold mt-1">DRIP CLIENT</p>
+      <p class="text-xs text-gray-400">FF Android</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2: DETAIL PRODUK -->
+<div id="detail" class="page">
+  <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div>
+  <div class="p-3">
+    <img id="detailImg" class="w-full h-40 object-contain">
+    <h2 id="detailNama" class="text-xl font-bold mt-2"></h2>
+
+    <div class="bg-[#111] p-3 rounded mt-3">
+      <p class="text-red-500 font-bold">WAJIB DIBACA</p>
+      <p class="text-xs">1. Masukkan email/no WA aktif</p>
+      <p class="text-xs">2. Pilih durasi</p>
+    </div>
+
+    <div class="mt-3">
+      <label class="text-sm">1. EMAIL / NO WA</label>
+      <input id="email" type="text" placeholder="your@email.com" class="w-full bg-[#222] p-2 rounded mt-1">
+    </div>
+
+    <div class="mt-3">
+      <label class="text-sm">2. PILIH DURASI</label>
+      <div id="durasiGrid" class="grid grid-cols-3 gap-2 mt-1"></div>
+    </div>
+
+    <button onclick="showPage('bayar')" class="w-full bg-purple-600 py-3 rounded mt-4 font-bold">LANJUT BAYAR</button>
+  </div>
+</div>
+
+<!-- PAGE 3: BAYAR -->
+<div id="bayar" class="page">
+  <div class="p-3 flex items-center gap-2" onclick="showPage('detail')">← <b>PEMBAYARAN</b></div>
+  <div class="p-3">
+    <h3 class="font-bold">PILIH PEMBAYARAN</h3>
+    <div class="bg-[#222] p-3 rounded mt-2">QRIS ALL PAYMENT</div>
+    <div class="bg-[#222] p-3 rounded mt-2">BANK VIRTUAL ACCOUNT</div>
+
+    <div class="bg-[#111] p-3 rounded mt-4">
+      <p class="font-bold">RINCIAN PESAN</p>
+      <p class="text-sm">Email: <span id="rinciEmail"></span></p>
+      <p class="text-sm">Produk: <span id="rinciProduk"></span></p>
+      <p class="text-sm">Durasi: <span id="rinciDurasi"></span></p>
+      <p class="text-lg font-bold text-purple-400">TOTAL: <span id="rinciTotal"></span></p>
+    </div>
+    <button class="w-full bg-purple-600 py-3 rounded mt-3 font-bold">BAYAR SEKARANG</button>
   </div>
 </div>
 
 <script>
-let produkSekarang = "";
-let hargaSekarang = 0;
-
-function openModal(nama, hargaObj){
-  produkSekarang = nama;
-  document.getElementById('modal').style.display = 'flex';
-  document.getElementById('modalTitle').innerText = nama;
-
-  let list = "";
-  for(const key in hargaObj){
-    let label = key.replace('d','').replace('lite',' Lite ').replace('pro',' Pro ');
-    list += `<div class="durasi-btn" onclick="pilihDurasi(this, ${hargaObj[key]}, '${nama} ${label}')">${label} Day<br>Rp${hargaObj[key].toLocaleString('id')}</div>`;
+const produk = {
+  migul: {
+    nama: "MIGUL LITE & PRO",
+    img: "https://i.ibb.co.com/0pL31MRx/IMG-6456.png",
+    durasi: [
+      {label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000},
+      {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000},
+      {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}
+    ]
+  },
+  fluorite: {
+    nama: "FLUORITE",
+    img: "https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg",
+    durasi: [
+      {label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}
+    ]
+  },
+  pubg: {
+    nama: "PUBG KING MOD",
+    img: "https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg",
+    durasi: [
+      {label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}
+    ]
+  },
+  gbox: {
+    nama: "GBOX 1 TAHUN",
+    img: "https://i.ibb.co.com/ksZhXRyb/IMG-6457.png",
+    durasi: [{label:"1 Tahun", harga:100000}]
+  },
+  drip: {
+    nama: "DRIP CLIENT",
+    img: "https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg",
+    durasi: [
+      {label:"1 Day", harga:12000}, {label:"3 Day", harga:25000},
+      {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}
+    ]
   }
-  document.getElementById('durasiList').innerHTML = list;
 }
 
-function pilihDurasi(el, harga, namaDurasi){
+let produkAktif = "";
+let durasiAktif = {};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showProduct(key){
+  produkAktif = key;
+  const p = produk[key];
+  document.getElementById('detailImg').src = p.img;
+  document.getElementById('detailNama').innerText = p.nama;
+
+  let grid = "";
+  p.durasi.forEach((d,i)=>{
+    grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br>Rp${d.harga.toLocaleString('id')}</div>`;
+  });
+  document.getElementById('durasiGrid').innerHTML = grid;
+  showPage('detail');
+}
+
+function pilihDurasi(el, i){
   document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active'));
   el.classList.add('active');
-  hargaSekarang = harga;
-  produkSekarang = namaDurasi;
-  document.getElementById('totalHarga').innerText = 'Rp' + harga.toLocaleString('id');
-}
+  durasiAktif = produk[produkAktif].durasi[i];
 
-function orderWA(){
-  if(hargaSekarang == 0){ alert('Pilih durasi dulu!'); return; }
-  window.open(`https://wa.me/6285194336082?text=Halo NIELofc, saya mau order ${produkSekarang} - Rp${hargaSekarang.toLocaleString('id')}`);
-  closeModal();
+  document.getElementById('rinciEmail').innerText = document.getElementById('email').value;
+  document.getElementById('rinciProduk').innerText = produk[produkAktif].nama;
+  document.getElementById('rinciDurasi').innerText = durasiAktif.label;
+  document.getElementById('rinciTotal').innerText = 'Rp' + durasiAktif.harga.toLocaleString('id');
 }
-
-function closeModal(){ document.getElementById('modal').style.display = 'none'; }
 </script>
 
 </body>
