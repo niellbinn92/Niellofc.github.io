@@ -3,148 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIELofc - Jual Cheat FF & PUBG</title>
+<title>NIELofc</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body { background: #0a0a0a; font-family: 'Inter', sans-serif; }
-.banner-bg { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #000 100%); }
-.notif { animation: slideUp 0.5s ease, fadeOut 0.5s ease 4s forwards; }
-@keyframes slideUp { from {transform: translateY(100px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
-@keyframes fadeOut { to {opacity: 0;} }
-.badge { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+body{background:#0B0B0B;color:#fff;font-family:system-ui}
+.gradient-banner{background:linear-gradient(135deg,#4B0082 0%,#8B00FF 50%,#000 100%)}
+.card{background:#151515;border-radius:16px}
+.badge{font-size:10px;padding:2px 6px;border-radius:6px}
 </style>
 </head>
-<body class="text-white">
+<body>
 
 <!-- HEADER -->
-<header class="bg-black px-4 py-3 flex justify-between items-center sticky top-0 z-50 border-b border-purple-900">
-  <h1 class="text-2xl font-bold">NIEL<span class="text-cyan-400">ofc</span></h1>
-  <button>☰</button>
-</header>
+<div class="flex justify-between items-center p-3 bg-black">
+  <div class="text-xl font-bold">NIEL<span class="text-[#00D1FF]">ofc</span></div>
+  <div>☰</div>
+</div>
 
-<!-- BANNER -->
-<section class="banner-bg p-6">
-  <div class="flex flex-col md:flex-row items-center gap-4">
-    <div class="flex-1">
-      <h2 class="text-4xl font-extrabold text-purple-300">NIELofc</h2>
-      <h2 class="text-2xl font-bold text-fuchsia-400">Cheat & Top Up Terpercaya</h2>
-      <p class="mt-2 text-sm text-gray-300">Proses Cepat 5 Menit • Garansi Aman</p>
+<!-- BANNER UTAMA -->
+<div class="gradient-banner p-5">
+  <div class="flex gap-4 items-center">
+    <div>
+      <h1 class="text-3xl font-black text-[#DDA0DD]">FREE FIRE</h1>
+      <h1 class="text-3xl font-black text-[#FF69B4]">APKMOD</h1>
+      <div class="grid grid-cols-2 gap-3 mt-3 text-xs">
+        <div><p class="text-yellow-400 font-bold">AIMBOT</p><p>✓ Legit Aim</p><p>✓ Rage Mode</p></div>
+        <div><p class="text-pink-400 font-bold">ESP / DRAW</p><p>✓ ESP Line</p><p>✓ ESP Box</p></div>
+      </div>
+      <p class="text-[10px] text-gray-400 mt-2">Support for android only!</p>
     </div>
-    <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-40 rounded-lg">
+    <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-32">
   </div>
-</section>
+</div>
 
-<!-- TRUST BAR -->
-<div class="bg-[#111] py-2 px-4 flex justify-between text-xs">
-  <p>10K+ Transaksi Sukses</p>
-  <p>Support 24 Jam</p>
+<!-- INFO BAR -->
+<div class="bg-[#121212] px-4 py-2 text-xs flex justify-between">
+  <span>10K+ kode voucher terjual</span>
+  <span>Transaksi aman & terpercaya</span>
 </div>
 
 <!-- PRODUK -->
-<section class="p-4">
-  <div class="flex justify-between items-center mb-3">
-    <h2 class="text-xl font-bold">🔥 Paling Laris</h2>
+<div class="p-3">
+  <div class="flex justify-between mb-2">
+    <h2 class="font-bold">Paling Laris</h2>
+    <a class="text-[#00D1FF] text-sm">Lihat Semua Produk →</a>
   </div>
+
   <div class="grid grid-cols-2 gap-3">
 
-    <!-- 1. FREE FIRE MIGUL -->
-    <div class="bg-[#1a1a1a] rounded-xl p-3 border-purple-800">
-      <span class="bg-purple-600 text-xs px-2 py-1 rounded">FF</span>
-      <span class="badge text-xs px-2 py-1 rounded float-right text-black font-bold">BEST SELLER</span>
-      <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-full h-28 object-contain my-2 rounded">
-      <h3 class="font-bold">MIGUL LITE & PRO</h3>
-      <p class="text-xs text-gray-400">1 Day Lite: Rp35.000</p>
-      <p class="text-xs text-gray-400">1 Day Pro: Rp40.000</p>
-      <p class="text-xs text-gray-400">7 Day Lite: Rp100.000</p>
-      <p class="text-xs text-gray-400">7 Day Pro: Rp120.000</p>
-      <p class="text-xs text-gray-400">30 Day Lite: Rp230.000</p>
-      <p class="text-xs text-gray-400">30 Day Pro: Rp270.000</p>
-      <button onclick="order('MIGUL')" class="w-full bg-cyan-500 text-black font-bold py-2 rounded mt-2">Order Sekarang</button>
+    <!-- MIGUL -->
+    <div class="card p-3">
+      <div class="flex justify-between"><span class="badge bg-purple-700">ANDROID</span><span class="badge bg-yellow-500 text-black">#1</span></div>
+      <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-full h-24 object-contain my-2">
+      <p class="font-bold text-sm">MIGUL LITE & PRO</p>
+      <p class="text-[10px] text-gray-400">1D Lite 35K | 1D Pro 40K</p>
+      <p class="text-[10px] text-gray-400">30D Lite 230K | 30D Pro 270K</p>
+      <button onclick="wa('MIGUL')" class="w-full bg-[#00D1FF] text-black font-bold py-1.5 rounded mt-2 text-sm">Order</button>
     </div>
 
-    <!-- 2. FREE FIRE FLUORITE -->
-    <div class="bg-[#1a1a1a] rounded-xl p-3 border-purple-800">
-      <span class="bg-purple-600 text-xs px-2 py-1 rounded">FF</span>
-      <img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg" class="w-full h-28 object-contain my-2 rounded">
-      <h3 class="font-bold">FLUORITE</h3>
-      <p class="text-xs text-gray-400">1 Day: Rp50.000</p>
-      <p class="text-xs text-gray-400">2 Day: Rp150.000</p>
-      <p class="text-xs text-gray-400">30 Day: Rp350.000</p>
-      <button onclick="order('FLUORITE')" class="w-full bg-cyan-500 text-black font-bold py-2 rounded mt-2">Order Sekarang</button>
+    <!-- FLUORITE -->
+    <div class="card p-3">
+      <span class="badge bg-purple-700">ANDROID</span>
+      <img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg" class="w-full h-24 object-contain my-2">
+      <p class="font-bold text-sm">FLUORITE</p>
+      <p class="text-[10px] text-gray-400">1D 50K | 2D 150K | 30D 350K</p>
+      <button onclick="wa('FLUORITE')" class="w-full bg-[#00D1FF] text-black font-bold py-1.5 rounded mt-2 text-sm">Order</button>
     </div>
 
-    <!-- 3. PUBG KING MOD -->
-    <div class="bg-[#1a1a1a] rounded-xl p-3 border-purple-800">
-      <span class="bg-yellow-600 text-xs px-2 py-1 rounded">PUBG</span>
-      <img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg" class="w-full h-28 object-contain my-2 rounded">
-      <h3 class="font-bold">PUBG KING MOD</h3>
-      <p class="text-xs text-gray-400">1 Day: Rp60.000</p>
-      <p class="text-xs text-gray-400">7 Day: Rp170.000</p>
-      <p class="text-xs text-gray-400">30 Day: Rp400.000</p>
-      <button onclick="order('PUBG KING MOD')" class="w-full bg-cyan-500 text-black font-bold py-2 rounded mt-2">Order Sekarang</button>
+    <!-- PUBG KING -->
+    <div class="card p-3">
+      <span class="badge bg-yellow-700">PUBG</span>
+      <img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg" class="w-full h-24 object-contain my-2">
+      <p class="font-bold text-sm">PUBG KING MOD</p>
+      <p class="text-[10px] text-gray-400">1D 60K | 7D 170K | 30D 400K</p>
+      <button onclick="wa('PUBG KING')" class="w-full bg-[#00D1FF] text-black font-bold py-1.5 rounded mt-2 text-sm">Order</button>
     </div>
 
-    <!-- 4. GBOX -->
-    <div class="bg-[#1a1a1a] rounded-xl p-3 border-purple-800">
-      <span class="bg-green-600 text-xs px-2 py-1 rounded">TOOLS</span>
-      <img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png" class="w-full h-28 object-contain my-2 rounded">
-      <h3 class="font-bold">GBOX 1 TAHUN</h3>
-      <p class="text-xs text-gray-400">Garansi 30 Hari</p>
-      <p class="text-lg font-bold text-cyan-400">Rp100.000</p>
-      <button onclick="order('GBOX 1 TAHUN')" class="w-full bg-cyan-500 text-black font-bold py-2 rounded mt-2">Order Sekarang</button>
+    <!-- GBOX -->
+    <div class="card p-3">
+      <span class="badge bg-green-700">TOOLS</span>
+      <img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png" class="w-full h-24 object-contain my-2">
+      <p class="font-bold text-sm">GBOX 1 TAHUN</p>
+      <p class="text-[10px] text-gray-400">Garansi 30 Hari - 100K</p>
+      <button onclick="wa('GBOX')" class="w-full bg-[#00D1FF] text-black font-bold py-1.5 rounded mt-2 text-sm">Order</button>
     </div>
 
-    <!-- 5. DRIP CLIENT -->
-    <div class="bg-[#1a1a1a] rounded-xl p-3 border-purple-800 col-span-2">
-      <span class="bg-purple-600 text-xs px-2 py-1 rounded">FF</span>
-      <span class="bg-red-600 text-xs px-2 py-1 rounded float-right">MURAH</span>
-      <div class="flex gap-3">
-        <img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg" class="w-24 h-24 object-contain rounded">
+    <!-- DRIP -->
+    <div class="card p-3 col-span-2">
+      <span class="badge bg-purple-700">ANDROID</span>
+      <div class="flex gap-2">
+        <img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg" class="w-20 h-20 object-contain">
         <div class="flex-1">
-          <h3 class="font-bold">DRIP CLIENT</h3>
-          <p class="text-xs text-gray-400">1 Day: Rp12.000</p>
-          <p class="text-xs text-gray-400">3 Day: Rp25.000</p>
-          <p class="text-xs text-gray-400">7 Day: Rp50.000</p>
-          <p class="text-xs text-gray-400">15 Day: Rp90.000</p>
-          <p class="text-xs text-gray-400">30 Day: Rp130.000</p>
-          <button onclick="order('DRIP CLIENT')" class="w-full bg-cyan-500 text-black font-bold py-2 rounded mt-1">Order Sekarang</button>
+          <p class="font-bold text-sm">DRIP CLIENT</p>
+          <p class="text-[10px] text-gray-400">1D 12K | 3D 25K | 7D 50K | 15D 90K | 30D 130K</p>
+          <button onclick="wa('DRIP')" class="w-full bg-[#00D1FF] text-black font-bold py-1.5 rounded mt-1 text-sm">Order</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- NOTIF MELAYANG -->
-<div id="notif" class="notif fixed bottom-20 left-4 bg-[#222] p-3 rounded-lg flex items-center gap-2 shadow-lg border-cyan-500">
-  <div class="w-8 h-8 bg-cyan-500 rounded flex items-center justify-center">🛒</div>
-  <div>
-    <p class="text-sm"><span class="text-cyan-400">Budi****</span> baru saja membeli</p>
-    <p class="font-bold">MIGUL PRO 30 Day</p>
-    <p class="text-xs text-gray-400">Baru saja</p>
   </div>
 </div>
 
-<!-- TOMBOL WA -->
-<a href="https://wa.me/6285194336082" target="_blank" class="fixed bottom-4 right-4 bg-green-500 w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg">💬</a>
+<!-- NOTIF -->
+<div id="notif" class="fixed bottom-20 left-3 bg-[#1E1E1E] p-2 rounded-lg flex gap-2 text-xs">
+  <div class="w-7 h-7 bg-[#00D1FF] rounded flex items-center justify-center">🛒</div>
+  <div><p><span class="text-[#00D1FF]">cha****</span> baru saja membeli</p><p class="font-bold">Saldo Wallet</p></div>
+</div>
+
+<!-- WA -->
+<a href="https://wa.me/6285194336082" class="fixed bottom-4 right-4 bg-green-500 w-12 h-12 rounded-full flex items-center justify-center text-2xl">💬</a>
 
 <script>
-function order(produk){
-  window.open(`https://wa.me/6285194336082?text=Halo NIELofc, saya mau order ${produk}`, '_blank')
-}
-// Ganti notif tiap 10 detik
-const notifs = [
-  {nama: 'Andi****', produk: 'FLUORITE 1 Day'},
-  {nama: 'Sari****', produk: 'PUBG KING MOD 7 Day'},
-  {nama: 'Riko****', produk: 'DRIP CLIENT 30 Day'}
-];
-let i = 0;
-setInterval(()=>{
-  document.querySelector('#notif p.font-bold').innerText = notifs[i].produk;
-  document.querySelector('#notif span.text-cyan-400').innerText = notifs[i].nama;
-  document.getElementById('notif').style.display = 'flex';
-  setTimeout(()=>{document.getElementById('notif').style.display = 'none'}, 4000)
-  i = (i + 1) % notifs.length;
-}, 10000)
+function wa(p){window.open(`https://wa.me/6285194336082?text=Order ${p} NIELofc`)}
 </script>
 
 </body>
