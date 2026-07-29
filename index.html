@@ -51,8 +51,8 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 
 <div id="home" class="page active">
   <div class="banner">
-    <img src="https://i.ibb.co.com/KpTzSk78/6-D06585-E-C6-D7-4-D1-A-8-F26-41-BCB7-A585-B1.png" class="active">
-    <img src="https://i.ibb.co.com/0pgBPm62/IMG-6683.jpg">
+    <img src="https://i.ibb.co.com/GvnLHZ8x/6-D06585-E-C6-D7-4-D1-A-8-F26-41-BCB7-A585-B1.png" class="active">
+    <img src="https://i.ibb.co.com/60V12jys/IMG-6683.jpg">
     <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
   </div>
   <div class="p-3 flex gap-2 overflow-x-auto">
@@ -72,12 +72,12 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
     <p class="text-yellow-400 text-sm font-semibold">⭐ 4.8 • PROTEKSI</p>
     <div class="bg-[#111] p-3 rounded mt-3 text-xs">
       <p class="font-bold text-red-500">WAJIB DIBACA</p>
-      <p>1. Masukkan Email/WA aktif</p>
+      <p>1. Masukkan No WA aktif</p>
       <p>2. Pilih durasi</p>
     </div>
     <div class="mt-3">
-      <label class="text-sm font-semibold">1. ALAMAT EMAIL / NO WA</label>
-      <input id="email" type="text" placeholder="0812xxxx / email" class="input mt-1">
+      <label class="text-sm font-semibold">1. NO WHATSAPP AKTIF</label>
+      <input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1">
     </div>
     <div class="mt-3">
       <label class="text-sm font-semibold">2. PILIH DURASI</label>
@@ -97,7 +97,7 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 <div id="login" class="page">
   <div class="p-4">
     <h2 class="text-2xl font-bold mb-4">Login Akun</h2>
-    <input id="loginEmail" type="text" placeholder="Email / No WA" class="input mb-3">
+    <input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
     <input id="loginPass" type="password" placeholder="Password" class="input mb-4">
     <button onclick="login()" class="btn-ungu mb-3">MASUK</button>
     <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-purple-400" onclick="showPage('register')">Daftar disini</span></p>
@@ -108,7 +108,7 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
   <div class="p-4">
     <h2 class="text-2xl font-bold mb-4">Daftar Akun</h2>
     <input id="regNama" type="text" placeholder="Nama" class="input mb-3">
-    <input id="regEmail" type="text" placeholder="Email / No WA" class="input mb-3">
+    <input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
     <input id="regPass" type="password" placeholder="Password" class="input mb-4">
     <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button>
     <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-purple-400" onclick="showPage('login')">Login disini</span></p>
@@ -130,7 +130,7 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
   <div class="p-4">
     <h2 class="text-2xl font-bold mb-4">FAQ - Pertanyaan Umum</h2>
     <div class="space-y-3">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi Email/No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Berapa lama proses pengiriman key? <span>+</span></div><div class="faq-a">Maksimal 5 menit setelah pembayaran dikonfirmasi. Biasanya langsung dikirim.</div></div>
     </div>
@@ -179,7 +179,7 @@ function cekLogin(){
   if(userLogin){
     document.getElementById('userStatus').innerHTML = `Hi, ${userLogin.nama}`;
     document.getElementById('btnLogout').classList.remove('hidden');
-    document.getElementById('email').value = userLogin.email;
+    document.getElementById('nohp').value = userLogin.nohp;
   } else {
     document.getElementById('userStatus').innerHTML = '';
     document.getElementById('btnLogout').classList.add('hidden');
@@ -188,22 +188,22 @@ function cekLogin(){
 
 function register(){
   const nama = document.getElementById('regNama').value;
-  const email = document.getElementById('regEmail').value;
+  const nohp = document.getElementById('regNohp').value;
   const pass = document.getElementById('regPass').value;
-  if(!nama ||!email ||!pass){ alert('Isi semua data!'); return; }
-  const user = {nama, email, pass};
+  if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; }
+  const user = {nama, nohp, pass};
   localStorage.setItem('niel_user', JSON.stringify(user));
   alert('Daftar berhasil! Silahkan login');
   showPage('login');
 }
 
 function login(){
-  const email = document.getElementById('loginEmail').value;
+  const nohp = document.getElementById('loginNohp').value;
   const pass = document.getElementById('loginPass').value;
   const user = JSON.parse(localStorage.getItem('niel_user'));
-  if(user && user.email == email && user.pass == pass){
+  if(user && user.nohp == nohp && user.pass == pass){
     userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home');
-  } else { alert('Email/No WA atau password salah!'); }
+  } else { alert('No WA atau password salah!'); }
 }
 
 function logout(){
@@ -255,16 +255,16 @@ function pilihDurasi(el, i){
 
 function orderWA(){
   if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
-  const email = document.getElementById('email').value;
-  if(!email ||!durasiAktif.label){ alert('Isi Email/No WA dan Pilih Durasi!'); return; }
+  const nohp = document.getElementById('nohp').value;
+  if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; }
   let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
   const newOrder = {
     id: 'ORD' + Date.now(), produk: produk[produkAktif].nama, durasi: durasiAktif.label,
-    harga: durasiAktif.harga, email: email, nama: userLogin.nama,
+    harga: durasiAktif.harga, nohp: nohp, nama: userLogin.nama,
     tanggal: new Date().toLocaleString('id'), status: 'pending'
   };
   orders.unshift(newOrder); localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0AEmail/WA: ${email}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`;
+  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0ANo WA: ${nohp}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`;
   window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
 }
 
@@ -272,7 +272,7 @@ function renderRiwayat(){
   const wrap = document.getElementById('riwayatOrder');
   let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
   if(!userLogin){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; }
-  const myOrders = orders.filter(o => o.email == userLogin.email);
+  const myOrders = orders.filter(o => o.nohp == userLogin.nohp);
   if(myOrders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; }
   wrap.innerHTML = '';
   myOrders.forEach(o=>{
@@ -309,20 +309,20 @@ function renderAdmin(){
   orders.forEach((o, i)=>{
     let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
     let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai';
-    let nomorWA = o.email.replace(/[^0-9]/g,'');
+    let nomorWA = o.nohp.replace(/[^0-9]/g,'');
     wrap.innerHTML += `
     <div class="order-card">
       <p class="font-bold">${o.produk}</p>
       <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
       <p class="text-xs">Nama: ${o.nama}</p>
-      <p class="text-xs">Kontak: ${o.email}</p>
+      <p class="text-xs">No WA: ${o.nohp}</p>
       <p class="text-xs text-gray-500">ID: ${o.id}</p>
       ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''}
       <div class="mt-2 space-y-2">
         <span class="status ${statusClass}">${statusText}</span>
         <div class="flex gap-2 flex-wrap">
           <button onclick="notifProses(${i})" class="btn-admin bg-blue-600">Proses + WA</button>
-          ${nomorWA.length > 8? `<button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button>` : `<p class="text-xs text-red-400">No WA tidak valid</p>`}
+          <button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button>
         </div>
         <div id="keyBox${i}" class="hidden">
           <input id="inputKey${i}" type="text" placeholder="Tempel Key Disini" class="input text-xs">
@@ -338,8 +338,8 @@ function notifProses(index){
   orders[index].status = 'proses';
   localStorage.setItem('niel_orders', JSON.stringify(orders));
   const o = orders[index];
-  const nomor = '62' + o.email.replace(/[^0-9]/g,'').replace(/^0/, '');
-  const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0AKontak: ${o.email}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`;
+  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
+  const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0ANo WA: ${o.nohp}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`;
   window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
   renderAdmin();
 }
@@ -358,7 +358,7 @@ function kirimKey(index){
   localStorage.setItem('niel_orders', JSON.stringify(orders));
 
   const o = orders[index];
-  const nomor = '62' + o.email.replace(/[^0-9]/g,'').replace(/^0/, '');
+  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
   const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
   window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
   renderAdmin();
