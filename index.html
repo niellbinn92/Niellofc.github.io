@@ -5,82 +5,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIELofc - Toko Cheat</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Orbitron:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 <style>
-body{background:#0A0A0A;color:#fff;font-family:'Inter', sans-serif;padding-bottom:80px}
-h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
-.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid #222;cursor:pointer}
-.banner{position:relative;height:180px;overflow:hidden;border-radius:0 0 16px 16px}
-.banner img{position:absolute;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out}
+:root{
+  --biru:#2563EB;
+  --biru-glow:#3B82F6;
+  --hitam:#050A14;
+  --abu:#0F172A;
+}
+body{background:var(--hitam);color:#fff;font-family:'Inter', sans-serif;padding-bottom:80px}
+h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;text-transform:uppercase;font-style:italic;font-weight:900;color:var(--biru-glow);text-shadow:0 0 8px var(--biru-glow)}
+.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:2px solid var(--biru)}
+.banner{position:relative;height:200px;overflow:hidden;border-radius:0 0 16px 16px;border-bottom:2px solid var(--biru);background:#000}
+.banner img{position:absolute;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1s ease-in-out}
 .banner img.active{opacity:1}
-.card{background:#121212;border-radius:12px;transition:0.2s;border:1px solid #1F1F1F}
-.card:active{transform:scale(0.98)}
+.card{background:var(--abu);border-radius:16px;transition:0.2s;border:1px solid var(--biru);padding:8px;box-shadow:0 0 10px #2563EB20}
+.card:active{transform:scale(0.96);border-color:var(--biru-glow);box-shadow:0 0 15px var(--biru-glow)}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--biru)} /* UDAH GANTI KE COVER BIAR FULL */
+.card p{font-family:'Poppins', sans-serif;font-weight:800}
 .page{display:none}
 .page.active{display:block}
-.durasi-btn{border:1px solid #333;padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:500}
-.durasi-btn.active{border-color:#A855F7;background:#A855F720;font-weight:700}
-.box-ungu{background:#1A0F2E;border-radius:16px;padding:16px}
-.btn-channel{background:#2D1B4E;border:1px solid #4C1D95;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;font-weight:600}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:6px 0}
-.nav-item{text-align:center;font-size:10px;color:#888;font-weight:500}
-.nav-item.active{color:#EC4899}
-.filter-btn{background:#222;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600}
-.filter-btn.active{background:#7C3AED}
+.durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;font-family:'Poppins';background:var(--abu)}
+.durasi-btn.active{border-color:var(--biru-glow);background:#2563EB30;font-weight:900;box-shadow:0 0 8px var(--biru-glow)}
+.box-ungu{background:var(--abu);border-radius:16px;padding:16px;border:1px solid var(--biru)}
+.btn-channel{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;font-weight:700;font-family:'Poppins'}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:2px solid var(--biru);display:flex;justify-content:space-around;padding:6px 0}
+.nav-item{text-align:center;font-size:10px;color:#64748B;font-weight:800;font-family:'Poppins'}
+.nav-item.active{color:var(--biru-glow)}
+.filter-btn{background:var(--abu);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:800;font-family:'Poppins';white-space:nowrap;border:1px solid var(--biru)}
+.filter-btn.active{background:var(--biru);color:#fff;box-shadow:0 0 8px var(--biru-glow)}
 .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.dot{width:8px;height:8px;border-radius:50%;background:#fff5;transition:0.3s}
-.dot.active{background:#fff}
-.faq-item{background:#121212;border:1px solid #222;border-radius:12px;padding:14px}
-.faq-q{font-weight:700;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.faq-a{display:none;margin-top:8px;color:#aaa;font-size:14px;line-height:1.6}
-.input{width:100%;background:#222;padding:12px;border-radius:10px;border:1px solid #333}
-.btn-ungu{width:100%;background:#7C3AED;padding:12px;border-radius:10px;font-weight:700}
-.order-card{background:#121212;border:1px solid #333;border-radius:12px;padding:12px}
-.status{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;background:#2563EB50;transition:0.3s}
+.dot.active{background:var(--biru-glow);box-shadow:0 0 6px var(--biru-glow)}
+.faq-item{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:14px}
+.faq-q{font-weight:800;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Poppins'}
+.faq-a{display:none;margin-top:8px;color:#94A3B8;font-size:14px;line-height:1.6}
+.input{width:100%;background:var(--abu);padding:12px;border-radius:10px;border:1px solid var(--biru);font-family:'Poppins';color:#fff}
+.btn-ungu{width:100%;background:linear-gradient(90deg,#2563EB,#06B6D4);padding:12px;border-radius:10px;font-weight:900;font-family:'Poppins';box-shadow:0 0 10px #2563EB50}
+.order-card{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:12px}
+.status{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:900;font-family:'Poppins'}
 .status.pending{background:#F59E0B20;color:#F59E0B}
 .status.proses{background:#3B82F620;color:#3B82F6}
 .status.selesai{background:#10B98120;color:#10B981}
-.btn-admin{padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700}
+.btn-admin{padding:6px 10px;border-radius:8px;font-size:11px;font-weight:900;font-family:'Poppins'}
 </style>
 </head>
 <body>
 
 <div class="header p-3 flex justify-between items-center" onclick="cekAdmin()">
-  <h1 class="text-2xl font-black">NIEL<span class="text-purple-400">ofc</span></h1>
-  <div id="userStatus" class="text-xs"></div>
+  <h1 class="text-2xl font-black">NIEL<span class="text-cyan-400">ofc</span></h1>
+  <div id="userStatus" class="text-xs font-bold"></div>
 </div>
 
 <div id="home" class="page active">
   <div class="banner">
-    <img src="https://i.ibb.co.com/GvnLHZ8x/6-D06585-E-C6-D7-4-D1-A-8-F26-41-BCB7-A585-B1.png" class="active">
-    <img src="https://i.ibb.co.com/60V12jys/IMG-6683.jpg">
-    <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
+    <img src="https://i.ibb.co.com/bMC635bG/F801-F624-F654-4-C43-9-F6-A-DC4416894-BA5.png" class="active">
+    <img src="https://i.ibb.co.com/d0Jb0TbJ/AB94-CFF3-E55-A-44-AB-8-CDE-D334337-B5-A92.png">
+    <img src="https://i.ibb.co.com/Gvfn9RBm/2-F44-B3-A4-A822-46-A8-B171-62-BABD63-AA2-D.png">
+    <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
   </div>
   <div class="p-3 flex gap-2 overflow-x-auto">
     <button id="btn-semua" class="filter-btn active" onclick="filterProduk('semua')">SEMUA</button>
-    <button id="btn-android" class="filter-btn" onclick="filterProduk('android')">ANDROID</button>
-    <button id="btn-ios" class="filter-btn" onclick="filterProduk('ios')">IOS</button>
+    <button id="btn-freefire" class="filter-btn" onclick="filterProduk('freefire')">FREE FIRE</button>
+    <button id="btn-pubg" class="filter-btn" onclick="filterProduk('pubg')">PUBG</button>
+    <button id="btn-8ball" class="filter-btn" onclick="filterProduk('8ball')">8 BALL</button>
+    <button id="btn-sertifikat" class="filter-btn" onclick="filterProduk('sertifikat')">SERTIFIKAT IOS</button>
   </div>
-  <h3 class="px-3 font-bold text-lg">Produk</h3>
+  <h3 class="px-3 font-bold text-lg italic">Produk</h3>
   <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3"></div>
 </div>
 
 <div id="detail" class="page">
   <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div>
   <div class="p-3">
-    <img id="detailImg" class="w-full h-40 object-contain rounded">
-    <h2 id="detailNama" class="text-2xl font-bold mt-2"></h2>
-    <p class="text-yellow-400 text-sm font-semibold">⭐ 4.8 • PROTEKSI</p>
-    <div class="bg-[#111] p-3 rounded mt-3 text-xs">
+    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border border-blue-500"> <!-- DETAIL JUGA UDAH COVER -->
+    <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2>
+    <p class="text-cyan-400 text-sm font-bold">⭐ 4.8 • PROTEKSI</p>
+    <div class="bg-[#0F172A] p-3 rounded mt-3 text-xs border-blue-500">
       <p class="font-bold text-red-500">WAJIB DIBACA</p>
       <p>1. Masukkan No WA aktif</p>
       <p>2. Pilih durasi</p>
     </div>
     <div class="mt-3">
-      <label class="text-sm font-semibold">1. NO WHATSAPP AKTIF</label>
+      <label class="text-sm font-bold">1. NO WHATSAPP AKTIF</label>
       <input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1">
     </div>
     <div class="mt-3">
-      <label class="text-sm font-semibold">2. PILIH DURASI</label>
+      <label class="text-sm font-bold">2. PILIH DURASI</label>
       <div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div>
     </div>
     <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold flex items-center justify-center gap-2">💬 ORDER VIA WHATSAPP</button>
@@ -89,35 +100,35 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 
 <div id="lacak" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Lacak Pesanan</h2>
+    <h2 class="text-2xl font-bold mb-4 italic">Lacak Pesanan</h2>
     <div id="riwayatOrder" class="space-y-3"></div>
   </div>
 </div>
 
 <div id="login" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Login Akun</h2>
+    <h2 class="text-2xl font-bold mb-4 italic">Login Akun</h2>
     <input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
     <input id="loginPass" type="password" placeholder="Password" class="input mb-4">
     <button onclick="login()" class="btn-ungu mb-3">MASUK</button>
-    <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-purple-400" onclick="showPage('register')">Daftar disini</span></p>
+    <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-cyan-400" onclick="showPage('register')">Daftar disini</span></p>
   </div>
 </div>
 
 <div id="register" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Daftar Akun</h2>
+    <h2 class="text-2xl font-bold mb-4 italic">Daftar Akun</h2>
     <input id="regNama" type="text" placeholder="Nama" class="input mb-3">
     <input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
     <input id="regPass" type="password" placeholder="Password" class="input mb-4">
     <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button>
-    <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-purple-400" onclick="showPage('login')">Login disini</span></p>
+    <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-cyan-400" onclick="showPage('login')">Login disini</span></p>
   </div>
 </div>
 
 <div id="admin" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Panel Admin</h2>
+    <h2 class="text-2xl font-bold mb-4 italic">Panel Admin</h2>
     <div id="loginAdmin" class="space-y-3">
       <input id="passAdmin" type="password" placeholder="Masukkan Password Admin" class="input">
       <button onclick="masukAdmin()" class="btn-ungu">MASUK</button>
@@ -128,7 +139,7 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 
 <div id="faq" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">FAQ - Pertanyaan Umum</h2>
+    <h2 class="text-2xl font-bold mb-4 italic">FAQ - Pertanyaan Umum</h2>
     <div class="space-y-3">
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div>
@@ -140,12 +151,12 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 <div id="bantuan" class="page">
   <div class="p-4">
     <div class="box-ungu">
-      <h3 class="text-yellow-400 font-bold text-lg mb-3">Saluran Kami</h3>
+      <h3 class="text-cyan-400 font-bold text-lg mb-3 italic">Saluran Kami</h3>
       <div class="grid grid-cols-2 gap-3">
         <a href="https://t.me/nielllofcbinn" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">✈️</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">Telegram</p></div></a>
         <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">📢</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">WhatsApp</p></div></a>
       </div>
-      <h3 class="text-yellow-400 font-bold text-lg mb-3 mt-5">Customer Service</h3>
+      <h3 class="text-cyan-400 font-bold text-lg mb-3 mt-5 italic">Customer Service</h3>
       <a href="https://wa.me/6285194336082?text=Halo%20Admin%20NIELofc%20saya%20butuh%20bantuan" target="_blank" class="btn-channel w-1/2"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">💬</div><div><p class="text-sm font-bold">Customer</p><p class="text-xs">Service 1</p></div></a>
       <button onclick="logout()" id="btnLogout" class="w-full bg-red-600 py-3 rounded mt-4 font-bold hidden">LOGOUT</button>
     </div>
@@ -162,12 +173,14 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 
 <script>
 const produk = {
-  migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/0pL31MRx/IMG-6456.png", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000}, {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000}, {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}]},
-  fluorite: {nama: "FLUORITE IOS", img: "https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}]},
-  pubg: {nama: "PUBG KING MOD IOS", img: "https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg", kategori: "ios", game: "PUBG Mobile iOS", durasi: [{label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}]},
-  gbox: {nama: "GBOX IOS", img: "https://i.ibb.co.com/ksZhXRyb/IMG-6457.png", kategori: "ios", game: "Garansi 30 Hari", durasi: [{label:"1 Tahun", harga:100000}]},
-  drip: {nama: "DRIP ANDROID", img: "https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg", kategori: "android", game: "Free Fire Android", durasi: [{label:"1 Day", harga:12000}, {label:"3 Day", harga:25000}, {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}]},
-  solana: {nama: "SOLANA HAX", img: "https://i.ibb.co.com/k6ywqJDV/5386c63f-1438-471a-b9b0-844ae37ebbcd.jpg", kategori: "android", game: "Android", durasi: [{label:"3 Day", harga:85000}, {label:"7 Day", harga:140000}, {label:"30 Day", harga:300000}]}
+  hgproxy: {nama: "HG PROXY", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", durasi: [{label:"1 Day", harga:15000}, {label:"7 Day", harga:30000}, {label:"10 Day", harga:45000}]},
+  silent: {nama: "SILENT CHEAT", img: "https://i.ibb.co.com/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png", kategori: "freefire", game: "Free Fire Android", durasi: [{label:"1 Day", harga:15000}, {label:"3 Day", harga:25000}]},
+  drip: {nama: "DRIP CLIENT", img: "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png", kategori: "freefire", game: "Free Fire Android", durasi: [{label:"1 Day", harga:12000}, {label:"3 Day", harga:25000}, {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}]},
+  migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/yFq7GkbZ/ED60-DBC3-39-CB-4170-8-EDC-F1-D63-F648642.png", kategori: "freefire", game: "Free Fire iOS", durasi: [{label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000}, {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000}, {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}]},
+  fluorite: {nama: "FLUORITE IOS", img: "https://i.ibb.co.com/Kcjdk9JR/E9132-D38-89-ED-44-D7-BCEA-13138480-B078.png", kategori: "freefire", game: "Free Fire iOS", durasi: [{label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}]},
+  gbox: {nama: "GBOX IOS", img: "https://i.ibb.co.com/5yqVRgd/CBB894-D0-401-E-4333-8-D7-C-4-E204-B27-F995.png", kategori: "sertifikat", game: "Sertifikat Developer 1 Tahun", durasi: [{label:"1 Tahun", harga:100000}]},
+  pubg: {nama: "PUBG KING MOD IOS", img: "https://i.ibb.co.com/99qkcXbS/5069398-C-48-A4-4496-92-C8-1-D846-C8-B1282.png", kategori: "pubg", game: "PUBG Mobile iOS", durasi: [{label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}]},
+  solana: {nama: "SOLANA HAX", img: "https://i.ibb.co.com/9kcg8gtC/229832-AA-4205-4801-A491-431276-DD9382.png", kategori: "pubg", game: "PUBG Mobile", durasi: [{label:"3 Day", harga:85000}, {label:"7 Day", harga:140000}, {label:"30 Day", harga:300000}]}
 }
 let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";
@@ -215,7 +228,7 @@ function renderProduk(kategori = 'semua'){
   const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
   for(let key in produk){
     if(kategori == 'semua' || produk[key].kategori == kategori){
-      grid.innerHTML += `<div class="card p-2" onclick="showProduct('${key}')"><img src="${produk[key].img}" class="w-full h-24 object-contain"><p class="text-sm font-bold mt-1">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
+      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')"><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
     }
   }
 }
@@ -279,7 +292,7 @@ function renderRiwayat(){
     let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
     let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai';
     let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : '';
-    wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
+    wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold italic">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
   });
 }
 
@@ -312,7 +325,7 @@ function renderAdmin(){
     let nomorWA = o.nohp.replace(/[^0-9]/g,'');
     wrap.innerHTML += `
     <div class="order-card">
-      <p class="font-bold">${o.produk}</p>
+      <p class="font-bold italic">${o.produk}</p>
       <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
       <p class="text-xs">Nama: ${o.nama}</p>
       <p class="text-xs">No WA: ${o.nohp}</p>
@@ -389,4 +402,3 @@ cekLogin();
 
 </body>
 </html>
-pakai yg ini
