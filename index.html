@@ -3,162 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIELofc</title>
+<title>NIELofc - Toko Cheat</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-body{background:#0A0A0A;color:#fff;font-family:Inter}
-.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid #222}
-.banner{background:linear-gradient(135deg,#7C3AED 0%,#EC4899 100%)}
-.card{background:#121212;border-radius:12px;transition:0.2s}
+body{background:#0A0A0A;color:#fff;font-family:'Inter', sans-serif;padding-bottom:80px}
+h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
+.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid #222;cursor:pointer}
+.banner{position:relative;height:180px;overflow:hidden;border-radius:0 0 16px 16px}
+.banner img{position:absolute;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out}
+.banner img.active{opacity:1}
+.card{background:#121212;border-radius:12px;transition:0.2s;border:1px solid #1F1F1F}
 .card:active{transform:scale(0.98)}
 .page{display:none}
 .page.active{display:block}
-.durasi-btn{border:1px solid #333;padding:12px;border-radius:10px;cursor:pointer;text-align:center}
-.durasi-btn.active{border-color:#A855F7;background:#A855F720}
-.progress{display:flex;gap:8px;align-items:center;font-size:12px}
-.progress.active{color:#A855F7}
+.durasi-btn{border:1px solid #333;padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:500}
+.durasi-btn.active{border-color:#A855F7;background:#A855F720;font-weight:700}
+.box-ungu{background:#1A0F2E;border-radius:16px;padding:16px}
+.btn-channel{background:#2D1B4E;border:1px solid #4C1D95;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;font-weight:600}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:6px 0}
+.nav-item{text-align:center;font-size:10px;color:#888;font-weight:500}
+.nav-item.active{color:#EC4899}
+.filter-btn{background:#222;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600}
+.filter-btn.active{background:#7C3AED}
+.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:#fff5;transition:0.3s}
+.dot.active{background:#fff}
+.faq-item{background:#121212;border:1px solid #222;border-radius:12px;padding:14px}
+.faq-q{font-weight:700;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq-a{display:none;margin-top:8px;color:#aaa;font-size:14px;line-height:1.6}
+.input{width:100%;background:#222;padding:12px;border-radius:10px;border:1px solid #333}
+.btn-ungu{width:100%;background:#7C3AED;padding:12px;border-radius:10px;font-weight:700}
+.order-card{background:#121212;border:1px solid #333;border-radius:12px;padding:12px}
+.status{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.status.pending{background:#F59E0B20;color:#F59E0B}
+.status.proses{background:#3B82F620;color:#3B82F6}
+.status.selesai{background:#10B98120;color:#10B981}
+.btn-admin{padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header p-3 flex justify-between items-center">
-  <h1 class="text-xl font-black">NIEL<span class="text-purple-400">ofc</span></h1>
+<div class="header p-3 flex justify-between items-center" onclick="cekAdmin()">
+  <h1 class="text-2xl font-black">NIEL<span class="text-purple-400">ofc</span></h1>
+  <div id="userStatus" class="text-xs"></div>
 </div>
 
-<!-- PAGE 1: HOME -->
 <div id="home" class="page active">
-  <div class="banner p-5 text-center">
-    <h2 class="text-2xl font-black">JUALAN VOUCHER GAME</h2>
-    <p class="text-sm">DI NIELofc</p>
+  <div class="banner">
+    <img src="https://i.ibb.co.com/KpTzSk78/6-D06585-E-C6-D7-4-D1-A-8-F26-41-BCB7-A585-B1.png" class="active">
+    <img src="https://i.ibb.co.com/0pgBPm62/IMG-6683.jpg">
+    <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
   </div>
-
-  <div class="p-3 flex gap-2">
-    <button class="bg-purple-700 px-4 py-1 rounded text-sm">SEMUA</button>
-    <button class="bg-[#222] px-4 py-1 rounded text-sm">ANDROID</button>
-    <button class="bg-[#222] px-4 py-1 rounded text-sm">IOS</button>
+  <div class="p-3 flex gap-2 overflow-x-auto">
+    <button id="btn-semua" class="filter-btn active" onclick="filterProduk('semua')">SEMUA</button>
+    <button id="btn-android" class="filter-btn" onclick="filterProduk('android')">ANDROID</button>
+    <button id="btn-ios" class="filter-btn" onclick="filterProduk('ios')">IOS</button>
   </div>
-
-  <h3 class="px-3 font-bold">Produk</h3>
-  <div class="grid grid-cols-2 gap-3 p-3">
-
-    <div class="card p-2" onclick="showProduct('migul')">
-      <img src="https://i.ibb.co.com/0pL31MRx/IMG-6456.png" class="w-full h-24 object-contain">
-      <p class="text-sm font-bold mt-1">MIGUL LITE & PRO</p>
-      <p class="text-xs text-gray-400">Free Fire Android</p>
-    </div>
-
-    <div class="card p-2" onclick="showProduct('fluorite')">
-      <img src="https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg" class="w-full h-24 object-contain">
-      <p class="text-sm font-bold mt-1">FLUORITE</p>
-      <p class="text-xs text-gray-400">Free Fire iOS</p>
-    </div>
-
-    <div class="card p-2" onclick="showProduct('pubg')">
-      <img src="https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg" class="w-full h-24 object-contain">
-      <p class="text-sm font-bold mt-1">PUBG KING MOD</p>
-      <p class="text-xs text-gray-400">PUBG Mobile</p>
-    </div>
-
-    <div class="card p-2" onclick="showProduct('gbox')">
-      <img src="https://i.ibb.co.com/ksZhXRyb/IMG-6457.png" class="w-full h-24 object-contain">
-      <p class="text-sm font-bold mt-1">GBOX 1 TAHUN</p>
-      <p class="text-xs text-gray-400">Garansi 30 Hari</p>
-    </div>
-
-    <div class="card p-2 col-span-2" onclick="showProduct('drip')">
-      <div class="flex gap-2">
-        <img src="https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg" class="w-20 h-20 object-contain">
-        <div>
-          <p class="text-sm font-bold">DRIP CLIENT</p>
-          <p class="text-xs text-gray-400">Free Fire Android</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <h3 class="px-3 font-bold text-lg">Produk</h3>
+  <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3"></div>
 </div>
 
-<!-- PAGE 2: DETAIL PRODUK -->
 <div id="detail" class="page">
   <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div>
-
-  <div class="progress px-3 mb-2">
-    <span class="active">1. PAKET</span> → <span>2. PEMBAYARAN</span> → <span>3. SELESAI</span>
-  </div>
-
   <div class="p-3">
     <img id="detailImg" class="w-full h-40 object-contain rounded">
-    <h2 id="detailNama" class="text-xl font-bold mt-2"></h2>
-    <p class="text-yellow-400 text-sm">⭐ 4.8 • PROTEKSI</p>
-
+    <h2 id="detailNama" class="text-2xl font-bold mt-2"></h2>
+    <p class="text-yellow-400 text-sm font-semibold">⭐ 4.8 • PROTEKSI</p>
     <div class="bg-[#111] p-3 rounded mt-3 text-xs">
       <p class="font-bold text-red-500">WAJIB DIBACA</p>
       <p>1. Masukkan Email/WA aktif</p>
       <p>2. Pilih durasi</p>
     </div>
-
     <div class="mt-3">
-      <label class="text-sm">1. ALAMAT EMAIL / NO WA</label>
-      <input id="email" type="text" placeholder="your@email.com" class="w-full bg-[#222] p-2 rounded mt-1">
+      <label class="text-sm font-semibold">1. ALAMAT EMAIL / NO WA</label>
+      <input id="email" type="text" placeholder="0812xxxx / email" class="input mt-1">
     </div>
-
     <div class="mt-3">
-      <label class="text-sm">2. PILIH DURASI</label>
+      <label class="text-sm font-semibold">2. PILIH DURASI</label>
       <div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div>
     </div>
-
     <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold flex items-center justify-center gap-2">💬 ORDER VIA WHATSAPP</button>
   </div>
 </div>
 
+<div id="lacak" class="page">
+  <div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">Lacak Pesanan</h2>
+    <div id="riwayatOrder" class="space-y-3"></div>
+  </div>
+</div>
+
+<div id="login" class="page">
+  <div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">Login Akun</h2>
+    <input id="loginEmail" type="text" placeholder="Email / No WA" class="input mb-3">
+    <input id="loginPass" type="password" placeholder="Password" class="input mb-4">
+    <button onclick="login()" class="btn-ungu mb-3">MASUK</button>
+    <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-purple-400" onclick="showPage('register')">Daftar disini</span></p>
+  </div>
+</div>
+
+<div id="register" class="page">
+  <div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">Daftar Akun</h2>
+    <input id="regNama" type="text" placeholder="Nama" class="input mb-3">
+    <input id="regEmail" type="text" placeholder="Email / No WA" class="input mb-3">
+    <input id="regPass" type="password" placeholder="Password" class="input mb-4">
+    <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button>
+    <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-purple-400" onclick="showPage('login')">Login disini</span></p>
+  </div>
+</div>
+
+<div id="admin" class="page">
+  <div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">Panel Admin</h2>
+    <div id="loginAdmin" class="space-y-3">
+      <input id="passAdmin" type="password" placeholder="Masukkan Password Admin" class="input">
+      <button onclick="masukAdmin()" class="btn-ungu">MASUK</button>
+    </div>
+    <div id="listAdmin" class="hidden space-y-3"></div>
+  </div>
+</div>
+
+<div id="faq" class="page">
+  <div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">FAQ - Pertanyaan Umum</h2>
+    <div class="space-y-3">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi Email/No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Berapa lama proses pengiriman key? <span>+</span></div><div class="faq-a">Maksimal 5 menit setelah pembayaran dikonfirmasi. Biasanya langsung dikirim.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="bantuan" class="page">
+  <div class="p-4">
+    <div class="box-ungu">
+      <h3 class="text-yellow-400 font-bold text-lg mb-3">Saluran Kami</h3>
+      <div class="grid grid-cols-2 gap-3">
+        <a href="https://t.me/nielllofcbinn" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">✈️</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">Telegram</p></div></a>
+        <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">📢</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">WhatsApp</p></div></a>
+      </div>
+      <h3 class="text-yellow-400 font-bold text-lg mb-3 mt-5">Customer Service</h3>
+      <a href="https://wa.me/6285194336082?text=Halo%20Admin%20NIELofc%20saya%20butuh%20bantuan" target="_blank" class="btn-channel w-1/2"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">💬</div><div><p class="text-sm font-bold">Customer</p><p class="text-xs">Service 1</p></div></a>
+      <button onclick="logout()" id="btnLogout" class="w-full bg-red-600 py-3 rounded mt-4 font-bold hidden">LOGOUT</button>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="showPage('home')"><div class="text-xl">🏠</div>Home</div>
+  <div class="nav-item" onclick="showPage('lacak')"><div class="text-xl">🔍</div>Lacak</div>
+  <div class="nav-item" onclick="showPage('login')"><div class="text-xl">➡️</div>Login</div>
+  <div class="nav-item" onclick="showPage('faq')"><div class="text-xl">❓</div>FAQ</div>
+  <div class="nav-item" onclick="showPage('bantuan')"><div class="text-xl">🆘</div>Bantuan</div>
+</div>
+
 <script>
 const produk = {
-  migul: {
-    nama: "MIGUL LITE & PRO",
-    img: "https://i.ibb.co.com/0pL31MRx/IMG-6456.png",
-    durasi: [
-      {label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000},
-      {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000},
-      {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}
-    ]
-  },
-  fluorite: {
-    nama: "FLUORITE",
-    img: "https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg",
-    durasi: [
-      {label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}
-    ]
-  },
-  pubg: {
-    nama: "PUBG KING MOD",
-    img: "https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg",
-    durasi: [
-      {label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}
-    ]
-  },
-  gbox: {
-    nama: "GBOX 1 TAHUN",
-    img: "https://i.ibb.co.com/ksZhXRyb/IMG-6457.png",
-    durasi: [{label:"1 Tahun", harga:100000}]
-  },
-  drip: {
-    nama: "DRIP CLIENT",
-    img: "https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg",
-    durasi: [
-      {label:"1 Day", harga:12000}, {label:"3 Day", harga:25000},
-      {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}
-    ]
+  migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/0pL31MRx/IMG-6456.png", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000}, {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000}, {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}]},
+  fluorite: {nama: "FLUORITE IOS", img: "https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}]},
+  pubg: {nama: "PUBG KING MOD IOS", img: "https://i.ibb.co.com/LdQWD9MQ/IMG-6423.jpg", kategori: "ios", game: "PUBG Mobile iOS", durasi: [{label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}]},
+  gbox: {nama: "GBOX IOS", img: "https://i.ibb.co.com/ksZhXRyb/IMG-6457.png", kategori: "ios", game: "Garansi 30 Hari", durasi: [{label:"1 Tahun", harga:100000}]},
+  drip: {nama: "DRIP ANDROID", img: "https://i.ibb.co.com/Qvbwh1Pw/IMG-6459.jpg", kategori: "android", game: "Free Fire Android", durasi: [{label:"1 Day", harga:12000}, {label:"3 Day", harga:25000}, {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}]},
+  solana: {nama: "SOLANA HAX", img: "https://i.ibb.co.com/k6ywqJDV/5386c63f-1438-471a-b9b0-844ae37ebbcd.jpg", kategori: "android", game: "Android", durasi: [{label:"3 Day", harga:85000}, {label:"7 Day", harga:140000}, {label:"30 Day", harga:300000}]}
+}
+let produkAktif = ""; let durasiAktif = {};
+const NO_WA = "6285194336082";
+const PASS_ADMIN = "220230";
+let klikHeader = 0;
+let userLogin = JSON.parse(localStorage.getItem('niel_user'));
+
+function cekLogin(){
+  if(userLogin){
+    document.getElementById('userStatus').innerHTML = `Hi, ${userLogin.nama}`;
+    document.getElementById('btnLogout').classList.remove('hidden');
+    document.getElementById('email').value = userLogin.email;
+  } else {
+    document.getElementById('userStatus').innerHTML = '';
+    document.getElementById('btnLogout').classList.add('hidden');
   }
 }
 
-let produkAktif = "";
-let durasiAktif = {};
-const NO_WA = "6285194336082"; // GANTI NOMOR WA KAMU DISINI
+function register(){
+  const nama = document.getElementById('regNama').value;
+  const email = document.getElementById('regEmail').value;
+  const pass = document.getElementById('regPass').value;
+  if(!nama ||!email ||!pass){ alert('Isi semua data!'); return; }
+  const user = {nama, email, pass};
+  localStorage.setItem('niel_user', JSON.stringify(user));
+  alert('Daftar berhasil! Silahkan login');
+  showPage('login');
+}
+
+function login(){
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPass').value;
+  const user = JSON.parse(localStorage.getItem('niel_user'));
+  if(user && user.email == email && user.pass == pass){
+    userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home');
+  } else { alert('Email/No WA atau password salah!'); }
+}
+
+function logout(){
+  localStorage.removeItem('niel_user');
+  userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home');
+}
+
+function renderProduk(kategori = 'semua'){
+  const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
+  for(let key in produk){
+    if(kategori == 'semua' || produk[key].kategori == kategori){
+      grid.innerHTML += `<div class="card p-2" onclick="showProduct('${key}')"><img src="${produk[key].img}" class="w-full h-24 object-contain"><p class="text-sm font-bold mt-1">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
+    }
+  }
+}
+
+function filterProduk(kategori){
+  document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById('btn-'+kategori).classList.add('active');
+  renderProduk(kategori);
+}
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(id=='home') document.querySelectorAll('.nav-item')[0].classList.add('active');
+  if(id=='lacak'){ document.querySelectorAll('.nav-item')[1].classList.add('active'); renderRiwayat(); }
+  if(id=='login') document.querySelectorAll('.nav-item')[2].classList.add('active');
+  if(id=='faq') document.querySelectorAll('.nav-item')[3].classList.add('active');
+  if(id=='bantuan') document.querySelectorAll('.nav-item')[4].classList.add('active');
 }
 
 function showProduct(key){
@@ -166,29 +242,149 @@ function showProduct(key){
   const p = produk[key];
   document.getElementById('detailImg').src = p.img;
   document.getElementById('detailNama').innerText = p.nama;
-
   let grid = "";
-  p.durasi.forEach((d,i)=>{
-    grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;
-  });
+  p.durasi.forEach((d,i)=>{ grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; });
   document.getElementById('durasiGrid').innerHTML = grid;
   showPage('detail');
 }
 
 function pilihDurasi(el, i){
   document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active'));
-  el.classList.add('active');
-  durasiAktif = produk[produkAktif].durasi[i];
+  el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i];
 }
 
 function orderWA(){
+  if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
   const email = document.getElementById('email').value;
-  if(!email){ alert('Isi Email/No WA dulu!'); return; }
-  if(!durasiAktif.label){ alert('Pilih durasi dulu!'); return; }
-
-  const pesan = `Halo NIELofc%0A%0ASaya mau order:%0AProduk: ${produk[produkAktif].nama}%0ADurasi: ${durasiAktif.label}%0AHarga: Rp${durasiAktif.harga.toLocaleString('id')}%0AEmail/WA: ${email}%0A%0AMohon diproses ya`;
+  if(!email ||!durasiAktif.label){ alert('Isi Email/No WA dan Pilih Durasi!'); return; }
+  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  const newOrder = {
+    id: 'ORD' + Date.now(), produk: produk[produkAktif].nama, durasi: durasiAktif.label,
+    harga: durasiAktif.harga, email: email, nama: userLogin.nama,
+    tanggal: new Date().toLocaleString('id'), status: 'pending'
+  };
+  orders.unshift(newOrder); localStorage.setItem('niel_orders', JSON.stringify(orders));
+  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0AEmail/WA: ${email}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`;
   window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
 }
+
+function renderRiwayat(){
+  const wrap = document.getElementById('riwayatOrder');
+  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  if(!userLogin){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; }
+  const myOrders = orders.filter(o => o.email == userLogin.email);
+  if(myOrders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; }
+  wrap.innerHTML = '';
+  myOrders.forEach(o=>{
+    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
+    let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai';
+    let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : '';
+    wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
+  });
+}
+
+function cekAdmin(){
+  klikHeader++;
+  if(klikHeader >= 5){
+    klikHeader = 0;
+    showPage('admin');
+  }
+  setTimeout(()=>{klikHeader=0}, 2000);
+}
+
+function masukAdmin(){
+  const pass = document.getElementById('passAdmin').value;
+  if(pass == PASS_ADMIN){
+    document.getElementById('loginAdmin').classList.add('hidden');
+    document.getElementById('listAdmin').classList.remove('hidden');
+    renderAdmin();
+  } else { alert('Password salah!'); }
+}
+
+function renderAdmin(){
+  const wrap = document.getElementById('listAdmin');
+  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  if(orders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada order masuk</p>'; return; }
+  wrap.innerHTML = '';
+  orders.forEach((o, i)=>{
+    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
+    let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai';
+    let nomorWA = o.email.replace(/[^0-9]/g,'');
+    wrap.innerHTML += `
+    <div class="order-card">
+      <p class="font-bold">${o.produk}</p>
+      <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
+      <p class="text-xs">Nama: ${o.nama}</p>
+      <p class="text-xs">Kontak: ${o.email}</p>
+      <p class="text-xs text-gray-500">ID: ${o.id}</p>
+      ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''}
+      <div class="mt-2 space-y-2">
+        <span class="status ${statusClass}">${statusText}</span>
+        <div class="flex gap-2 flex-wrap">
+          <button onclick="notifProses(${i})" class="btn-admin bg-blue-600">Proses + WA</button>
+          ${nomorWA.length > 8? `<button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button>` : `<p class="text-xs text-red-400">No WA tidak valid</p>`}
+        </div>
+        <div id="keyBox${i}" class="hidden">
+          <input id="inputKey${i}" type="text" placeholder="Tempel Key Disini" class="input text-xs">
+          <button onclick="kirimKey(${i})" class="btn-ungu mt-2 text-sm">KIRIM KEY + WA</button>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+function notifProses(index){
+  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  orders[index].status = 'proses';
+  localStorage.setItem('niel_orders', JSON.stringify(orders));
+  const o = orders[index];
+  const nomor = '62' + o.email.replace(/[^0-9]/g,'').replace(/^0/, '');
+  const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0AKontak: ${o.email}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`;
+  window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
+  renderAdmin();
+}
+
+function kirimSelesai(index){
+  document.getElementById(`keyBox${index}`).classList.remove('hidden');
+}
+
+function kirimKey(index){
+  let key = document.getElementById(`inputKey${index}`).value;
+  if(!key){ alert('Isi key dulu!'); return; }
+
+  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  orders[index].status = 'selesai';
+  orders[index].key = key;
+  localStorage.setItem('niel_orders', JSON.stringify(orders));
+
+  const o = orders[index];
+  const nomor = '62' + o.email.replace(/[^0-9]/g,'').replace(/^0/, '');
+  const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
+  window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
+  renderAdmin();
+}
+
+function toggleFaq(el){
+  const ans = el.nextElementSibling;
+  const icon = el.querySelector('span');
+  if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; }
+  else { ans.style.display='block'; icon.innerText='-'; }
+}
+
+let slideIndex = 0;
+const slides = document.querySelectorAll('.banner img');
+const dots = document.querySelectorAll('.dot');
+function showSlide(){
+  slides.forEach(s=>s.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
+  dots[slideIndex].classList.add('active');
+}
+setInterval(showSlide, 3000);
+
+renderProduk('semua');
+cekLogin();
 </script>
 
 </body>
