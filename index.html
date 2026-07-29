@@ -6,6 +6,12 @@
 <title>NIELofc - Toko Cheat</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
 <style>
 body{background:#0A0A0A;color:#fff;font-family:'Inter', sans-serif;padding-bottom:80px}
 h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
@@ -96,33 +102,19 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
 
 <div id="login" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Login Akun</h2>
-    <input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
-    <input id="loginPass" type="password" placeholder="Password" class="input mb-4">
-    <button onclick="login()" class="btn-ungu mb-3">MASUK</button>
-    <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-purple-400" onclick="showPage('register')">Daftar disini</span></p>
-  </div>
-</div>
-
-<div id="register" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Daftar Akun</h2>
-    <input id="regNama" type="text" placeholder="Nama" class="input mb-3">
-    <input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
-    <input id="regPass" type="password" placeholder="Password" class="input mb-4">
-    <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button>
-    <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-purple-400" onclick="showPage('login')">Login disini</span></p>
+    <h2 class="text-2xl font-bold mb-4">Login OTP</h2>
+    <input id="loginNohp" type="number" placeholder="No WhatsApp 0812xxx" class="input mb-3">
+    <div id="recaptcha-container"></div>
+    <input id="loginOtp" type="text" placeholder="Masukkan Kode OTP" class="input mb-3 hidden">
+    <button id="btnSendOtp" onclick="sendOtp()" class="btn-ungu mb-3">KIRIM KODE OTP</button>
+    <button id="btnVerifyOtp" onclick="verifyOtp()" class="btn-ungu mb-3 hidden">VERIFIKASI</button>
   </div>
 </div>
 
 <div id="admin" class="page">
   <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Panel Admin</h2>
-    <div id="loginAdmin" class="space-y-3">
-      <input id="passAdmin" type="password" placeholder="Masukkan Password Admin" class="input">
-      <button onclick="masukAdmin()" class="btn-ungu">MASUK</button>
-    </div>
-    <div id="listAdmin" class="hidden space-y-3"></div>
+    <h2 class="text-2xl font-bold mb-4">🔔 Panel Admin RealTime</h2>
+    <div id="listAdmin" class="space-y-3"></div>
   </div>
 </div>
 
@@ -131,8 +123,6 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
     <h2 class="text-2xl font-bold mb-4">FAQ - Pertanyaan Umum</h2>
     <div class="space-y-3">
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Berapa lama proses pengiriman key? <span>+</span></div><div class="faq-a">Maksimal 5 menit setelah pembayaran dikonfirmasi. Biasanya langsung dikirim.</div></div>
     </div>
   </div>
 </div>
@@ -159,8 +149,26 @@ h1, h2, h3,.font-black{font-family:'Poppins', sans-serif;letter-spacing:-0.5px}
   <div class="nav-item" onclick="showPage('faq')"><div class="text-xl">❓</div>FAQ</div>
   <div class="nav-item" onclick="showPage('bantuan')"><div class="text-xl">🆘</div>Bantuan</div>
 </div>
+<audio id="notifSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 
 <script>
+// ========== UDAH DIGANTI PUNYA KAMU ==========
+const firebaseConfig = {
+  apiKey: "AIzaSyDy8nuNPGTeW9GNGK1tYTOyPcXouXZYdGA",
+  authDomain: "nielofc-4f831.firebaseapp.com",
+  databaseURL: "https://nielofc-4f831-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "nielofc-4f831",
+  storageBucket: "nielofc-4f831.firebasestorage.app",
+  messagingSenderId: "1088543199786",
+  appId: "1:1088543199786:web:79119fe81014de9dcfa953"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const ordersRef = db.ref('orders');
+// =============================================
+
 const produk = {
   migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/0pL31MRx/IMG-6456.png", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day Lite", harga:35000}, {label:"1 Day Pro", harga:40000}, {label:"7 Day Lite", harga:100000}, {label:"7 Day Pro", harga:120000}, {label:"30 Day Lite", harga:230000}, {label:"30 Day Pro", harga:270000}]},
   fluorite: {nama: "FLUORITE IOS", img: "https://i.ibb.co.com/r2wp4rPW/IMG-6458.jpg", kategori: "ios", game: "Free Fire iOS", durasi: [{label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}]},
@@ -171,45 +179,43 @@ const produk = {
 }
 let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";
-const PASS_ADMIN = "220230";
 let klikHeader = 0;
-let userLogin = JSON.parse(localStorage.getItem('niel_user'));
+let currentUser = null;
+let confirmationResult = null;
 
 function cekLogin(){
-  if(userLogin){
-    document.getElementById('userStatus').innerHTML = `Hi, ${userLogin.nama}`;
+  if(currentUser){
+    document.getElementById('userStatus').innerHTML = `Hi, ${currentUser.phoneNumber}`;
     document.getElementById('btnLogout').classList.remove('hidden');
-    document.getElementById('nohp').value = userLogin.nohp;
+    document.getElementById('nohp').value = currentUser.phoneNumber.replace('+62', '0');
   } else {
     document.getElementById('userStatus').innerHTML = '';
     document.getElementById('btnLogout').classList.add('hidden');
   }
 }
 
-function register(){
-  const nama = document.getElementById('regNama').value;
-  const nohp = document.getElementById('regNohp').value;
-  const pass = document.getElementById('regPass').value;
-  if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; }
-  const user = {nama, nohp, pass};
-  localStorage.setItem('niel_user', JSON.stringify(user));
-  alert('Daftar berhasil! Silahkan login');
-  showPage('login');
-}
+auth.onAuthStateChanged(user => { currentUser = user; cekLogin(); });
 
-function login(){
+function sendOtp(){
   const nohp = document.getElementById('loginNohp').value;
-  const pass = document.getElementById('loginPass').value;
-  const user = JSON.parse(localStorage.getItem('niel_user'));
-  if(user && user.nohp == nohp && user.pass == pass){
-    userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home');
-  } else { alert('No WA atau password salah!'); }
+  if(!nohp){ alert('Isi No WA dulu!'); return; }
+  const phone = '+62' + nohp.substring(1);
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+  auth.signInWithPhoneNumber(phone, window.recaptchaVerifier)
+.then(result => {
+    confirmationResult = result;
+    document.getElementById('loginOtp').classList.remove('hidden');
+    document.getElementById('btnSendOtp').classList.add('hidden');
+    document.getElementById('btnVerifyOtp').classList.remove('hidden');
+  }).catch(e => alert(e.message));
 }
 
-function logout(){
-  localStorage.removeItem('niel_user');
-  userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home');
+function verifyOtp(){
+  const code = document.getElementById('loginOtp').value;
+  confirmationResult.confirm(code).then(() => { showPage('home'); });
 }
+
+function logout(){ auth.signOut(); }
 
 function renderProduk(kategori = 'semua'){
   const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
@@ -254,114 +260,100 @@ function pilihDurasi(el, i){
 }
 
 function orderWA(){
-  if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
+  if(!currentUser){ alert('Silahkan login dulu!'); showPage('login'); return; }
   const nohp = document.getElementById('nohp').value;
   if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; }
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
+  const orderId = 'ORD' + Date.now();
   const newOrder = {
-    id: 'ORD' + Date.now(), produk: produk[produkAktif].nama, durasi: durasiAktif.label,
-    harga: durasiAktif.harga, nohp: nohp, nama: userLogin.nama,
+    id: orderId, produk: produk[produkAktif].nama, durasi: durasiAktif.label,
+    harga: durasiAktif.harga, nohp: nohp, uid: currentUser.uid,
     tanggal: new Date().toLocaleString('id'), status: 'pending'
   };
-  orders.unshift(newOrder); localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0ANo WA: ${nohp}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`;
+  ordersRef.child(orderId).set(newOrder);
+
+  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0ANo WA: ${nohp}%0AID: ${newOrder.id}`;
   window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
 }
 
 function renderRiwayat(){
   const wrap = document.getElementById('riwayatOrder');
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  if(!userLogin){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; }
-  const myOrders = orders.filter(o => o.nohp == userLogin.nohp);
-  if(myOrders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; }
-  wrap.innerHTML = '';
-  myOrders.forEach(o=>{
-    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
-    let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai';
-    let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : '';
-    wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
+  if(!currentUser){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; }
+  ordersRef.orderByChild('uid').equalTo(currentUser.uid).on('value', snapshot => {
+    wrap.innerHTML = '';
+    if(!snapshot.exists()){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; }
+    snapshot.forEach(child => {
+      const o = child.val();
+      let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
+      let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai';
+      let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : '';
+      wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
+    });
   });
 }
 
 function cekAdmin(){
   klikHeader++;
-  if(klikHeader >= 5){
-    klikHeader = 0;
-    showPage('admin');
-  }
+  if(klikHeader >= 5){ klikHeader = 0; showPage('admin'); }
   setTimeout(()=>{klikHeader=0}, 2000);
 }
 
-function masukAdmin(){
-  const pass = document.getElementById('passAdmin').value;
-  if(pass == PASS_ADMIN){
-    document.getElementById('loginAdmin').classList.add('hidden');
-    document.getElementById('listAdmin').classList.remove('hidden');
-    renderAdmin();
-  } else { alert('Password salah!'); }
-}
+ordersRef.on('child_added', snapshot => {
+  if(document.getElementById('admin').classList.contains('active')){
+    notifSound.play();
+    alert(`ORDER BARU MASUK! ID: ${snapshot.val().id}`);
+  }
+  renderAdmin();
+});
 
 function renderAdmin(){
   const wrap = document.getElementById('listAdmin');
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  if(orders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada order masuk</p>'; return; }
-  wrap.innerHTML = '';
-  orders.forEach((o, i)=>{
-    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
-    let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai';
-    let nomorWA = o.nohp.replace(/[^0-9]/g,'');
-    wrap.innerHTML += `
-    <div class="order-card">
-      <p class="font-bold">${o.produk}</p>
-      <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
-      <p class="text-xs">Nama: ${o.nama}</p>
-      <p class="text-xs">No WA: ${o.nohp}</p>
-      <p class="text-xs text-gray-500">ID: ${o.id}</p>
-      ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''}
-      <div class="mt-2 space-y-2">
-        <span class="status ${statusClass}">${statusText}</span>
-        <div class="flex gap-2 flex-wrap">
-          <button onclick="notifProses(${i})" class="btn-admin bg-blue-600">Proses + WA</button>
-          <button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button>
+  ordersRef.on('value', snapshot => {
+    wrap.innerHTML = '';
+    if(!snapshot.exists()){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada order masuk</p>'; return; }
+    snapshot.forEach(child => {
+      const o = child.val();
+      let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
+      let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai';
+      let nomorWA = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
+      wrap.innerHTML += `
+      <div class="order-card">
+        <p class="font-bold">${o.produk}</p>
+        <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
+        <p class="text-xs">No WA: ${o.nohp}</p>
+        <p class="text-xs text-gray-500">ID: ${o.id}</p>
+        ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''}
+        <div class="mt-2 space-y-2">
+          <span class="status ${statusClass}">${statusText}</span>
+          <div class="flex gap-2 flex-wrap">
+            <button onclick="notifProses('${o.id}', '${nomorWA}')" class="btn-admin bg-blue-600">Proses + WA</button>
+            <button onclick="kirimSelesai('${o.id}')" class="btn-admin bg-green-600">Selesai + WA</button>
+          </div>
+          <div id="keyBox${o.id}" class="hidden">
+            <input id="inputKey${o.id}" type="text" placeholder="Tempel Key Disini" class="input text-xs">
+            <button onclick="kirimKey('${o.id}', '${nomorWA}')" class="btn-ungu mt-2 text-sm">KIRIM KEY + WA</button>
+          </div>
         </div>
-        <div id="keyBox${i}" class="hidden">
-          <input id="inputKey${i}" type="text" placeholder="Tempel Key Disini" class="input text-xs">
-          <button onclick="kirimKey(${i})" class="btn-ungu mt-2 text-sm">KIRIM KEY + WA</button>
-        </div>
-      </div>
-    </div>`;
+      </div>`;
+    });
   });
 }
 
-function notifProses(index){
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  orders[index].status = 'proses';
-  localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const o = orders[index];
-  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
-  const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0ANo WA: ${o.nohp}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`;
+function notifProses(id, nomor){
+  db.ref('orders/' + id).update({status: 'proses'});
+  const pesan = `Halo 👋%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏%0AID: ${id}`;
   window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
-  renderAdmin();
 }
 
-function kirimSelesai(index){
-  document.getElementById(`keyBox${index}`).classList.remove('hidden');
+function kirimSelesai(id){
+  document.getElementById(`keyBox${id}`).classList.remove('hidden');
 }
 
-function kirimKey(index){
-  let key = document.getElementById(`inputKey${index}`).value;
+function kirimKey(id, nomor){
+  let key = document.getElementById(`inputKey${id}`).value;
   if(!key){ alert('Isi key dulu!'); return; }
-
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  orders[index].status = 'selesai';
-  orders[index].key = key;
-  localStorage.setItem('niel_orders', JSON.stringify(orders));
-
-  const o = orders[index];
-  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
-  const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
+  db.ref('orders/' + id).update({status: 'selesai', key: key});
+  const pesan = `Halo 👋%0APesanan kamu SUDAH SELESAI ✅%0AID: ${id}%0AKEY: ${key}%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
   window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
-  renderAdmin();
 }
 
 function toggleFaq(el){
@@ -384,7 +376,6 @@ function showSlide(){
 setInterval(showSlide, 3000);
 
 renderProduk('semua');
-cekLogin();
 </script>
 
 </body>
