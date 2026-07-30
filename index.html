@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Orbitron:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 
-<!-- FIREBASE -->
+<!-- FIREBASE WAJIB -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -211,7 +211,7 @@ const PASS_ADMIN = "220230";
 let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
 
-// SINKRON FIREBASE
+// SINKRON FIREBASE REALTIME
 window.dbOn(window.dbRef(window.db, 'produk_status'), (snapshot) => {
   produkStatus = snapshot.val() || {};
   renderProduk('semua');
@@ -336,7 +336,7 @@ function renderRiwayat(){
   });
 }
 
-// ADMIN MODE: KLIK LOGO 5X - RAHASIA
+// ADMIN MODE: KLIK LOGO 5X
 function cekAdmin(){
   klikHeader++;
   if(klikHeader >= 5){
