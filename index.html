@@ -7,21 +7,9 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Orbitron:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 
-<!-- FIREBASE WAJIB -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-  const firebaseConfig = {
-    databaseURL: "https://nielofc-panel-default-rtdb.asia-southeast1.firebasedatabase.app/"
-  };
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  window.db = db;
-  window.dbRef = ref;
-  window.dbSet = set;
-  window.dbOn = onValue;
-</script>
+<!-- FIREBASE V8 BIAR GA KEBLOKIR -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <style>
 :root{
@@ -45,6 +33,7 @@ h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;tex
 .indikator.on{background:#10B981;box-shadow:0 0 10px #10B981;animation:kedip 1.5s infinite}
 .indikator.off{background:#EF4444;box-shadow:0 0 10px #EF4444}
 @keyframes kedip{0%,100%{opacity:1}50%{opacity:0.3}}
+.grid{grid-template-columns:repeat(2,1fr)}
 .page{display:none}
 .page.active{display:block}
 .durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;font-family:'Poppins';background:var(--abu)}
@@ -94,96 +83,17 @@ h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;tex
     <button id="btn-sertifikat" class="filter-btn" onclick="filterProduk('sertifikat')">SERTIFIKAT IOS</button>
   </div>
   <h3 class="px-3 font-bold text-lg italic">Produk</h3>
-  <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3"></div>
+  <div id="produkGrid" class="grid gap-3 p-3"></div>
 </div>
 
-<div id="detail" class="page">
-  <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div>
-  <div class="p-3">
-    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border border-blue-500">
-    <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2>
-    <p class="text-cyan-400 text-sm font-bold">⭐ 4.8 • PROTEKSI</p>
-    <div class="bg-[#0F172A] p-3 rounded mt-3 text-xs border-blue-500">
-      <p class="font-bold text-red-500">WAJIB DIBACA</p>
-      <p>1. Masukkan No WA aktif</p>
-      <p>2. Pilih durasi</p>
-    </div>
-    <div class="mt-3">
-      <label class="text-sm font-bold">1. NO WHATSAPP AKTIF</label>
-      <input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1">
-    </div>
-    <div class="mt-3">
-      <label class="text-sm font-bold">2. PILIH DURASI</label>
-      <div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div>
-    </div>
-    <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold flex items-center justify-center gap-2">💬 ORDER VIA WHATSAPP</button>
-  </div>
-</div>
-
-<div id="lacak" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4 italic">Lacak Pesanan</h2>
-    <div id="riwayatOrder" class="space-y-3"></div>
-  </div>
-</div>
-
-<div id="login" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4 italic">Login Akun</h2>
-    <input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
-    <input id="loginPass" type="password" placeholder="Password" class="input mb-4">
-    <button onclick="login()" class="btn-ungu mb-3">MASUK</button>
-    <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-cyan-400" onclick="showPage('register')">Daftar disini</span></p>
-  </div>
-</div>
-
-<div id="register" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4 italic">Daftar Akun</h2>
-    <input id="regNama" type="text" placeholder="Nama" class="input mb-3">
-    <input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3">
-    <input id="regPass" type="password" placeholder="Password" class="input mb-4">
-    <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button>
-    <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-cyan-400" onclick="showPage('login')">Login disini</span></p>
-  </div>
-</div>
-
-<div id="admin" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4 italic">Panel Admin</h2>
-    <div id="loginAdmin" class="space-y-3">
-      <input id="passAdmin" type="password" placeholder="Masukkan Password Admin" class="input">
-      <button onclick="masukAdmin()" class="btn-ungu">MASUK</button>
-    </div>
-    <div id="listAdmin" class="hidden space-y-3"></div>
-  </div>
-</div>
-
-<div id="faq" class="page">
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4 italic">FAQ - Pertanyaan Umum</h2>
-    <div class="space-y-3">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Berapa lama proses pengiriman key? <span>+</span></div><div class="faq-a">Maksimal 5 menit setelah pembayaran dikonfirmasi. Biasanya langsung dikirim.</div></div>
-    </div>
-  </div>
-</div>
-
-<div id="bantuan" class="page">
-  <div class="p-4">
-    <div class="box-ungu">
-      <h3 class="text-cyan-400 font-bold text-lg mb-3 italic">Saluran Kami</h3>
-      <div class="grid grid-cols-2 gap-3">
-        <a href="https://t.me/nielllofcbinn" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">✈️</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">Telegram</p></div></a>
-        <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">📢</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">WhatsApp</p></div></a>
-      </div>
-      <h3 class="text-cyan-400 font-bold text-lg mb-3 mt-5 italic">Customer Service</h3>
-      <a href="https://wa.me/6285194336082?text=Halo%20Admin%20NIELofc%20saya%20butuh%20bantuan" target="_blank" class="btn-channel w-1/2"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">💬</div><div><p class="text-sm font-bold">Customer</p><p class="text-xs">Service 1</p></div></a>
-      <button onclick="logout()" id="btnLogout" class="w-full bg-red-600 py-3 rounded mt-4 font-bold hidden">LOGOUT</button>
-    </div>
-  </div>
-</div>
+<!-- SISA PAGE SAMA SEMUA... -->
+<div id="detail" class="page"> <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div> <div class="p-3"> <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border border-blue-500"> <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2> <p class="text-cyan-400 text-sm font-bold">⭐ 4.8 • PROTEKSI</p> <div class="bg-[#0F172A] p-3 rounded mt-3 text-xs border-blue-500"> <p class="font-bold text-red-500">WAJIB DIBACA</p> <p>1. Masukkan No WA aktif</p> <p>2. Pilih durasi</p> </div> <div class="mt-3"> <label class="text-sm font-bold">1. NO WHATSAPP AKTIF</label> <input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1"> </div> <div class="mt-3"> <label class="text-sm font-bold">2. PILIH DURASI</label> <div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div> </div> <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold flex items-center justify-center gap-2">💬 ORDER VIA WHATSAPP</button> </div> </div>
+<div id="lacak" class="page"> <div class="p-4"> <h2 class="text-2xl font-bold mb-4 italic">Lacak Pesanan</h2> <div id="riwayatOrder" class="space-y-3"></div> </div> </div>
+<div id="login" class="page"> <div class="p-4"> <h2 class="text-2xl font-bold mb-4 italic">Login Akun</h2> <input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3"> <input id="loginPass" type="password" placeholder="Password" class="input mb-4"> <button onclick="login()" class="btn-ungu mb-3">MASUK</button> <p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-cyan-400" onclick="showPage('register')">Daftar disini</span></p> </div> </div>
+<div id="register" class="page"> <div class="p-4"> <h2 class="text-2xl font-bold mb-4 italic">Daftar Akun</h2> <input id="regNama" type="text" placeholder="Nama" class="input mb-3"> <input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3"> <input id="regPass" type="password" placeholder="Password" class="input mb-4"> <button onclick="register()" class="btn-ungu mb-3">DAFTAR</button> <p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-cyan-400" onclick="showPage('login')">Login disini</span></p> </div> </div>
+<div id="admin" class="page"> <div class="p-4"> <h2 class="text-2xl font-bold mb-4 italic">Panel Admin</h2> <div id="loginAdmin" class="space-y-3"> <input id="passAdmin" type="password" placeholder="Masukkan Password Admin" class="input"> <button onclick="masukAdmin()" class="btn-ungu">MASUK</button> </div> <div id="listAdmin" class="hidden space-y-3"></div> </div> </div>
+<div id="faq" class="page"> <div class="p-4"> <h2 class="text-2xl font-bold mb-4 italic">FAQ - Pertanyaan Umum</h2> <div class="space-y-3"> <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div> <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah aman dan bergaransi? <span>+</span></div><div class="faq-a">Semua produk sudah tested dan ada garansi. Jika key error/mati dalam masa aktif, bisa klaim reset ke CS.</div></div> <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Berapa lama proses pengiriman key? <span>+</span></div><div class="faq-a">Maksimal 5 menit setelah pembayaran dikonfirmasi. Biasanya langsung dikirim.</div></div> </div> </div> </div>
+<div id="bantuan" class="page"> <div class="p-4"> <div class="box-ungu"> <h3 class="text-cyan-400 font-bold text-lg mb-3 italic">Saluran Kami</h3> <div class="grid grid-cols-2 gap-3"> <a href="https://t.me/nielllofcbinn" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">✈️</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">Telegram</p></div></a> <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank" class="btn-channel"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">📢</div><div><p class="text-sm font-bold">Channel</p><p class="text-xs">WhatsApp</p></div></a> </div> <h3 class="text-cyan-400 font-bold text-lg mb-3 mt-5 italic">Customer Service</h3> <a href="https://wa.me/6285194336082?text=Halo%20Admin%20NIELofc%20saya%20butuh%20bantuan" target="_blank" class="btn-channel w-1/2"><div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center">💬</div><div><p class="text-sm font-bold">Customer</p><p class="text-xs">Service 1</p></div></a> <button onclick="logout()" id="btnLogout" class="w-full bg-red-600 py-3 rounded mt-4 font-bold hidden">LOGOUT</button> </div> </div> </div>
 
 <div class="bottom-nav">
   <div class="nav-item active" onclick="showPage('home')"><div class="text-xl">🏠</div>Home</div>
@@ -194,6 +104,13 @@ h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;tex
 </div>
 
 <script>
+// INISIALISASI FIREBASE V8
+var firebaseConfig = {
+  databaseURL: "https://nielofc-panel-default-rtdb.asia-southeast1.firebasedatabase.app/"
+};
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
+
 const produk = {
   hgproxy: {nama: "HG PROXY", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", durasi: [{label:"1 Day", harga:15000}, {label:"7 Day", harga:30000}, {label:"10 Day", harga:45000}]},
   silent: {nama: "SILENT CHEAT", img: "https://i.ibb.co.com/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png", kategori: "freefire", game: "Free Fire Android", durasi: [{label:"1 Day", harga:15000}, {label:"3 Day", harga:25000}]},
@@ -211,8 +128,8 @@ const PASS_ADMIN = "220230";
 let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
 
-// SINKRON FIREBASE REALTIME
-window.dbOn(window.dbRef(window.db, 'produk_status'), (snapshot) => {
+// SINKRON FIREBASE V8
+database.ref('produk_status').on('value', (snapshot) => {
   produkStatus = snapshot.val() || {};
   renderProduk('semua');
 });
@@ -223,221 +140,30 @@ function cekStatus(key){
 }
 
 function toggleStatus(key){
-  window.dbSet(window.dbRef(window.db, 'produk_status/' + key),!cekStatus(key));
+  database.ref('produk_status/' + key).set(!cekStatus(key));
 }
 
-function cekLogin(){
-  if(userLogin){
-    document.getElementById('userStatus').innerHTML = `Hi, ${userLogin.nama}`;
-    document.getElementById('btnLogout').classList.remove('hidden');
-    document.getElementById('nohp').value = userLogin.nohp;
-  } else {
-    document.getElementById('userStatus').innerHTML = '';
-    document.getElementById('btnLogout').classList.add('hidden');
-  }
-}
-
-function register(){
-  const nama = document.getElementById('regNama').value;
-  const nohp = document.getElementById('regNohp').value;
-  const pass = document.getElementById('regPass').value;
-  if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; }
-  const user = {nama, nohp, pass};
-  localStorage.setItem('niel_user', JSON.stringify(user));
-  alert('Daftar berhasil! Silahkan login');
-  showPage('login');
-}
-
-function login(){
-  const nohp = document.getElementById('loginNohp').value;
-  const pass = document.getElementById('loginPass').value;
-  const user = JSON.parse(localStorage.getItem('niel_user'));
-  if(user && user.nohp == nohp && user.pass == pass){
-    userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home');
-  } else { alert('No WA atau password salah!'); }
-}
-
-function logout(){
-  localStorage.removeItem('niel_user');
-  userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home');
-}
-
-function renderProduk(kategori = 'semua'){
-  const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
-  for(let key in produk){
-    if(kategori == 'semua' || produk[key].kategori == kategori){
-      let isOn = cekStatus(key);
-      grid.innerHTML += `<div class="card ${isOn?'':'off'}" onclick="showProduct('${key}')"><div class="indikator ${isOn?'on':'off'}"></div><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
-    }
-  }
-}
-
-function filterProduk(kategori){
-  document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));
-  document.getElementById('btn-'+kategori).classList.add('active');
-  renderProduk(kategori);
-}
-
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(id=='home') document.querySelectorAll('.nav-item')[0].classList.add('active');
-  if(id=='lacak'){ document.querySelectorAll('.nav-item')[1].classList.add('active'); renderRiwayat(); }
-  if(id=='login') document.querySelectorAll('.nav-item')[2].classList.add('active');
-  if(id=='faq') document.querySelectorAll('.nav-item')[3].classList.add('active');
-  if(id=='bantuan') document.querySelectorAll('.nav-item')[4].classList.add('active');
-}
-
-function showProduct(key){
-  if(!cekStatus(key)){ alert('❌ Produk sedang OFF'); return; }
-  produkAktif = key;
-  const p = produk[key];
-  document.getElementById('detailImg').src = p.img;
-  document.getElementById('detailNama').innerText = p.nama;
-  let grid = "";
-  p.durasi.forEach((d,i)=>{ grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; });
-  document.getElementById('durasiGrid').innerHTML = grid;
-  showPage('detail');
-}
-
-function pilihDurasi(el, i){
-  document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active'));
-  el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i];
-}
-
-function orderWA(){
-  if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
-  const nohp = document.getElementById('nohp').value;
-  if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; }
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  const newOrder = {
-    id: 'ORD' + Date.now(), produk: produk[produkAktif].nama, durasi: durasiAktif.label,
-    harga: durasiAktif.harga, nohp: nohp, nama: userLogin.nama,
-    tanggal: new Date().toLocaleString('id'), status: 'pending'
-  };
-  orders.unshift(newOrder); localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0ANo WA: ${nohp}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`;
-  window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
-}
-
-function renderRiwayat(){
-  const wrap = document.getElementById('riwayatOrder');
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  if(!userLogin){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; }
-  const myOrders = orders.filter(o => o.nohp == userLogin.nohp);
-  if(myOrders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; }
-  wrap.innerHTML = '';
-  myOrders.forEach(o=>{
-    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
-    let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai';
-    let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : '';
-    wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold italic">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`;
-  });
-}
-
-// ADMIN MODE: KLIK LOGO 5X
-function cekAdmin(){
-  klikHeader++;
-  if(klikHeader >= 5){
-    klikHeader = 0;
-    let key = prompt("Masukkan key produk yang mau di ON/OFF\nList Key:\nhgproxy, silent, drip, migul, fluorite, gbox, pubg, solana");
-    if(key && produk[key]) toggleStatus(key);
-  }
-  setTimeout(()=>{klikHeader=0}, 2000);
-}
-
-function masukAdmin(){
-  const pass = document.getElementById('passAdmin').value;
-  if(pass == PASS_ADMIN){
-    document.getElementById('loginAdmin').classList.add('hidden');
-    document.getElementById('listAdmin').classList.remove('hidden');
-    renderAdmin();
-  } else { alert('Password salah!'); }
-}
-
-function renderAdmin(){
-  const wrap = document.getElementById('listAdmin');
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  if(orders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada order masuk</p>'; return; }
-  wrap.innerHTML = '';
-  orders.forEach((o, i)=>{
-    let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai';
-    let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai';
-    let nomorWA = o.nohp.replace(/[^0-9]/g,'');
-    wrap.innerHTML += `
-    <div class="order-card">
-      <p class="font-bold italic">${o.produk}</p>
-      <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>
-      <p class="text-xs">Nama: ${o.nama}</p>
-      <p class="text-xs">No WA: ${o.nohp}</p>
-      <p class="text-xs text-gray-500">ID: ${o.id}</p>
-      ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''}
-      <div class="mt-2 space-y-2">
-        <span class="status ${statusClass}">${statusText}</span>
-        <div class="flex gap-2 flex-wrap">
-          <button onclick="notifProses(${i})" class="btn-admin bg-blue-600">Proses + WA</button>
-          <button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button>
-        </div>
-        <div id="keyBox${i}" class="hidden">
-          <input id="inputKey${i}" type="text" placeholder="Tempel Key Disini" class="input text-xs">
-          <button onclick="kirimKey(${i})" class="btn-ungu mt-2 text-sm">KIRIM KEY + WA</button>
-        </div>
-      </div>
-    </div>`;
-  });
-}
-
-function notifProses(index){
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  orders[index].status = 'proses';
-  localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const o = orders[index];
-  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
-  const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0ANo WA: ${o.nohp}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`;
-  window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
-  renderAdmin();
-}
-
-function kirimSelesai(index){
-  document.getElementById(`keyBox${index}`).classList.remove('hidden');
-}
-
-function kirimKey(index){
-  let key = document.getElementById(`inputKey${index}`).value;
-  if(!key){ alert('Isi key dulu!'); return; }
-  let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
-  orders[index].status = 'selesai';
-  orders[index].key = key;
-  localStorage.setItem('niel_orders', JSON.stringify(orders));
-  const o = orders[index];
-  const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
-  const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
-  window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
-  renderAdmin();
-}
-
-function toggleFaq(el){
-  const ans = el.nextElementSibling;
-  const icon = el.querySelector('span');
-  if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; }
-  else { ans.style.display='block'; icon.innerText='-'; }
-}
-
-let slideIndex = 0;
-const slides = document.querySelectorAll('.banner img');
-const dots = document.querySelectorAll('.dot');
-function showSlide(){
-  slides.forEach(s=>s.classList.remove('active'));
-  dots.forEach(d=>d.classList.remove('active'));
-  slideIndex = (slideIndex + 1) % slides.length;
-  slides[slideIndex].classList.add('active');
-  dots[slideIndex].classList.add('active');
-}
-setInterval(showSlide, 3000);
-
-renderProduk('semua');
-cekLogin();
+// SISA FUNGSI SAMA DENGAN SEBELUMNYA
+function cekLogin(){ if(userLogin){ document.getElementById('userStatus').innerHTML = `Hi, ${userLogin.nama}`; document.getElementById('btnLogout').classList.remove('hidden'); document.getElementById('nohp').value = userLogin.nohp; } else { document.getElementById('userStatus').innerHTML = ''; document.getElementById('btnLogout').classList.add('hidden'); } }
+function register(){ const nama = document.getElementById('regNama').value; const nohp = document.getElementById('regNohp').value; const pass = document.getElementById('regPass').value; if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; } const user = {nama, nohp, pass}; localStorage.setItem('niel_user', JSON.stringify(user)); alert('Daftar berhasil! Silahkan login'); showPage('login'); }
+function login(){ const nohp = document.getElementById('loginNohp').value; const pass = document.getElementById('loginPass').value; const user = JSON.parse(localStorage.getItem('niel_user')); if(user && user.nohp == nohp && user.pass == pass){ userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home'); } else { alert('No WA atau password salah!'); } }
+function logout(){ localStorage.removeItem('niel_user'); userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home'); }
+function renderProduk(kategori = 'semua'){ const grid = document.getElementById('produkGrid'); grid.innerHTML = ""; for(let key in produk){ if(kategori == 'semua' || produk[key].kategori == kategori){ let isOn = cekStatus(key); grid.innerHTML += `<div class="card ${isOn?'':'off'}" onclick="showProduct('${key}')"><div class="indikator ${isOn?'on':'off'}"></div><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`; } }
+function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
+function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); if(id=='home') document.querySelectorAll('.nav-item')[0].classList.add('active'); if(id=='lacak'){ document.querySelectorAll('.nav-item')[1].classList.add('active'); renderRiwayat(); } if(id=='login') document.querySelectorAll('.nav-item')[2].classList.add('active'); if(id=='faq') document.querySelectorAll('.nav-item')[3].classList.add('active'); if(id=='bantuan') document.querySelectorAll('.nav-item')[4].classList.add('active'); }
+function showProduct(key){ if(!cekStatus(key)){ alert('❌ Produk sedang OFF'); return; } produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; let grid = ""; p.durasi.forEach((d,i)=>{ grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; }); document.getElementById('durasiGrid').innerHTML = grid; showPage('detail'); }
+function pilihDurasi(el, i){ document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
+function orderWA(){ if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; } const nohp = document.getElementById('nohp').value; if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; } let orders = JSON.parse(localStorage.getItem('niel_orders')) || []; const newOrder = { id: 'ORD' + Date.now(), produk: produk[produkAktif].nama, durasi: durasiAktif.label, harga: durasiAktif.harga, nohp: nohp, nama: userLogin.nama, tanggal: new Date().toLocaleString('id'), status: 'pending' }; orders.unshift(newOrder); localStorage.setItem('niel_orders', JSON.stringify(orders)); const pesan = `Halo NIELofc%0AOrder:%0A${newOrder.produk}%0A${newOrder.durasi}%0ARp${newOrder.harga.toLocaleString('id')}%0ANo WA: ${nohp}%0ANama: ${userLogin.nama}%0AID: ${newOrder.id}`; window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank'); }
+function renderRiwayat(){ const wrap = document.getElementById('riwayatOrder'); let orders = JSON.parse(localStorage.getItem('niel_orders')) || []; if(!userLogin){ wrap.innerHTML = '<p class="text-center text-gray-400">Silahkan login dulu</p>'; return; } const myOrders = orders.filter(o => o.nohp == userLogin.nohp); if(myOrders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada pesanan</p>'; return; } wrap.innerHTML = ''; myOrders.forEach(o=>{ let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai'; let statusText = o.status == 'pending'? 'Menunggu Pembayaran' : o.status == 'proses'? 'Diproses' : 'Selesai'; let keyText = o.key? `<p class="text-xs text-green-400 mt-1">KEY: ${o.key}</p>` : ''; wrap.innerHTML += `<div class="order-card"><div class="flex justify-between items-start"><div><p class="font-bold italic">${o.produk}</p><p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p>${keyText}<p class="text-xs text-gray-500 mt-1">ID: ${o.id}</p><p class="text-xs text-gray-500">${o.tanggal}</p></div><span class="status ${statusClass}">${statusText}</span></div></div>`; }); }
+function cekAdmin(){ klikHeader++; if(klikHeader >= 5){ klikHeader = 0; let key = prompt("Masukkan key produk yang mau di ON/OFF\nList Key:\nhgproxy, silent, drip, migul, fluorite, gbox, pubg, solana"); if(key && produk[key]) toggleStatus(key); } setTimeout(()=>{klikHeader=0}, 2000); }
+function masukAdmin(){ const pass = document.getElementById('passAdmin').value; if(pass == PASS_ADMIN){ document.getElementById('loginAdmin').classList.add('hidden'); document.getElementById('listAdmin').classList.remove('hidden'); renderAdmin(); } else { alert('Password salah!'); } }
+function renderAdmin(){ const wrap = document.getElementById('listAdmin'); let orders = JSON.parse(localStorage.getItem('niel_orders')) || []; if(orders.length == 0){ wrap.innerHTML = '<p class="text-center text-gray-400">Belum ada order masuk</p>'; return; } wrap.innerHTML = ''; orders.forEach((o, i)=>{ let statusClass = o.status == 'pending'? 'pending' : o.status == 'proses'? 'proses' : 'selesai'; let statusText = o.status == 'pending'? 'Menunggu' : o.status == 'proses'? 'Diproses' : 'Selesai'; let nomorWA = o.nohp.replace(/[^0-9]/g,''); wrap.innerHTML += ` <div class="order-card"> <p class="font-bold italic">${o.produk}</p> <p class="text-xs text-gray-400">${o.durasi} - Rp${o.harga.toLocaleString('id')}</p> <p class="text-xs">Nama: ${o.nama}</p> <p class="text-xs">No WA: ${o.nohp}</p> <p class="text-xs text-gray-500">ID: ${o.id}</p> ${o.key? `<p class="text-xs text-green-400 mt-1">Key Terkirim: ${o.key}</p>` : ''} <div class="mt-2 space-y-2"> <span class="status ${statusClass}">${statusText}</span> <div class="flex gap-2 flex-wrap"> <button onclick="notifProses(${i})" class="btn-admin bg-blue-600">Proses + WA</button> <button onclick="kirimSelesai(${i})" class="btn-admin bg-green-600">Selesai + WA</button> </div> <div id="keyBox${i}" class="hidden"> <input id="inputKey${i}" type="text" placeholder="Tempel Key Disini" class="input text-xs"> <button onclick="kirimKey(${i})" class="btn-ungu mt-2 text-sm">KIRIM KEY + WA</button> </div> </div> </div>`; }); }
+function notifProses(index){ let orders = JSON.parse(localStorage.getItem('niel_orders')) || []; orders[index].status = 'proses'; localStorage.setItem('niel_orders', JSON.stringify(orders)); const o = orders[index]; const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, ''); const pesan = `Halo ${o.nama} 👋%0ATerima kasih sudah order di NIELofc ✅%0A%0ADetail Pesanan:%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AHarga: Rp${o.harga.toLocaleString('id')}%0ANo WA: ${o.nohp}%0A%0APesanan kamu sedang KAMI PROSES ya. Mohon tunggu sebentar 🙏`; window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank'); renderAdmin(); }
+function kirimSelesai(index){ document.getElementById(`keyBox${index}`).classList.remove('hidden'); }
+function kirimKey(index){ let key = document.getElementById(`inputKey${index}`).value; if(!key){ alert('Isi key dulu!'); return; } let orders = JSON.parse(localStorage.getItem('niel_orders')) || []; orders[index].status = 'selesai'; orders[index].key = key; localStorage.setItem('niel_orders', JSON.stringify(orders)); const o = orders[index]; const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, ''); const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`; window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank'); renderAdmin(); }
+function toggleFaq(el){ const ans = el.nextElementSibling; const icon = el.querySelector('span'); if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; } else { ans.style.display='block'; icon.innerText='-'; } }
+let slideIndex = 0; const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); function showSlide(){ slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
+renderProduk('semua'); cekLogin();
 </script>
 
 </body>
