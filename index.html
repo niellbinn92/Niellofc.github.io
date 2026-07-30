@@ -6,6 +6,23 @@
 <title>NIELofc - Toko Cheat</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Orbitron:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  const firebaseConfig = {
+    databaseURL: "https://nielofc-panel-default-rtdb.asia-southeast1.firebasedatabase.app/"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  window.db = db;
+  window.dbRef = ref;
+  window.dbSet = set;
+  window.dbOn = onValue;
+</script>
+
 <style>
 :root{
   --biru:#2563EB;
@@ -15,14 +32,19 @@
 }
 body{background:var(--hitam);color:#fff;font-family:'Inter', sans-serif;padding-bottom:80px}
 h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;text-transform:uppercase;font-style:italic;font-weight:900;color:var(--biru-glow);text-shadow:0 0 8px var(--biru-glow)}
-.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:2px solid var(--biru)}
+.header{position:sticky;top:0;z-index:50;background:#000;border-bottom:2px solid var(--biru);cursor:pointer}
 .banner{position:relative;height:200px;overflow:hidden;border-radius:0 0 16px 16px;border-bottom:2px solid var(--biru);background:#000}
 .banner img{position:absolute;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1s ease-in-out}
 .banner img.active{opacity:1}
-.card{background:var(--abu);border-radius:16px;transition:0.2s;border:1px solid var(--biru);padding:8px;box-shadow:0 0 10px #2563EB20}
+.card{background:var(--abu);border-radius:16px;transition:0.2s;border:1px solid var(--biru);padding:8px;box-shadow:0 0 10px #2563EB20;position:relative;cursor:pointer}
 .card:active{transform:scale(0.96);border-color:var(--biru-glow);box-shadow:0 0 15px var(--biru-glow)}
-.card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--biru)} /* UDAH GANTI KE COVER BIAR FULL */
+.card.off{opacity:0.35;filter:grayscale(0.8);cursor:not-allowed;border-color:#EF4444}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--biru)}
 .card p{font-family:'Poppins', sans-serif;font-weight:800}
+.indikator{position:absolute;top:8px;right:8px;width:10px;height:10px;border-radius:50%;z-index:10}
+.indikator.on{background:#10B981;box-shadow:0 0 10px #10B981;animation:kedip 1.5s infinite}
+.indikator.off{background:#EF4444;box-shadow:0 0 10px #EF4444}
+@keyframes kedip{0%,100%{opacity:1}50%{opacity:0.3}}
 .page{display:none}
 .page.active{display:block}
 .durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;font-family:'Poppins';background:var(--abu)}
@@ -78,7 +100,7 @@ h1, h2, h3,.font-black{font-family:'Orbitron', sans-serif;letter-spacing:1px;tex
 <div id="detail" class="page">
   <div class="p-3 flex items-center gap-2" onclick="showPage('home')">← <b>KEMBALI</b></div>
   <div class="p-3">
-    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border border-blue-500"> <!-- DETAIL JUGA UDAH COVER -->
+    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border border-blue-500">
     <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2>
     <p class="text-cyan-400 text-sm font-bold">⭐ 4.8 • PROTEKSI</p>
     <div class="bg-[#0F172A] p-3 rounded mt-3 text-xs border-blue-500">
@@ -182,11 +204,27 @@ const produk = {
   pubg: {nama: "PUBG KING MOD IOS", img: "https://i.ibb.co.com/99qkcXbS/5069398-C-48-A4-4496-92-C8-1-D846-C8-B1282.png", kategori: "pubg", game: "PUBG Mobile iOS", durasi: [{label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}]},
   solana: {nama: "SOLANA HAX", img: "https://i.ibb.co.com/9kcg8gtC/229832-AA-4205-4801-A491-431276-DD9382.png", kategori: "pubg", game: "PUBG Mobile", durasi: [{label:"3 Day", harga:85000}, {label:"7 Day", harga:140000}, {label:"30 Day", harga:300000}]}
 }
+let produkStatus = {};
 let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";
 const PASS_ADMIN = "220230";
 let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
+
+// SINKRON FIREBASE
+window.dbOn(window.dbRef(window.db, 'produk_status'), (snapshot) => {
+  produkStatus = snapshot.val() || {};
+  renderProduk('semua');
+});
+
+function cekStatus(key){
+  if(produkStatus[key] === undefined) return true;
+  return produkStatus[key];
+}
+
+function toggleStatus(key){
+  window.dbSet(window.dbRef(window.db, 'produk_status/' + key),!cekStatus(key));
+}
 
 function cekLogin(){
   if(userLogin){
@@ -228,7 +266,8 @@ function renderProduk(kategori = 'semua'){
   const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
   for(let key in produk){
     if(kategori == 'semua' || produk[key].kategori == kategori){
-      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')"><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
+      let isOn = cekStatus(key);
+      grid.innerHTML += `<div class="card ${isOn?'':'off'}" onclick="showProduct('${key}')"><div class="indikator ${isOn?'on':'off'}"></div><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
     }
   }
 }
@@ -251,6 +290,7 @@ function showPage(id){
 }
 
 function showProduct(key){
+  if(!cekStatus(key)){ alert('❌ Produk sedang OFF'); return; }
   produkAktif = key;
   const p = produk[key];
   document.getElementById('detailImg').src = p.img;
@@ -296,11 +336,13 @@ function renderRiwayat(){
   });
 }
 
+// ADMIN MODE: KLIK LOGO 5X - RAHASIA
 function cekAdmin(){
   klikHeader++;
   if(klikHeader >= 5){
     klikHeader = 0;
-    showPage('admin');
+    let key = prompt("Masukkan key produk yang mau di ON/OFF\nList Key:\nhgproxy, silent, drip, migul, fluorite, gbox, pubg, solana");
+    if(key && produk[key]) toggleStatus(key);
   }
   setTimeout(()=>{klikHeader=0}, 2000);
 }
@@ -364,12 +406,10 @@ function kirimSelesai(index){
 function kirimKey(index){
   let key = document.getElementById(`inputKey${index}`).value;
   if(!key){ alert('Isi key dulu!'); return; }
-
   let orders = JSON.parse(localStorage.getItem('niel_orders')) || [];
   orders[index].status = 'selesai';
   orders[index].key = key;
   localStorage.setItem('niel_orders', JSON.stringify(orders));
-
   const o = orders[index];
   const nomor = '62' + o.nohp.replace(/[^0-9]/g,'').replace(/^0/, '');
   const pesan = `Halo ${o.nama} 👋%0APesanan kamu SUDAH SELESAI ✅%0A%0AID: ${o.id}%0AProduk: ${o.produk} - ${o.durasi}%0AStatus: AKTIF%0A%0AKEY: ${key}%0A%0ATutorial: Silahkan login ke aplikasi dan masukkan key diatas%0ATerima kasih sudah order di NIELofc 🙏`;
