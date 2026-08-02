@@ -37,8 +37,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .deskripsi{font-size:12px;color:#94A3B8;line-height:1.5;margin-top:4px;white-space:pre-line}
 .cara-order{background:#2563EB20;border:1px solid var(--biru);border-radius:12px;padding:12px;margin-top:12px;font-size:13px}
 .cara-order ol{list-style:decimal;padding-left:18px;line-height:1.8}
-
-/* MENU GARIS 3 */
 .menu-btn{background:none;border:none;color:var(--biru-glow);font-size:24px;cursor:pointer;font-weight:900}
 .side-menu{position:fixed;top:0;right:-300px;width:280px;height:100%;background:#000;border-left:2px solid var(--biru);z-index:100;transition:0.3s;padding:20px;display:flex;flex-direction:column;gap:10px}
 .side-menu.active{right:0}
@@ -55,7 +53,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
 
-<!-- MENU SAMPING -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 <div id="sideMenu" class="side-menu">
   <h3 class="text-xl font-bold mb-2 text-center">MENU</h3>
@@ -168,7 +165,7 @@ const produk = {
 };
 
 let produkAktif = ""; let durasiAktif = {};
-const NO_WA = "6285194336082";
+const NO_WA = "6285194336082"; // <-- NOMOR ADMIN KAMU
 const PASS_ADMIN = "220230";
 let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
@@ -201,7 +198,29 @@ function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEac
 function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc; let grid = ""; p.durasi.forEach((d,i)=>{ grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; }); document.getElementById('durasiGrid').innerHTML = grid; showPage('detail'); }
 function pilihDurasi(el, i){ document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
-function orderWA(){ if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; } const nohp = document.getElementById('nohp').value; if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; } alert('Order dikirim ke WA Admin'); }
+
+// INI YANG UDAH DI FIX BIAR OTOMATIS KE WA
+function orderWA(){
+  if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
+  const nohp = document.getElementById('nohp').value;
+  if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }
+  if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }
+
+  let namaProduk = produk[produkAktif].nama;
+  let harga = durasiAktif.harga.toLocaleString('id');
+
+  let pesan = `Halo Admin NIELofc%0A%0A
+Saya mau ORDER:%0A
+Produk: ${namaProduk}%0A
+Durasi: ${durasiAktif.label}%0A
+Harga: Rp${harga}%0A
+No WA: ${nohp}%0A%0A
+Mohon info pembayaran. Terima kasih`;
+
+  let url = `https://wa.me/${NO_WA}?text=${pesan}`;
+  window.open(url, '_blank');
+}
+
 function renderRiwayat(){ document.getElementById('riwayatOrder').innerHTML = '<p class="text-center text-gray-400">Fitur lacak aktif</p>'; }
 
 function cekAdmin(){ klikHeader++; if(klikHeader >= 5){ klikHeader = 0; showPage('admin'); toggleMenu(); } setTimeout(()=>{klikHeader=0}, 2000); }
