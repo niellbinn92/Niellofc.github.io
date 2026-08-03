@@ -22,6 +22,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .page{display:none}.page.active{display:block}
 .durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;background:var(--abu)}
 .durasi-btn.active{border-color:var(--biru-glow);background:#2563EB30;box-shadow:0 0 8px var(--biru-glow)}
+.durasi-btn.disabled{opacity:0.4;cursor:not-allowed;background:#EF444430;border-color:#EF4444}
 .box-ungu{background:var(--abu);border-radius:16px;padding:16px;border:1px solid var(--biru)}
 .btn-channel{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;font-weight:700}
 .filter-btn{background:var(--abu);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:800;white-space:nowrap;border:1px solid var(--biru);cursor:pointer}
@@ -37,8 +38,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .deskripsi{font-size:12px;color:#94A3B8;line-height:1.5;margin-top:4px;white-space:pre-line}
 .cara-order{background:#2563EB20;border:1px solid var(--biru);border-radius:12px;padding:12px;margin-top:12px;font-size:13px}
 .cara-order ol{list-style:decimal;padding-left:18px;line-height:1.8}
-
-/* MENU GARIS 3 */
 .menu-btn{background:none;border:none;color:var(--biru-glow);font-size:24px;cursor:pointer;font-weight:900}
 .side-menu{position:fixed;top:0;right:-300px;width:280px;height:100%;background:#000;border-left:2px solid var(--biru);z-index:100;transition:0.3s;padding:20px;display:flex;flex-direction:column;gap:10px}
 .side-menu.active{right:0}
@@ -46,6 +45,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .side-menu a:hover{background:var(--biru)}
 .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#00080;z-index:99;display:none}
 .overlay.active{display:block}
+.stok-habis{color:#EF4444;font-size:11px;font-weight:800}
 </style>
 </head>
 <body>
@@ -55,7 +55,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
 
-<!-- MENU SAMPING -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 <div id="sideMenu" class="side-menu">
   <h3 class="text-xl font-bold mb-2 text-center">MENU</h3>
@@ -149,21 +148,32 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 
 <script>
 const produk = {
-  hgproxy: {nama: "HG PROXY", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"1 Day", harga:15000}, {label:"7 Day", harga:30000}, {label:"10 Day", harga:45000}]},
-  silent: {nama: "SILENT CHEAT", img: "https://i.ibb.co.com/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"1 Day", harga:15000}, {label:"3 Day", harga:25000}]},
+  migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/yFq7GkbZ/ED60-DBC3-39-CB-4170-8-EDC-F1-D63-F648642.png", kategori: "freefire", game: "Free Fire iOS", desc:"🛠️ Pemasangan wajib menggunakan Gbox/Esign\n🚫 No iPhone bypass\n✅ Support all iOS", durasi: [
+    {label:"1 Day Lite", harga:35000}, {label:"7 Day Lite", harga:100000}, {label:"30 Day Lite", harga:200000},
+    {label:"1 Day Pro", harga:40000}, {label:"7 Day Pro", harga:120000}, {label:"30 Day Pro", harga:280000}
+  ]},
+  silent: {nama: "SILENT CHEAT", img: "https://i.ibb.co.com/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [
+    {label:"1 Day", harga:10000}, {label:"3 Day", harga:20000}
+  ]},
+  hgcheat: {nama: "HG APK MOD", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [
+    {label:"1 Day", harga:"habis"}, {label:"7 Day", harga:"habis"}, {label:"10 Day", harga:40000}, {label:"30 Day", harga:80000}
+  ]},
+  hgproxy: {nama: "HG PROXY", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [
+    {label:"1 Day", harga:12000}, {label:"7 Day", harga:25000}, {label:"30 Day", harga:35000}
+  ]},
+  primehook: {nama: "PRIME HOOK", img: "https://i.ibb.co.com/KjSSLRLv/IMG-6906.jpg", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [
+    {label:"1 Day", harga:10000}, {label:"3 Day", harga:20000}, {label:"7 Day", harga:35000}
+  ]},
   drip: {nama: "DRIP CLIENT", img: "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"1 Day", harga:12000}, {label:"3 Day", harga:25000}, {label:"7 Day", harga:50000}, {label:"15 Day", harga:90000}, {label:"30 Day", harga:130000}]},
   dripproxy: {nama: "DRIP CLIENT PROXY", img: "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+\n📝 Wajib support layar belah/jendela mengambang", durasi: [{label:"1 Day", harga:10000}, {label:"3 Day", harga:30000}, {label:"7 Day", harga:50000}, {label:"30 Day", harga:110000}]},
-  migul: {nama: "MIGUL IOS", img: "https://i.ibb.co.com/yFq7GkbZ/ED60-DBC3-39-CB-4170-8-EDC-F1-D63-F648642.png", kategori: "freefire", game: "Free Fire iOS", desc:"🛠️ Pemasangan wajib menggunakan Gbox/Esign\n🚫 No iPhone bypass\n✅ Support all iOS", durasi: [{label:"1 Hari Lite", harga:40000}, {label:"1 Hari Pro", harga:45000}, {label:"7 Hari Lite", harga:110000}, {label:"7 Hari Pro", harga:130000}, {label:"30 Hari Lite", harga:250000}, {label:"30 Hari Pro", harga:300000}]},
   fluorite: {nama: "FLUORITE IOS", img: "https://i.ibb.co.com/Kcjdk9JR/E9132-D38-89-ED-44-D7-BCEA-13138480-B078.png", kategori: "freefire", game: "Free Fire iOS", desc:"🛠️ Pemasangan wajib menggunakan Gbox/Esign\n🚫 No iPhone bypass\n✅ Support all iOS", durasi: [{label:"1 Day", harga:50000}, {label:"2 Day", harga:150000}, {label:"30 Day", harga:350000}]},
-  gbox: {nama: "GBOX IOS", img: "https://i.ibb.co.com/5yqVRgd/CBB894-D0-401-E-4333-8-D7-C-4-E204-B27-F995.png", kategori: "sertifikat", game: "Sertifikat Developer 1 Tahun", desc:"Sertifikat Developer untuk install aplikasi iOS selama 1 Tahun", durasi: [{label:"1 Tahun", harga:80000}]},
+  gbox: {nama: "GBOX IOS", img: "https://i.ibb.co.com/5yqVRgd/CBB894-D0-401-E-4333-8-D7-C-4-E204-B27-F995.png", kategori: "sertifikat", game: "Sertifikat Developer 1 Tahun", desc:"Sertifikat Developer untuk install aplikasi iOS selama 1 Tahun", durasi: [{label:"1 Tahun", harga:70000}]},
   pubg: {nama: "PUBG KING MOD IOS", img: "https://i.ibb.co.com/99qkcXbS/5069398-C-48-A4-4496-92-C8-1-D846-C8-B1282.png", kategori: "pubg", game: "PUBG Mobile iOS", desc:"🛠️ Pemasangan wajib menggunakan Gbox/Esign\n🚫 No iPhone bypass\n✅ Support all iOS", durasi: [{label:"1 Day", harga:60000}, {label:"7 Day", harga:170000}, {label:"30 Day", harga:400000}]},
   solana: {nama: "SOLANA HAX", img: "https://i.ibb.co.com/9kcg8gtC/229832-AA-4205-4801-A491-431276-DD9382.png", kategori: "pubg", game: "PUBG Mobile", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"3 Day", harga:85000}, {label:"7 Day", harga:140000}, {label:"30 Day", harga:300000}]},
-  hgcheat: {nama: "HG CHEAT", img: "https://i.ibb.co.com/5gJHKDkf/80-E7-F1-C5-B0-E1-4-DDF-BCA9-A8-AAB572-A621.png", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"1 Day", harga:12000}, {label:"7 Day", harga:32000}, {label:"10 Day", harga:45000}, {label:"30 Day", harga:95000}]},
-  primehook: {nama: "PRIME HOOK", img: "https://i.ibb.co.com/KjSSLRLv/IMG-6906.jpg", kategori: "freefire", game: "Free Fire Android", desc:"🛠️ Pemasangan menggunakan Zarchiver/Mt Manager\n🚫 No Android root\n✅ Support Android 11+", durasi: [{label:"1 Day", harga:10000}, {label:"3 Day", harga:25000}, {label:"7 Day", harga:40000}]},
   fluorite8ball: {nama: "FLUORITE 8 BALL", img: "https://i.ibb.co.com/wNBr5401/99-B66151-4-D1-D-4-A1-D-8-F69-742-B6-B4-C3-FEE.png", kategori: "8ball", game: "8 Ball Pool iOS", desc:"🛠️ Pemasangan wajib menggunakan Gbox/Esign\n🚫 No iPhone bypass\n✅ Support all iOS", durasi: [{label:"1 Day", harga:50000}, {label:"7 Day", harga:150000}, {label:"30 Day", harga:300000}]},
-  kosbasic: {nama: "KING OF SHOTS BASIC", img: "https://i.ibb.co.com/1Gx8mQxY/IMG-6907.webp", kategori: "8ball", game: "8 Ball Pool Android", desc:"- Virtual Tipe Basic ini tidak ada fitur Autoplay & Autoqueue\n- Jika ingin autoplay & autoqueue silahkan beli yang Premium.\n- Support login fb, google, miniclip\n- Wajib menggunakan 8 ball pool dari playstore", durasi: [{label:"1 Day", harga:30000}, {label:"7 Day", harga:90000}, {label:"30 Day", harga:250000}]},
-  kospremium: {nama: "KING OF SHOTS PREMIUM", img: "https://i.ibb.co.com/JFKVPGH3/IMG-6909.webp", kategori: "8ball", game: "8 Ball Pool Android", desc:"- Virtual Tipe Premium ini sudah ada fitur Autoplay & Autoqueue\n- Jika ingin Tanpa Autoplay silahkan beli yang Basic.\n- Support login fb, google, miniclip\n- Wajib menggunakan 8 ball pool dari playstore", durasi: [{label:"1 Day", harga:40000}, {label:"7 Day", harga:120000}, {label:"15 Day", harga:185000}, {label:"30 Day", harga:310000}]},
-  kosmod: {nama: "KING OF SHOTS MOD", img: "https://i.ibb.co.com/rK0L66Fp/IMG-6908.webp", kategori: "8ball", game: "8 Ball Pool Android MOD", desc:"KOS Versi MOD ini menggunakan Aplikasi MOD APK, yang berarti kamu wajib menghapus 8 Ball Pool dari Playstore dan menggantinya dengan 8 Ball Pool Kos MOD yang akan di dapat setelah pembelian.\njika kamu ingin menggunakan 8 Ball Pool original silahkan beli KOS Basic / Premium", durasi: [{label:"1 Day", harga:40000}, {label:"7 Day", harga:100000}, {label:"15 Day", harga:150000}, {label:"30 Day", harga:260000}]},
+  kosbasic: {nama: "KING OF SHOTS BASIC", img: "https://i.ibb.co.com/1Gx8mQxY/IMG-6907.webp", kategori: "8ball", game: "8 Ball Pool Android", desc:"- Virtual Tipe Basic ini tidak ada fitur Autoplay & Autoqueue\n- Support login fb, google, miniclip", durasi: [{label:"1 Day", harga:30000}, {label:"7 Day", harga:90000}, {label:"30 Day", harga:250000}]},
+  kospremium: {nama: "KING OF SHOTS PREMIUM", img: "https://i.ibb.co.com/JFKVPGH3/IMG-6909.webp", kategori: "8ball", game: "8 Ball Pool Android", desc:"- Virtual Tipe Premium ini sudah ada fitur Autoplay & Autoqueue\n- Support login fb, google, miniclip", durasi: [{label:"1 Day", harga:40000}, {label:"7 Day", harga:120000}, {label:"15 Day", harga:185000}, {label:"30 Day", harga:310000}]},
+  kosmod: {nama: "KING OF SHOTS MOD", img: "https://i.ibb.co.com/rK0L66Fp/IMG-6908.webp", kategori: "8ball", game: "8 Ball Pool Android MOD", desc:"Versi MOD wajib hapus 8 Ball Pool dari Playstore", durasi: [{label:"1 Day", harga:40000}, {label:"7 Day", harga:100000}, {label:"15 Day", harga:150000}, {label:"30 Day", harga:260000}]},
   wizard8bp: {nama: "WIZARD 8BP", img: "https://i.ibb.co.com/DPrp2rtQ/IMG-6912.webp", kategori: "8ball", game: "8 Ball Pool iOS", desc:"Ini adalah produk 8BP Untuk iOS Terbaik\nMinimal sisa storage 3gb", durasi: [{label:"1 Day", harga:70000}, {label:"7 Day", harga:200000}, {label:"30 Day", harga:400000}]}
 };
 
@@ -174,15 +184,7 @@ let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
 
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-
-function cekLogin(){
-  if(userLogin){
-    document.getElementById('btnLogoutMenu').classList.remove('hidden');
-    document.getElementById('nohp').value = userLogin.nohp;
-  } else {
-    document.getElementById('btnLogoutMenu').classList.add('hidden');
-  }
-}
+function cekLogin(){ if(userLogin){ document.getElementById('btnLogoutMenu').classList.remove('hidden'); document.getElementById('nohp').value = userLogin.nohp; } else { document.getElementById('btnLogoutMenu').classList.add('hidden'); } }
 function register(){ const nama = document.getElementById('regNama').value; const nohp = document.getElementById('regNohp').value; const pass = document.getElementById('regPass').value; if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; } localStorage.setItem('niel_user', JSON.stringify({nama, nohp, pass})); alert('Daftar berhasil!'); showPage('login'); }
 function login(){ const nohp = document.getElementById('loginNohp').value; const pass = document.getElementById('loginPass').value; const user = JSON.parse(localStorage.getItem('niel_user')); if(user && user.nohp == nohp && user.pass == pass){ userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home'); toggleMenu(); } else { alert('No WA atau password salah!'); } }
 function logout(){ localStorage.removeItem('niel_user'); userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home'); toggleMenu(); }
@@ -199,11 +201,44 @@ function renderProduk(kategori = 'semua'){
 
 function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
 function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc; let grid = ""; p.durasi.forEach((d,i)=>{ grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; }); document.getElementById('durasiGrid').innerHTML = grid; showPage('detail'); }
-function pilihDurasi(el, i){ document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
-function orderWA(){ if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; } const nohp = document.getElementById('nohp').value; if(!nohp ||!durasiAktif.label){ alert('Isi No WA dan Pilih Durasi!'); return; } alert('Order dikirim ke WA Admin'); }
-function renderRiwayat(){ document.getElementById('riwayatOrder').innerHTML = '<p class="text-center text-gray-400">Fitur lacak aktif</p>'; }
+function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc;
+  let grid = "";
+  p.durasi.forEach((d,i)=>{
+    if(d.harga == "habis"){
+      grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`;
+    } else {
+      grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;
+    }
+  });
+  document.getElementById('durasiGrid').innerHTML = grid;
+  durasiAktif = {}; // reset
+  showPage('detail');
+}
+function pilihDurasi(el, i){ if(el.classList.contains('disabled')) return; document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
 
+function orderWA(){
+  if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
+  const nohp = document.getElementById('nohp').value;
+  if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }
+  if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }
+  if(durasiAktif.harga == "habis"){ alert('Stok durasi ini habis!'); return; }
+
+  let namaProduk = produk[produkAktif].nama;
+  let harga = durasiAktif.harga.toLocaleString('id');
+
+  let pesan = `Halo Admin NIELofc%0A%0A
+Saya mau ORDER:%0A
+Produk: ${namaProduk}%0A
+Durasi: ${durasiAktif.label}%0A
+Harga: Rp${harga}%0A
+No WA: ${nohp}%0A%0A
+Mohon info pembayaran. Terima kasih`;
+
+  let url = `https://wa.me/${NO_WA}?text=${pesan}`;
+  window.open(url, '_blank');
+}
+
+function renderRiwayat(){ document.getElementById('riwayatOrder').innerHTML = '<p class="text-center text-gray-400">Fitur lacak aktif</p>'; }
 function cekAdmin(){ klikHeader++; if(klikHeader >= 5){ klikHeader = 0; showPage('admin'); toggleMenu(); } setTimeout(()=>{klikHeader=0}, 2000); }
 function masukAdmin(){ const pass = document.getElementById('passAdmin').value; if(pass == PASS_ADMIN){ document.getElementById('loginAdmin').classList.add('hidden'); document.getElementById('listAdmin').classList.remove('hidden'); } else { alert('Password salah!'); } }
 function toggleFaq(el){ const ans = el.nextElementSibling; const icon = el.querySelector('span'); if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; } else { ans.style.display='block'; icon.innerText='-'; } }
@@ -212,10 +247,7 @@ let slideIndex = 0; const slides = document.querySelectorAll('.banner img'); con
 function showSlide(){ slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); }
 setInterval(showSlide, 3000);
 
-window.onload = function(){
-  renderProduk('semua');
-  cekLogin();
-}
+window.onload = function(){ renderProduk('semua'); cekLogin(); }
 </script>
 </body>
 </html>
