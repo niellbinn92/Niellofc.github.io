@@ -35,7 +35,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .faq-a{display:none;margin-top:8px;color:#94A3B8;font-size:14px;line-height:1.6}
 .input{width:100%;background:var(--abu);padding:12px;border-radius:10px;border:1px solid var(--biru);color:#fff}
 .btn-ungu{width:100%;background:linear-gradient(90deg,#2563EB,#06B6D4);padding:12px;border-radius:10px;font-weight:900;cursor:pointer}
-.deskripsi{font-size:12px;color:#94A3B8;line-height:1.5;margin-top:4px;white-space:pre-line}
+.deskripsi{font-size:13px;color:#94A3B8;line-height:1.6;margin-top:8px;white-space:pre-line}
 .cara-order{background:#2563EB20;border:1px solid var(--biru);border-radius:12px;padding:12px;margin-top:12px;font-size:13px}
 .cara-order ol{list-style:decimal;padding-left:18px;line-height:1.8}
 .menu-btn{background:none;border:none;color:var(--biru-glow);font-size:24px;cursor:pointer;font-weight:900}
@@ -163,9 +163,10 @@ async function loadProdukDariSheet() {
       let stok = row.Stok;
       let kategori = row.Kategori || "freefire";
       let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
+      let deskripsi = row.Deskripsi || "Produk digital. Proses cepat setelah pembayaran."; // AMBIL DESKRIPSI DARI SHEET
       let keyProduk = nama.toLowerCase().replace(/ /g, "");
       if(!produk[keyProduk]){
-        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori, game: kategori.toUpperCase(), desc: "Edit stok di Google Sheet. Isi 0 = STOK HABIS", durasi: []}
+        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori, game: kategori.toUpperCase(), desc: deskripsi, durasi: []} // PAKE DESKRIPSI DARI SHEET
       }
       produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
     });
