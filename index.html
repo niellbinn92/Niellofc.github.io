@@ -163,10 +163,10 @@ async function loadProdukDariSheet() {
       let stok = row.Stok;
       let kategori = row.Kategori || "freefire";
       let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
-      let deskripsi = row.Deskripsi || "Produk digital. Proses cepat setelah pembayaran."; // AMBIL DESKRIPSI DARI SHEET
+      let deskripsi = row.Deskripsi || "Produk digital. Proses cepat setelah pembayaran.";
       let keyProduk = nama.toLowerCase().replace(/ /g, "");
       if(!produk[keyProduk]){
-        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori, game: kategori.toUpperCase(), desc: deskripsi, durasi: []} // PAKE DESKRIPSI DARI SHEET
+        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori, game: kategori.toUpperCase(), desc: deskripsi, durasi: []}
       }
       produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
     });
