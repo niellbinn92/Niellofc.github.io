@@ -51,7 +51,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 </head>
 <body>
 
-<div class="header p-3 flex justify-between items-center" onclick="cekAdmin()">
+<div class="header p-3 flex justify-between items-center">
   <h1 class="text-2xl font-black glow-text">NIEL<span class="text-cyan-400">ofc</span></h1>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
@@ -117,71 +117,52 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 <div id="lacak" class="page"><div class="p-4 pb-10"><h2 class="text-2xl font-bold mb-4 italic">Lacak Pesanan</h2><div id="riwayatOrder" class="space-y-3"></div></div></div>
 <div id="login" class="page"><div class="p-4 pb-10"><h2 class="text-2xl font-bold mb-4 italic">Login Akun</h2><input id="loginNohp" type="number" placeholder="No WhatsApp" class="input mb-3"><input id="loginPass" type="password" placeholder="Password" class="input mb-4"><button onclick="login()" class="btn-ungu mb-3">MASUK</button><p class="text-center text-sm text-gray-400">Belum punya akun? <span class="text-cyan-400 cursor-pointer" onclick="showPage('register')">Daftar disini</span></p></div></div>
 <div id="register" class="page"><div class="p-4 pb-10"><h2 class="text-2xl font-bold mb-4 italic">Daftar Akun</h2><input id="regNama" type="text" placeholder="Nama" class="input mb-3"><input id="regNohp" type="number" placeholder="No WhatsApp" class="input mb-3"><input id="regPass" type="password" placeholder="Password" class="input mb-4"><button onclick="register()" class="btn-ungu mb-3">DAFTAR</button><p class="text-center text-sm text-gray-400">Sudah punya akun? <span class="text-cyan-400 cursor-pointer" onclick="showPage('login')">Login disini</span></p></div></div>
-<div id="admin" class="page"><div class="p-4 pb-10"><h2 class="text-2xl font-bold mb-4 italic">Panel Admin</h2><div id="loginAdmin" class="space-y-3"><input id="passAdmin" type="password" placeholder="Password Admin" class="input"><button onclick="masukAdmin()" class="btn-ungu">MASUK</button></div><div id="listAdmin" class="hidden space-y-3"></div></div></div>
 <div id="faq" class="page"><div class="p-4 pb-10"><h2 class="text-2xl font-bold mb-4 italic">FAQ</h2><div class="space-y-3"><div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara order? <span>+</span></div><div class="faq-a">1. Pilih produk dan durasi<br>2. Isi No WA aktif<br>3. Klik Order via WhatsApp<br>4. Admin akan kirim key dan tutorial</div></div></div></div></div>
 <div id="bantuan" class="page"><div class="p-4 pb-10"><div class="box-ungu"><h3 class="text-cyan-400 font-bold text-lg mb-3 italic">Saluran Kami</h3><div class="grid grid-cols-2 gap-3"><a href="https://t.me/nielllofcbinn" target="_blank" class="btn-channel"><div><p class="text-sm font-bold">Channel</p><p class="text-xs">Telegram</p></div></a><a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank" class="btn-channel"><div><p class="text-sm font-bold">Channel</p><p class="text-xs">WhatsApp</p></div></a></div><h3 class="text-cyan-400 font-bold text-lg mb-3 mt-5 italic">Customer Service</h3><a href="https://wa.me/6285194336082?text=Halo%20Admin%20NIELofc%20saya%20butuh%20bantuan" target="_blank" class="btn-channel w-1/2"><div><p class="text-sm font-bold">Customer</p><p class="text-xs">Service 1</p></div></a></div></div></div>
 
 <script>
+const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
 let produk = {};
 let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";
-const PASS_ADMIN = "220230";
-let klikHeader = 0;
 let userLogin = JSON.parse(localStorage.getItem('niel_user'));
 
-// LINK APPS SCRIPT KAMU
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxijE_zmof5IQFE0BIS6RT3rxYMZdehgHNv9slUl6beaWDnkiKsJJfozjR2zi6GQ_U_/exec";
-
-function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function cekLogin(){ if(userLogin){ document.getElementById('btnLogoutMenu').classList.remove('hidden'); document.getElementById('nohp').value = userLogin.nohp; } else { document.getElementById('btnLogoutMenu').classList.add('hidden'); } }
 function register(){ const nama = document.getElementById('regNama').value; const nohp = document.getElementById('regNohp').value; const pass = document.getElementById('regPass').value; if(!nama ||!nohp ||!pass){ alert('Isi semua data!'); return; } localStorage.setItem('niel_user', JSON.stringify({nama, nohp, pass})); alert('Daftar berhasil!'); showPage('login'); }
 function login(){ const nohp = document.getElementById('loginNohp').value; const pass = document.getElementById('loginPass').value; const user = JSON.parse(localStorage.getItem('niel_user')); if(user && user.nohp == nohp && user.pass == pass){ userLogin = user; cekLogin(); alert('Login berhasil!'); showPage('home'); toggleMenu(); } else { alert('No WA atau password salah!'); } }
 function logout(){ localStorage.removeItem('niel_user'); userLogin = null; cekLogin(); alert('Logout berhasil'); showPage('home'); toggleMenu(); }
-function renderProduk(kategori = 'semua'){ const grid = document.getElementById('produkGrid'); grid.innerHTML = ""; for(let key in produk){ if(kategori == 'semua' || produk[key].kategori == kategori){ grid.innerHTML += `<div class="card" onclick="showProduct('${key}')"><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`; } if(Object.keys(produk).length === 0) grid.innerHTML = '<p class="col-span-2 text-center text-red-400">Gagal load data</p>'; }
-function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
+function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc; let grid = ""; p.durasi.forEach((d,i)=>{ if(d.stok <= 0){ grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`; } else { grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b><br><small>Stok: ${d.stok}</small></div>`; } }); document.getElementById('durasiGrid').innerHTML = grid; durasiAktif = {}; showPage('detail'); }
+function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
 function pilihDurasi(el, i){ if(el.classList.contains('disabled')) return; document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
-function renderRiwayat(){ document.getElementById('riwayatOrder').innerHTML = '<p class="text-center text-gray-400">Fitur lacak aktif</p>'; }
-function cekAdmin(){ klikHeader++; if(klikHeader >= 5){ klikHeader = 0; showPage('admin'); toggleMenu(); } setTimeout(()=>{klikHeader=0}, 2000); }
-function masukAdmin(){ const pass = document.getElementById('passAdmin').value; if(pass == PASS_ADMIN){ document.getElementById('loginAdmin').classList.add('hidden'); document.getElementById('listAdmin').classList.remove('hidden'); } else { alert('Password salah!'); } }
-function toggleFaq(el){ const ans = el.nextElementSibling; const icon = el.querySelector('span'); if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; } else { ans.style.display='block'; icon.innerText='-'; } }
-let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
-
-// FUNGSI KURANGI STOK OTOMATIS
-async function kurangiStok(namaProduk, durasi) {
-  await fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify({action: "kurangi", produk: namaProduk, durasi: durasi})
-  });
+function renderProduk(kategori = 'semua'){
+  const grid = document.getElementById('produkGrid');
+  grid.innerHTML = "";
+  let ada = false;
+  for(let key in produk){
+    if(kategori == 'semua' || produk[key].kategori == kategori){
+      ada = true;
+      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')"><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
+    }
+  }
+  if(!ada) grid.innerHTML = '<p class="col-span-2 text-center text-gray-400">Produk kosong</p>';
 }
+function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc; let grid = ""; p.durasi.forEach((d,i)=>{ if(d.harga == "habis"){ grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`; } else { grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; } }); document.getElementById('durasiGrid').innerHTML = grid; durasiAktif = {}; showPage('detail'); }
+function toggleFaq(el){ const ans = el.nextElementSibling; const icon = el.querySelector('span'); if(ans.style.display == 'block'){ ans.style.display='none'; icon.innerText='+'; } else { ans.style.display='block'; icon.innerText='-'; } }
 
 async function orderWA(){
   if(!userLogin){ alert('Silahkan login dulu!'); showPage('login'); return; }
   const nohp = document.getElementById('nohp').value;
   if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }
   if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }
-  if(durasiAktif.stok <= 0){ alert('Stok durasi ini habis!'); return; }
+  if(durasiAktif.harga == "habis"){ alert('Stok durasi ini habis!'); return; }
 
   let namaProduk = produk[produkAktif].nama;
   let harga = durasiAktif.harga.toLocaleString('id');
-
-  await kurangiStok(namaProduk, durasiAktif.label); // KURANGI STOK
-
-  let pesan = `Halo Admin NIELofc%0A%0A
-Saya mau ORDER:%0A
-Produk: ${namaProduk}%0A
-Durasi: ${durasiAktif.label}%0A
-Harga: Rp${harga}%0A
-No WA: ${nohp}%0A%0A
-Mohon info pembayaran. Terima kasih`;
-
+  let pesan = `Halo Admin NIELofc%0A%0ASaya mau ORDER:%0AProduk: ${namaProduk}%0ADurasi: ${durasiAktif.label}%0AHarga: Rp${harga}%0ANo WA: ${nohp}%0A%0AMohon info pembayaran. Terima kasih`;
   window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
-  setTimeout(()=>{loadProdukDariSheet()}, 1500); // reload 1.5 detik biar update
 }
 
-// AMBIL DATA DARI APPS SCRIPT
 async function loadProdukDariSheet() {
   try {
     let res = await fetch(SHEET_URL);
@@ -190,17 +171,33 @@ async function loadProdukDariSheet() {
     rows.forEach(row => {
       let nama = row.Produk;
       let durasi = row.Durasi;
-      let harga = parseInt(row.Harga);
-      let stok = parseInt(row.Stok);
+      let harga = row.Harga;
+      let stok = row.Stok;
+      let kategori = row.Kategori || "freefire";
       let keyProduk = nama.toLowerCase().replace(/ /g, "");
       if(!produk[keyProduk]){
-        produk[keyProduk] = {nama: nama, img: "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png", kategori: "freefire", game: "Free Fire Android", desc: "🛠️ Stok otomatis dari Google Sheet\nUpdate real-time", durasi: []}
+        produk[keyProduk] = {nama: nama, img: "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png", kategori: kategori, game: "Game", desc: "Edit stok di Google Sheet. Isi 0 = STOK HABIS", durasi: []}
       }
-      produk[keyProduk].durasi.push({label: durasi, harga: harga, stok: stok})
+      produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
     });
     renderProduk('semua');
-  } catch(err){ document.getElementById('produkGrid').innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek Link Apps Script</p>'; }
+  } catch(err){ document.getElementById('produkGrid').innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek sheetdb.io</p>'; }
 }
+
+// INI FUNGSI SLIDE YANG KETINGGALAN TADI
+let slideIndex = 0;
+function showSlide(){
+  const slides = document.querySelectorAll('.banner img');
+  const dots = document.querySelectorAll('.dot');
+  if(slides.length==0)return;
+  slides.forEach(s=>s.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
+  dots[slideIndex].classList.add('active');
+}
+setInterval(showSlide, 3000);
+
 window.onload = function(){ loadProdukDariSheet(); cekLogin(); }
 </script>
 </body>
