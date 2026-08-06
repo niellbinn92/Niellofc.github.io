@@ -66,7 +66,7 @@ function showProducts(category) {
 }
 
 function order(produk, durasi, harga) {
-  const wa = `https://wa.me/628xxxxxxxxxx?text=Halo%20bang%20mau%20order%20${encodeURIComponent(produk)}%20${encodeURIComponent(durasi)}%20Rp${harga}`;
+  const wa = `https://wa.me/6285194336082?text=Halo%20bang%20mau%20order%20${encodeURIComponent(produk)}%20${encodeURIComponent(durasi)}%20Rp${harga}`;
   window.open(wa, '_blank');
 }
 
