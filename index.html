@@ -118,7 +118,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
 let produk = {};
 let produkAktif = ""; let durasiAktif = {};
-const NO_WA = "6285194336082";
+const NO_WA = "6285194336082"; // NO WA KAMU
 
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
@@ -166,7 +166,7 @@ async function loadProdukDariSheet() {
       let deskripsi = row.Deskripsi || "Produk digital. Proses cepat setelah pembayaran.";
       let keyProduk = nama.toLowerCase().replace(/ /g, "");
       if(!produk[keyProduk]){
-        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori, game: kategori.toUpperCase(), desc: deskripsi, durasi: []}
+        produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori.toLowerCase(), game: kategori.toUpperCase(), desc: deskripsi, durasi: []}
       }
       produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
     });
@@ -177,7 +177,7 @@ async function loadProdukDariSheet() {
 let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); if(slides.length==0)return; slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
 
 window.onload = function()
-{ loadProducts(); };
-<script src="data.js"></script>
+{ loadProdukDariSheet(); };
+</script>
 </body>
 </html>
