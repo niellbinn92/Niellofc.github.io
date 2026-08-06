@@ -52,7 +52,10 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 <body>
 
 <div class="header p-3 flex justify-between items-center">
-  <h1 class="text-2xl font-black glow-text">NIEL<span class="text-cyan-400">ofc</span></h1>
+  <div>
+    <h1 class="text-2xl font-black glow-text">NIEL<span class="text-cyan-400">ofc</span></h1>
+    <a href="status.html" class="text-xs bg-blue-600 px-3 py-1 rounded mt-1 inline-block">CEK STATUS CHEAT</a>
+  </div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
 
@@ -60,6 +63,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 <div id="sideMenu" class="side-menu">
   <h3 class="text-xl font-bold mb-2 text-center">MENU</h3>
   <a onclick="showPage('home');toggleMenu()">Home</a>
+  <a href="status.html">Status Cheat</a>
   <a onclick="showPage('faq');toggleMenu()">FAQ</a>
   <a onclick="showPage('bantuan');toggleMenu()">Bantuan</a>
   <a href="https://www.tiktok.com/@username1895410" target="_blank">TikTok Admin</a>
@@ -176,8 +180,7 @@ async function loadProdukDariSheet() {
 
 let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); if(slides.length==0)return; slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
 
-window.onload = function()
-{ loadProdukDariSheet(); };
+window.onload = function(){ loadProdukDariSheet(); };
 </script>
 </body>
 </html>
