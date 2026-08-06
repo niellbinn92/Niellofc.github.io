@@ -38,13 +38,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
 .dot{width:8px;height:8px;border-radius:50%;background:#2563EB50;transition:0.3s}
 .dot.active{background:var(--biru-glow)}
-.tab-btn{padding:8px 16px;border-radius:10px;font-weight:800;border:1px solid var(--biru)}
-.tab-btn.active{background:var(--biru);box-shadow:0 0 8px var(--biru-glow)}
-.status-card{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.status-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
-.online{color:#22C55E}.online.status-dot{background:#22C55E;box-shadow:0 0 8px #22C55E}
-.offline{color:#EF4444}.offline.status-dot{background:#EF4444;box-shadow:0 0 8px #EF4444}
-.patch{color:#3B82F6}.patch.status-dot{background:#3B82F6;box-shadow:0 0 8px #3B82F6}
 </style>
 </head>
 <body>
@@ -52,10 +45,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 <div class="header p-3 flex justify-between items-center">
   <div>
     <h1 class="text-2xl font-black glow-text">NIEL<span class="text-cyan-400">ofc</span></h1>
-    <div class="flex gap-2 mt-2">
-      <button id="tabToko" class="tab-btn active" onclick="showPage('home')">TOKO</button>
-      <button id="tabStatus" class="tab-btn" onclick="showPage('statusPage')">STATUS</button>
-    </div>
   </div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
@@ -64,7 +53,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 <div id="sideMenu" class="side-menu">
   <h3 class="text-xl font-bold mb-2 text-center">MENU</h3>
   <a onclick="showPage('home');toggleMenu()">Home</a>
-  <a onclick="showPage('statusPage');toggleMenu()">Status Cheat</a>
   <a onclick="showPage('faq');toggleMenu()">FAQ</a>
   <a href="https://wa.me/6285194336082" target="_blank">CS WhatsApp</a>
 </div>
@@ -85,34 +73,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   </div>
   <h3 class="px-3 font-bold text-lg italic">Produk</h3>
   <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3 pb-10"><div class="loading col-span-2">⏳ Loading produk...</div></div>
-</div>
-
-<div id="statusPage" class="page">
-  <div class="p-4 pb-10">
-    <h2 class="text-2xl font-bold mb-2 text-center">STATUS CHEAT</h2>
-    <p class="text-center text-gray-400 mb-4">Update: <span id="tanggal"></span></p>
-
-    <div id="statusList">
-      <div class="status-card"><p class="font-bold">Fluorite Ios FF</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Migul Ios</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Fluorite Ios 8 Ball</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Fluorite Ios MLBB</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Br Mods Pc</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Br Mods Root</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Aurora Vn Pc</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Kiwmods Andro / Pc</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Reaper X Pro Root</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Pato Team Andro</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Prime Hook Andro</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Hg Apkm Andro</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Hg Proxy Andro</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Drip Client Proxy Andro</p><div class="status offline"><span class="status-dot"></span> OFFLINE</div></div>
-      <div class="status-card"><p class="font-bold">Drip Client Apkm Andro</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Slient Cheats</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-      <div class="status-card"><p class="font-bold">Plugin Mlbb/Codm/8bp/Blodstrk</p><div class="status online"><span class="status-dot"></span> ONLINE</div></div>
-    </div>
-    <p class="text-center mt-4 text-xs text-gray-500">🟢 ONLINE | 🔴 OFFLINE | 🔵 PATCH</p>
-  </div>
 </div>
 
 <div id="detail" class="page">
@@ -138,10 +98,7 @@ const NO_WA = "6285194336082";
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if(id=='home') document.getElementById('tabToko').classList.add('active');
-  if(id=='statusPage') document.getElementById('tabStatus').classList.add('active');
 }
 function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
 function pilihDurasi(el, i){ if(el.classList.contains('disabled')) return; document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
@@ -179,11 +136,7 @@ async function loadProdukDariSheet() {
 
 let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); if(slides.length==0)return; slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
 
-window.onload = function(){
-  loadProdukDariSheet();
-  const tgl = new Date().toLocaleDateString('id-ID', {day: '2-digit', month: 'long', year: 'numeric'});
-  document.getElementById('tanggal').innerText = tgl;
-};
+window.onload = function(){ loadProdukDariSheet(); };
 </script>
 </body>
 </html>
