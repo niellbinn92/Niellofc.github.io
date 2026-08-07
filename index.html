@@ -18,9 +18,10 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .banner img.active{opacity:1}
 .hero{background:var(--gradient);padding:20px;border-radius:16px;margin:15px;text-align:center}
 .hero h2{color:#fff;font-size:24px}
-.card{background:var(--abu);border-radius:16px;transition:0.3s;border:1px solid var(--biru);padding:10px;cursor:pointer}
+.card{background:var(--abu);border-radius:16px;transition:0.3s;border:1px solid var(--biru);padding:10px;cursor:pointer;position:relative}
 .card:hover{transform:translateY(-5px);box-shadow:0 0 15px var(--biru-glow)}
 .card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--biru)}
+.status-badge{position:absolute;top:8px;right:8px;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:800}
 .page{display:none}.page.active{display:block}
 .durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;background:var(--abu);transition:0.2s}
 .durasi-btn.active{border-color:var(--biru-glow);background:#2563EB30;box-shadow:0 0 8px var(--biru-glow);transform:scale(1.05)}
@@ -58,8 +59,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 @keyframes pulse {0%,100%{opacity:1} 50%{opacity:0.5}}
 .legend{display:flex;gap:15px;justify-content:center;margin-bottom:15px;font-size:12px;font-weight:800}
 .legend span{display:flex;align-items:center;gap:5px}
-
-/* FOOTER BARU KECE */
 .footer{background:linear-gradient(180deg,#000 0%,#050A14 100%);border-top:2px solid var(--biru);padding:30px 20px;text-align:center;margin-top:30px}
 .footer-logo{font-size:28px;font-weight:900;margin-bottom:10px}
 .sosmed{display:flex;gap:12px;justify-content:center;margin:15px 0}
@@ -83,7 +82,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   <a onclick="showPage('home');document.getElementById('produk').scrollIntoView();toggleMenu()">🛒 Produk</a>
   <a onclick="showPage('home');document.getElementById('faq').scrollIntoView();toggleMenu()">❓ FAQ</a>
   <a href="https://wa.me/6285194336082" target="_blank">💬 WhatsApp</a>
-  <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank">📢 Saluran WA</a>
   <a href="https://t.me/nielllofcbinn" target="_blank">✈️ Telegram</a>
 </div>
 
@@ -94,38 +92,22 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
     <img src="https://i.ibb.co.com/Gvfn9RBm/2-F44-B3-A4-A822-46-A8-B171-62-BABD63-AA2-D.png">
     <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
   </div>
-  <div class="hero"><h2 class="glow-text">TOKO CHEAT TERPERCAYA</h2><p class="text-sm mt-1">Proses 1-5 Menit | Garansi Full | 24 Jam Online</p></div>
+  <div class="hero"><h2 class="glow-text">TOKO CHEAT TERPERCAYA</h2><p class="text-sm mt-1">Proses 1-5 Menit | Garansi Full</p></div>
   <div class="p-3 flex gap-2 overflow-x-auto" id="filterMenu">
     <button id="btn-semua" class="filter-btn active" onclick="filterProduk('semua')">SEMUA</button>
     <button id="btn-freefire" class="filter-btn" onclick="filterProduk('freefire')">FREE FIRE</button>
     <button id="btn-pubg" class="filter-btn" onclick="filterProduk('pubg')">PUBG</button>
-    <button id="btn-8ball" class="filter-btn" onclick="filterProduk('8ball')">8 BALL</button>
-    <button id="btn-sertifikat" class="filter-btn" onclick="filterProduk('sertifikat')">SERTIFIKAT IOS</button>
   </div>
   <h3 class="px-3 font-bold text-lg italic mt-4" id="produk">🔥 Produk Terlaris</h3>
   <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3 pb-10"><div class="loading col-span-2">⏳ Loading produk...</div></div>
-
-  <!-- FAQ LENGKAP -->
-  <div class="p-3" id="faq">
-    <h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ PERTANYAAN UMUM</h2>
-    <div class="faq-box"><b>Q: Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Klik Order via WhatsApp</p></div>
-    <div class="faq-box"><b>Q: Pembayaran kemana?</b><p class="text-sm text-gray-300 mt-1">A: Dana, Ovo, Gopay, QRIS. Admin kirim setelah bayar lunas</p></div>
-    <div class="faq-box"><b>Q: Ada garansi?</b><p class="text-sm text-gray-300 mt-1">A: Ada! Garansi ganti 100% jika cheat tidak bisa dipakai saat masa aktif</p></div>
-    <div class="faq-box"><b>Q: Proses berapa lama?</b><p class="text-sm text-gray-300 mt-1">A: 1-5 menit setelah pembayaran. Dijamin cepat & aman!</p></div>
-    <div class="faq-box"><b>Q: Bisa refund?</b><p class="text-sm text-gray-300 mt-1">A: Bisa, jika produk sudah patch/offline sebelum masa aktif habis</p></div>
-    <div class="faq-box"><b>Q: Aman dari banned?</b><p class="text-sm text-gray-300 mt-1">A: Aman. Sudah anti ban & update terus. Pakai sesuai arahan admin</p></div>
-  </div>
-
-  <!-- FOOTER KECE 2026 -->
+  <div class="p-3" id="faq"><h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ FAQ</h2><div class="faq-box"><b>Q: Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi</p></div></div>
   <div class="footer">
     <p class="footer-logo glow-text">NIEL<span class="text-cyan-400">ofc</span></p>
-    <p class="text-sm text-gray-400">Toko Cheat Digital No.1 di Indonesia</p>
     <div class="sosmed">
       <a href="https://wa.me/6285194336082" target="_blank">💬</a>
-      <a href="https://whatsapp.com/channel/0029VbCXLJx9hXF9QRZdRr12" target="_blank">📢</a>
       <a href="https://t.me/nielllofcbinn" target="_blank">✈️</a>
     </div>
-    <p class="copyright">© 2026 NIELofc. All Rights Reserved. | Made with 🔥 by NIEL</p>
+    <p class="copyright">© 2026 NIELofc. All Rights Reserved.</p>
   </div>
 </div>
 
@@ -137,6 +119,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
     <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2>
     <p id="detailGame" class="text-cyan-400 text-sm font-bold"></p>
     <p id="detailDesc" class="text-xs text-gray-300 mt-2"></p>
+    <div id="detailStatus" class="mt-2"></div>
     <div class="mt-3"><label class="text-sm font-bold">1. NO WHATSAPP AKTIF</label><input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1"></div>
     <div class="mt-3"><label class="text-sm font-bold">2. PILIH DURASI</label><div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div></div>
     <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold text-lg">💬 ORDER VIA WHATSAPP</button>
@@ -149,9 +132,9 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
     <h2 class="text-2xl font-bold mb-2 italic text-center glow-text">📊 STATUS PRODUK</h2>
     <p class="text-xs text-center text-gray-400 mb-4" id="lastUpdate">Loading...</p>
     <div class="legend">
-      <span><span class="status-dot"></span> ONLINE</span>
-      <span><span class="status-dot"></span> OFFLINE</span>
-      <span><span class="status-dot"></span> PATCH</span>
+      <span><span class="status-dot status-online"></span> ONLINE</span>
+      <span><span class="status-dot status-offline"></span> OFFLINE</span>
+      <span><span class="status-dot status-patch"></span> PATCH</span>
     </div>
     <div class="status-grid" id="statusGrid"><div class="loading col-span-2">⏳ Loading status...</div></div>
   </div>
@@ -159,7 +142,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 
 <script>
 const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
-const SHEET_STATUS_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq/sheet/Status";
 let produk = {};
 let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";
@@ -173,15 +155,41 @@ function showPage(id){
 }
 function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
 function pilihDurasi(el, i){ if(el.classList.contains('disabled')) return; document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
+
+function getStatusBadge(status){
+  if(status == "online") return '<span class="status-badge" style="background:#22C55E20;color:#4ADE80;border:1px solid #22C55E">ONLINE</span>';
+  if(status == "patch") return '<span class="status-badge" style="background:#3B82F620;color:#60A5FA;border:1px solid #3B82F6">PATCH</span>';
+  return '<span class="status-badge" style="background:#EF444420;color:#F87171;border:1px solid #EF4444">OFFLINE</span>';
+}
+
 function renderProduk(kategori = 'semua'){
   const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
   for(let key in produk){
     if(kategori == 'semua' || produk[key].kategori == kategori){
-      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')"><img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
+      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')">${getStatusBadge(produk[key].status)}<img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
     }
   }
 }
-function showProduct(key){ produkAktif = key; const p = produk[key]; document.getElementById('detailImg').src = p.img; document.getElementById('detailNama').innerText = p.nama; document.getElementById('detailGame').innerText = p.game; document.getElementById('detailDesc').innerText = p.desc; let grid = ""; p.durasi.forEach((d,i)=>{ if(d.harga == "habis"){ grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`; } else { grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`; } }); document.getElementById('durasiGrid').innerHTML = grid; durasiAktif = {}; showPage('detail'); }
+function showProduct(key){
+  produkAktif = key;
+  const p = produk[key];
+  document.getElementById('detailImg').src = p.img;
+  document.getElementById('detailNama').innerText = p.nama;
+  document.getElementById('detailGame').innerText = p.game;
+  document.getElementById('detailDesc').innerText = p.desc;
+  document.getElementById('detailStatus').innerHTML = "Status: " + getStatusBadge(p.status);
+  let grid = "";
+  p.durasi.forEach((d,i)=>{
+    if(d.harga == "habis"){
+      grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`;
+    } else {
+      grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;
+    }
+  });
+  document.getElementById('durasiGrid').innerHTML = grid;
+  durasiAktif = {};
+  showPage('detail');
+}
 
 async function orderWA(){
   const nohp = document.getElementById('nohp').value;
@@ -194,18 +202,16 @@ async function orderWA(){
 async function loadStatus(){
   const grid = document.getElementById('statusGrid');
   grid.innerHTML = '<div class="loading col-span-2">⏳ Loading status...</div>';
-  try{
-    let res = await fetch(SHEET_STATUS_URL);
-    let data = await res.json();
-    grid.innerHTML = "";
-    data.forEach(item=>{
-      let statusClass = item.Status == "online"? "status-online" : item.Status == "patch"? "status-patch" : "status-offline";
-      grid.innerHTML += `<div class="status-card ${statusClass}"><span class="status-dot"></span> ${item.Produk}</div>`;
-    })
-    document.getElementById('lastUpdate').innerText = 'Update terakhir: ' + new Date().toLocaleString('id');
-  }catch(err){
-    grid.innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek sheet Status</p>';
+  grid.innerHTML = "";
+  let namaProduk = [];
+  for(let key in produk){
+    if(!namaProduk.includes(produk[key].nama)){
+      namaProduk.push(produk[key].nama);
+      let statusClass = produk[key].status == "online"? "status-online" : produk[key].status == "patch"? "status-patch" : "status-offline";
+      grid.innerHTML += `<div class="status-card ${statusClass}"><span class="status-dot"></span> ${produk[key].nama}</div>`;
+    }
   }
+  document.getElementById('lastUpdate').innerText = 'Update terakhir: ' + new Date().toLocaleString('id');
 }
 
 async function loadProdukDariSheet() {
@@ -214,9 +220,14 @@ async function loadProdukDariSheet() {
     rows.forEach(row => {
       let nama = row.Produk; let durasi = row.Durasi; let harga = row.Harga; let stok = row.Stok;
       let kategori = row.Kategori || "freefire"; let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
-      let deskripsi = row.Deskripsi || "Produk digital";
+      let deskripsi = row.Deskripsi || "Produk digital"; let status = row.Status || "online";
       let keyProduk = nama.toLowerCase().replace(/ /g, "");
-      if(!produk[keyProduk]){ produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori.toLowerCase(), game: kategori.toUpperCase(), desc: deskripsi, durasi: []} }
+      if(!produk[keyProduk]){
+        produk[keyProduk] = {
+          nama: nama, img: gambar, kategori: kategori.toLowerCase(),
+          game: kategori.toUpperCase(), desc: deskripsi, status: status.toLowerCase(), durasi: []
+        }
+      }
       produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
     });
     renderProduk('semua');
