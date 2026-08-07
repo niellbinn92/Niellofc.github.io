@@ -100,7 +100,27 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   </div>
   <h3 class="px-3 font-bold text-lg italic mt-4" id="produk">🔥 Produk Terlaris</h3>
   <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3 pb-10"><div class="loading col-span-2">⏳ Loading produk...</div></div>
-  <div class="p-3" id="faq"><h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ FAQ</h2><div class="faq-box"><b>Q: Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi</p></div></div>
+
+  <div class="p-3" id="faq">
+    <h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ FAQ</h2>
+
+    <div class="faq-box"><b>Q: Gimana cara order?</b>
+    <p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Kirim ke WA Admin. Proses 1-5 Menit</p></div>
+
+    <div class="faq-box"><b>Q: Kok tempat kamu murah banget bg?</b>
+    <p class="text-sm text-gray-300 mt-1">A: Kita sistemnya langsung dari source/reseller utama jadi ga ada calo. Terus kita ambil untung tipis tapi putaran cepet. Yang penting buyer rame + puas, bukan nyari untung 1x doang 🔥</p></div>
+
+    <div class="faq-box"><b>Q: Murah gini kualitasnya gimana?</b>
+    <p class="text-sm text-gray-300 mt-1">A: Kualitas SAMA KAYA YANG JUAL 100K. Beda di harga doang. Karena kita ga bayar admin, ga sewa ruko, semua online. Dijamin work 100% + ada garansi</p></div>
+
+    <div class="faq-box"><b>Q: Proses berapa lama?</b>
+    <p class="text-sm text-gray-300 mt-1">A: 1 - 5 Menit setelah transfer. Admin 24 Jam Online</p></div>
+
+    <div class="faq-box"><b>Q: Ada garansi?</b>
+    <p class="text-sm text-gray-300 mt-1">A: Ada bos. Garansi full selama durasi aktif. Kalo patch/mati diganti baru</p></div>
+
+  </div>
+
   <div class="footer">
     <p class="footer-logo glow-text">NIEL<span class="text-cyan-400">ofc</span></p>
     <div class="sosmed">
@@ -141,10 +161,10 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 </div>
 
 <script>
-const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
+const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq"; // GANTI LINK SHEETDB KAMU DISINI
 let produk = {};
 let produkAktif = ""; let durasiAktif = {};
-const NO_WA = "6285194336082";
+const NO_WA = "6285194336082"; // GANTI NO WA KAMU DISINI
 
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function showPage(id){
