@@ -44,8 +44,6 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .faq-box{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:14px;margin-bottom:12px;transition:0.2s}
 .faq-box:hover{border-color:var(--biru-glow);transform:translateX(5px)}
 .badge{background:var(--gradient);padding:4px 10px;border-radius:8px;font-size:10px;font-weight:800}
-
-/* STATUS */
 .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .status-card{border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:700;border:2px solid;transition:0.3s}
 .status-card:hover{transform:scale(1.03)}
@@ -103,22 +101,11 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 
   <div class="p-3" id="faq">
     <h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ FAQ</h2>
-
-    <div class="faq-box"><b>Q: Gimana cara order?</b>
-    <p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Kirim ke WA Admin. Proses 1-5 Menit</p></div>
-
-    <div class="faq-box"><b>Q: Kok tempat kamu murah banget bg?</b>
-    <p class="text-sm text-gray-300 mt-1">A: Kita sistemnya langsung dari source/reseller utama jadi ga ada calo. Terus kita ambil untung tipis tapi putaran cepet. Yang penting buyer rame + puas, bukan nyari untung 1x doang 🔥</p></div>
-
-    <div class="faq-box"><b>Q: Murah gini kualitasnya gimana?</b>
-    <p class="text-sm text-gray-300 mt-1">A: Kualitas SAMA KAYA YANG JUAL 100K. Beda di harga doang. Karena kita ga bayar admin, ga sewa ruko, semua online. Dijamin work 100% + ada garansi</p></div>
-
-    <div class="faq-box"><b>Q: Proses berapa lama?</b>
-    <p class="text-sm text-gray-300 mt-1">A: 1 - 5 Menit setelah transfer. Admin 24 Jam Online</p></div>
-
-    <div class="faq-box"><b>Q: Ada garansi?</b>
-    <p class="text-sm text-gray-300 mt-1">A: Ada bos. Garansi full selama durasi aktif. Kalo patch/mati diganti baru</p></div>
-
+    <div class="faq-box"><b>Q: Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Kirim ke WA Admin. Proses 1-5 Menit</p></div>
+    <div class="faq-box"><b>Q: Kok tempat kamu murah banget bg?</b><p class="text-sm text-gray-300 mt-1">A: Kita sistemnya langsung dari source/reseller utama jadi ga ada calo. Untung tipis tapi putaran cepet 🔥</p></div>
+    <div class="faq-box"><b>Q: Murah gini kualitasnya gimana?</b><p class="text-sm text-gray-300 mt-1">A: Kualitas SAMA KAYA YANG JUAL 100K. Dijamin work 100% + ada garansi</p></div>
+    <div class="faq-box"><b>Q: Proses berapa lama?</b><p class="text-sm text-gray-300 mt-1">A: 1 - 5 Menit setelah transfer. Admin 24 Jam Online</p></div>
+    <div class="faq-box"><b>Q: Ada garansi?</b><p class="text-sm text-gray-300 mt-1">A: Ada bos. Garansi full selama durasi aktif. Kalo patch/mati diganti baru</p></div>
   </div>
 
   <div class="footer">
@@ -161,10 +148,14 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 </div>
 
 <script>
-const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq"; // GANTI LINK SHEETDB KAMU DISINI
+const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq"; // GANTI LINK SHEETDB KAMU
 let produk = {};
 let produkAktif = ""; let durasiAktif = {};
-const NO_WA = "6285194336082"; // GANTI NO WA KAMU DISINI
+const NO_WA = "6285194336082";
+
+// SETTING BOT TELEGRAM
+const BOT_TOKEN = "8953718075:AAFDOrkjFhT9AD844g1Jr1RXlvb1HWblAeQ";
+const CHAT_ID = "8606966194";
 
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
 function showPage(id){
@@ -256,7 +247,12 @@ async function loadProdukDariSheet() {
 
 let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); if(slides.length==0)return; slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
 
-window.onload = function(){ loadProdukDariSheet(); };
+// NOTIF TELEGRAM PAS ADA YG BUKA WEB
+window.onload = function(){
+  loadProdukDariSheet();
+  let pesan = `🔥 ADA YANG BUKA WEB NIELofc 🔥%0AWaktu: ${new Date().toLocaleString('id')}%0ALokasi: Indonesia`;
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);
+};
 </script>
 </body>
 </html>
