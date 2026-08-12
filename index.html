@@ -3,47 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIELofc - Toko Cheat No.1</title>
+<title>NIELofc - Premium Panel</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Saira:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--biru:#2563EB;--biru-glow:#3B82F6;--hitam:#050A14;--abu:#0F172A;--gradient:linear-gradient(135deg,#2563EB 0%,#3B82F6 100%);--hijau:#22C55E;--hijau-glow:#4ADE80;--merah:#EF4444;--merah-glow:#F87171;--biru-status:#3B82F6;--biru-glow-status:#60A5FA}
-body{background:var(--hitam);color:#fff;font-family:'Saira', sans-serif;scroll-behavior:smooth;}
-h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--biru-glow)}
-.glow-text{text-shadow:0 0 5px var(--biru-glow);animation: glow 2.5s ease-in-out infinite alternate;}
-@keyframes glow {from { opacity: 0.7; } to { opacity: 1; text-shadow:0 0 15px var(--biru-glow); }}
-.header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);border-bottom:2px solid var(--biru)}
-.banner{position:relative;height:220px;overflow:hidden;border-radius:0 0 20px 20px;border-bottom:2px solid var(--biru);background:#000}
-.banner img{position:absolute;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1s ease-in-out}
-.banner img.active{opacity:1}
+:root{
+  --emas:#FFD700;--emas-glow:#FFC700;--emas-gelap:#FFA500;
+  --hitam:#0A0A0A;--abu:#1A1A1A;--putih:#FFFFFF;
+  --gradient:linear-gradient(90deg,#FFD700 0%,#FFA500 100%);
+  --hijau:#22C55E;--hijau-glow:#4ADE80;--merah:#EF4444;--merah-glow:#F87171
+}
+body{background:var(--hitam);color:var(--putih);font-family:'Saira', sans-serif;scroll-behavior:smooth;}
+h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--emas)}
+.glow-text{text-shadow:0 0 5px var(--emas-glow);animation: glow 2.5s ease-in-out infinite alternate;}
+@keyframes glow {from { opacity: 0.7; } to { opacity: 1; text-shadow:0 0 15px var(--emas-glow); }}
+
+.animate-on-scroll{opacity:0;transform:translateY(30px);transition:0.8s ease-out;}
+.animate-on-scroll.show{opacity:1;transform:translateY(0);}
+
+.flash-bar{background:var(--gradient);color:var(--hitam);padding:8px 0;overflow:hidden;white-space:nowrap;font-weight:900;border-bottom:2px solid var(--emas)}
+.flash-text{display:inline-block;padding-left:100%;animation: flash-marquee 12s linear infinite;text-shadow:0 0 10px var(--emas-glow)}
+@keyframes flash-marquee {0% { transform: translateX(0); }100% { transform: translateX(-100%); }}
+
+.header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,0.9);backdrop-filter:blur(10px);border-bottom:2px solid var(--emas)}
+.banner{position:relative;height:220px;overflow:hidden;border-radius:0 0 20px 20px;border-bottom:2px solid var(--emas);background:#000}
+.banner img{position:absolute;width:100%;height:100%;object-fit:cover}
+
 .hero{background:var(--gradient);padding:20px;border-radius:16px;margin:15px;text-align:center}
-.hero h2{color:#fff;font-size:24px}
-.card{background:var(--abu);border-radius:16px;transition:0.3s;border:1px solid var(--biru);padding:10px;cursor:pointer;position:relative}
-.card:hover{transform:translateY(-5px);box-shadow:0 0 15px var(--biru-glow)}
-.card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--biru)}
+.hero h2{color:var(--hitam);font-size:24px}
+.btn-emas{background:var(--gradient);color:var(--hitam);font-weight:900;transition:0.3s;box-shadow:0 0 5px var(--emas-glow)}
+.btn-emas:hover{box-shadow:0 0 20px var(--emas-glow), 0 0 40px var(--emas-glow);transform:scale(1.05)}
+
+.card{background:var(--abu);border-radius:16px;transition:0.3s;border:1px solid var(--emas);padding:10px;cursor:pointer;position:relative}
+.card:hover{transform:translateY(-5px);box-shadow:0 0 15px var(--emas-glow)}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:12px;margin-bottom:8px;border:1px solid var(--emas)}
 .status-badge{position:absolute;top:8px;right:8px;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:800}
 .page{display:none}.page.active{display:block}
-.durasi-btn{border:1px solid var(--biru);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;background:var(--abu);transition:0.2s}
-.durasi-btn.active{border-color:var(--biru-glow);background:#2563EB30;box-shadow:0 0 8px var(--biru-glow);transform:scale(1.05)}
+.durasi-btn{border:1px solid var(--emas);padding:12px;border-radius:10px;cursor:pointer;text-align:center;font-weight:700;background:var(--abu);transition:0.2s}
+.durasi-btn.active{border-color:var(--emas-glow);background:#FFD70030;box-shadow:0 0 8px var(--emas-glow);transform:scale(1.05)}
 .durasi-btn.disabled{opacity:0.4;cursor:not-allowed;background:#EF444430;border-color:#EF4444}
-.filter-btn{background:var(--abu);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:800;white-space:nowrap;border:1px solid var(--biru);cursor:pointer;transition:0.2s}
-.filter-btn.active{background:var(--gradient);color:#fff;box-shadow:0 0 8px var(--biru-glow)}
-.input{width:100%;background:var(--abu);padding:12px;border-radius:10px;border:1px solid var(--biru);color:#fff}
-.menu-btn{background:none;border:none;color:var(--biru-glow);font-size:24px;cursor:pointer;font-weight:900}
-.side-menu{position:fixed;top:0;right:-300px;width:280px;height:100%;background:#000;border-left:2px solid var(--biru);z-index:100;transition:0.3s;padding:20px;display:flex;flex-direction:column;gap:10px}
+.filter-btn{background:var(--abu);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:800;white-space:nowrap;border:1px solid var(--emas);cursor:pointer;transition:0.2s}
+.filter-btn.active{background:var(--gradient);color:var(--hitam);box-shadow:0 0 8px var(--emas-glow)}
+.input{width:100%;background:var(--abu);padding:12px;border-radius:10px;border:1px solid var(--emas);color:var(--putih)}
+.menu-btn{background:none;border:none;color:var(--emas-glow);font-size:24px;cursor:pointer;font-weight:900}
+.side-menu{position:fixed;top:0;right:-300px;width:280px;height:100%;background:var(--hitam);border-left:2px solid var(--emas);z-index:100;transition:0.3s;padding:20px;display:flex;flex-direction:column;gap:10px}
 .side-menu.active{right:0}
-.side-menu a{padding:14px;border-radius:10px;background:var(--abu);font-weight:800;text-align:center;border:1px solid var(--biru);cursor:pointer}
-.side-menu a:hover{background:var(--gradient)}
+.side-menu a{padding:14px;border-radius:10px;background:var(--abu);font-weight:800;text-align:center;border:1px solid var(--emas);cursor:pointer}
+.side-menu a:hover{background:var(--gradient);color:var(--hitam)}
 .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#00080;z-index:99;display:none}
 .overlay.active{display:block}
 .stok-habis{color:#EF4444;font-size:11px;font-weight:800}
-.loading{text-align:center;padding:40px;color:var(--biru-glow)}
-.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.dot{width:8px;height:8px;border-radius:50%;background:#2563EB50;transition:0.3s}
-.dot.active{background:var(--biru-glow)}
-.faq-box{background:var(--abu);border:1px solid var(--biru);border-radius:12px;padding:14px;margin-bottom:12px;transition:0.2s}
-.faq-box:hover{border-color:var(--biru-glow);transform:translateX(5px)}
-.badge{background:var(--gradient);padding:4px 10px;border-radius:8px;font-size:10px;font-weight:800}
+.loading{text-align:center;padding:40px;color:var(--emas-glow)}
+.faq-box{background:var(--abu);border:1px solid var(--emas);border-radius:12px;padding:14px;margin-bottom:12px;transition:0.2s}
+.faq-box:hover{border-color:var(--emas-glow);transform:translateX(5px)}
+.icon-emas{color:var(--emas);margin-right:6px}
+.section-divider{height:2px;background:linear-gradient(90deg,transparent,var(--emas),transparent);margin:30px 15px}
+.badge{background:var(--gradient);color:var(--hitam);padding:4px 10px;border-radius:8px;font-size:10px;font-weight:800}
+
+/* TESTIMONI TANPA FOTO */
+.testi-card{max-width:95%;margin:0 auto;background:var(--abu);border:1px solid var(--emas);border-radius:16px;padding:18px;transition:0.3s}
+.testi-card:hover{box-shadow:0 0 15px var(--emas-glow);transform:scale(1.02)}
+.testi-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.testi-icon{width:45px;height:45px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--hitam)}
+.testi-nama{font-weight:800;font-size:15px}
+.testi-bintang{color:var(--emas);font-size:14px}
+.testi-komentar{font-size:14px;color:#D1D5DB;line-height:1.6;font-style:italic}
+
 .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .status-card{border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:700;border:2px solid;transition:0.3s}
 .status-card:hover{transform:scale(1.03)}
@@ -52,69 +77,90 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .status-online.status-dot{background:var(--hijau);box-shadow:0 0 15px var(--hijau-glow)}
 .status-offline{background:#EF444420;border-color:var(--merah);color:var(--merah-glow)}
 .status-offline.status-dot{background:var(--merah);box-shadow:0 0 15px var(--merah-glow)}
-.status-patch{background:#3B82F620;border-color:var(--biru-status);color:var(--biru-glow-status)}
-.status-patch.status-dot{background:var(--biru-status);box-shadow:0 0 15px var(--biru-glow-status)}
+.status-patch{background:#FFD70020;border-color:var(--emas);color:var(--emas-glow)}
+.status-patch.status-dot{background:var(--emas);box-shadow:0 0 15px var(--emas-glow)}
 @keyframes pulse {0%,100%{opacity:1} 50%{opacity:0.5}}
 .legend{display:flex;gap:15px;justify-content:center;margin-bottom:15px;font-size:12px;font-weight:800}
 .legend span{display:flex;align-items:center;gap:5px}
-.footer{background:linear-gradient(180deg,#000 0%,#050A14 100%);border-top:2px solid var(--biru);padding:30px 20px;text-align:center;margin-top:30px}
+.footer{background:linear-gradient(180deg,#000 0%,#0A0A0A 100%);border-top:2px solid var(--emas);padding:30px 20px;text-align:center;margin-top:30px}
 .footer-logo{font-size:28px;font-weight:900;margin-bottom:10px}
 .sosmed{display:flex;gap:12px;justify-content:center;margin:15px 0}
-.sosmed a{background:var(--abu);padding:10px;border-radius:10px;border:1px solid var(--biru);font-size:20px;transition:0.2s}
-.sosmed a:hover{background:var(--gradient);transform:scale(1.1)}
-.copyright{font-size:11px;color:#64748B;margin-top:15px}
+.sosmed a{background:var(--abu);padding:10px;border-radius:10px;border:1px solid var(--emas);font-size:20px;transition:0.2s;color:var(--emas)}
+.sosmed a:hover{background:var(--gradient);color:var(--hitam);transform:scale(1.1)}
+.copyright{font-size:11px;color:#B8860B;margin-top:15px}
 </style>
 </head>
 <body>
 
+<div class="flash-bar">
+  <div class="flash-text">🔥 FLASH SALE 50% OFF HARI INI SAJA 🔥 | PANEL PREMIUM BERGARANSI 🔥 | ORDER SEKARANG VIA WA 🔥</div>
+</div>
+
 <div class="header p-3 flex justify-between items-center">
-  <div><h1 class="text-2xl font-black glow-text">NIEL<span class="text-cyan-400">ofc</span></h1></div>
+  <div><h1 class="text-2xl font-black glow-text">NIEL<span style="color:var(--emas-gelap)">ofc</span></h1></div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </div>
 
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 <div id="sideMenu" class="side-menu">
-  <h3 class="text-xl font-bold mb-2 text-center">MENU</h3>
-  <a onclick="showPage('home');toggleMenu()">🏠 Home</a>
-  <a onclick="showPage('status');toggleMenu()">📊 Status Produk</a>
-  <a onclick="showPage('home');document.getElementById('produk').scrollIntoView();toggleMenu()">🛒 Produk</a>
-  <a onclick="showPage('home');document.getElementById('faq').scrollIntoView();toggleMenu()">❓ FAQ</a>
-  <a href="https://wa.me/6285194336082" target="_blank">💬 WhatsApp</a>
-  <a href="https://t.me/nielllofcbinn" target="_blank">✈️ Telegram</a>
+  <h3 class="text-xl font-bold mb-2 text-center"><span class="icon-emas">👑</span>MENU</h3>
+  <a onclick="showPage('home');toggleMenu()"><span class="icon-emas">🏠</span>Home</a>
+  <a onclick="showPage('status');toggleMenu()"><span class="icon-emas">📊</span>Status Produk</a>
+  <a onclick="showPage('home');document.getElementById('produk').scrollIntoView();toggleMenu()"><span class="icon-emas">🛒</span>Produk</a>
+  <a onclick="showPage('home');document.getElementById('testi').scrollIntoView();toggleMenu()"><span class="icon-emas">⭐</span>Testimoni</a>
+  <a onclick="showPage('home');document.getElementById('faq').scrollIntoView();toggleMenu()"><span class="icon-emas">❓</span>FAQ</a>
+  <a href="https://wa.me/6285194336082" target="_blank"><span class="icon-emas">💬</span>WhatsApp</a>
+  <a href="https://t.me/VIPNIEL" target="_blank"><span class="icon-emas">✈️</span>Telegram</a>
 </div>
 
 <div id="home" class="page active">
-  <div class="banner">
-    <img src="https://i.ibb.co.com/bMC635bG/F801-F624-F654-4-C43-9-F6-A-DC4416894-BA5.png" class="active">
-    <img src="https://i.ibb.co.com/d0Jb0TbJ/AB94-CFF3-E55-A-44-AB-8-CDE-D334337-B5-A92.png">
-    <img src="https://i.ibb.co.com/Gvfn9RBm/2-F44-B3-A4-A822-46-A8-B171-62-BABD63-AA2-D.png">
-    <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
-  </div>
-  <div class="hero"><h2 class="glow-text">TOKO CHEAT TERPERCAYA</h2><p class="text-sm mt-1">Proses 1-5 Menit | Garansi Full</p></div>
-  <div class="p-3 flex gap-2 overflow-x-auto" id="filterMenu">
-    <button id="btn-semua" class="filter-btn active" onclick="filterProduk('semua')">SEMUA</button>
-    <button id="btn-freefire" class="filter-btn" onclick="filterProduk('freefire')">FREE FIRE</button>
-    <button id="btn-pubg" class="filter-btn" onclick="filterProduk('pubg')">PUBG</button>
-  </div>
-  <h3 class="px-3 font-bold text-lg italic mt-4" id="produk">🔥 Produk Terlaris</h3>
-  <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3 pb-10"><div class="loading col-span-2">⏳ Loading produk...</div></div>
+  <div class="banner"><img src="https://i.ibb.co.com/W4Vk9tz3/F75-B26-F7-AFA0-4-EC4-936-F-AAB0-E64-D74.png"></div>
 
-  <div class="p-3" id="faq">
-    <h2 class="text-2xl font-bold mb-4 italic text-center glow-text">❓ FAQ</h2>
-    <div class="faq-box"><b>Q: Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Kirim ke WA Admin. Proses 1-5 Menit</p></div>
-    <div class="faq-box"><b>Q: Kok tempat kamu murah banget bg?</b><p class="text-sm text-gray-300 mt-1">A: Kita sistemnya langsung dari source/reseller utama jadi ga ada calo. Untung tipis tapi putaran cepet 🔥</p></div>
-    <div class="faq-box"><b>Q: Murah gini kualitasnya gimana?</b><p class="text-sm text-gray-300 mt-1">A: Kualitas SAMA KAYA YANG JUAL 100K. Dijamin work 100% + ada garansi</p></div>
-    <div class="faq-box"><b>Q: Proses berapa lama?</b><p class="text-sm text-gray-300 mt-1">A: 1 - 5 Menit setelah transfer. Admin 24 Jam Online</p></div>
-    <div class="faq-box"><b>Q: Ada garansi?</b><p class="text-sm text-gray-300 mt-1">A: Ada bos. Garansi full selama durasi aktif. Kalo patch/mati diganti baru</p></div>
+  <div class="hero animate-on-scroll"><h2 class="glow-text">NIELofc PREMIUM PANEL</h2><p class="text-sm mt-1" style="color:var(--hitam)">Kualitas Sultan | Harga Pelajar</p></div>
+
+  <div class="section-divider animate-on-scroll"></div>
+
+  <div class="p-3 flex gap-2 overflow-x-auto animate-on-scroll" id="filterMenu"></div>
+
+  <h3 class="px-3 font-bold text-lg italic mt-4 animate-on-scroll" id="produk"><span class="icon-emas">🔥</span>Produk Terlaris</h3>
+  <div id="produkGrid" class="grid grid-cols-2 gap-3 p-3 pb-10 animate-on-scroll"><div class="loading col-span-2">⏳ Loading produk...</div></div>
+
+  <div class="section-divider animate-on-scroll"></div>
+
+  <!-- TESTIMONI 1 ORANG TANPA FOTO -->
+  <div class="p-3 animate-on-scroll" id="testi">
+    <h2 class="text-2xl font-bold mb-4 italic text-center glow-text"><span class="icon-emas">⭐</span>TESTIMONI PELANGGAN</h2>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-icon">D</div>
+        <div>
+          <p class="testi-nama">dimm19cm</p>
+          <p class="testi-bintang">⭐⭐⭐⭐</p>
+        </div>
+      </div>
+      <p class="testi-komentar">"mantap"</p>
+    </div>
   </div>
 
-  <div class="footer">
-    <p class="footer-logo glow-text">NIEL<span class="text-cyan-400">ofc</span></p>
+  <div class="section-divider animate-on-scroll"></div>
+
+  <!-- FAQ -->
+  <div class="p-3 animate-on-scroll" id="faq">
+    <h2 class="text-2xl font-bold mb-4 italic text-center glow-text"><span class="icon-emas">❓</span>FAQ</h2>
+    <div class="faq-box"><b><span class="icon-emas">Q:</span> Gimana cara order?</b><p class="text-sm text-gray-300 mt-1">A: Pilih produk > Isi No WA > Pilih durasi > Kirim ke WA Admin. Proses 1-5 Menit</p></div>
+    <div class="faq-box"><b><span class="icon-emas">Q:</span> Kok tempat kamu murah banget bg?</b><p class="text-sm text-gray-300 mt-1">A: Kita sistemnya langsung dari source/reseller utama jadi ga ada calo. Untung tipis tapi putaran cepet 🔥</p></div>
+    <div class="faq-box"><b><span class="icon-emas">Q:</span> Murah gini kualitasnya gimana?</b><p class="text-sm text-gray-300 mt-1">A: Kualitas SAMA KAYA YANG JUAL 100K. Dijamin work 100% + ada garansi</p></div>
+    <div class="faq-box"><b><span class="icon-emas">Q:</span> Proses berapa lama?</b><p class="text-sm text-gray-300 mt-1">A: 1 - 5 Menit setelah transfer. Admin 24 Jam Online</p></div>
+    <div class="faq-box"><b><span class="icon-emas">Q:</span> Ada garansi?</b><p class="text-sm text-gray-300 mt-1">A: Ada bos. Garansi full selama durasi aktif. Kalo patch/mati diganti baru</p></div>
+  </div>
+
+  <div class="footer animate-on-scroll">
+    <p class="footer-logo glow-text">NIEL<span style="color:var(--emas-gelap)">ofc</span></p>
     <div class="sosmed">
       <a href="https://wa.me/6285194336082" target="_blank">💬</a>
-      <a href="https://t.me/nielllofcbinn" target="_blank">✈️</a>
+      <a href="https://t.me/VIPNIEL" target="_blank">✈️</a>
     </div>
-    <p class="copyright">© 2026 NIELofc. All Rights Reserved.</p>
+    <p class="copyright">© 2026 NIELofc. Trusted by Experience.</p>
   </div>
 </div>
 
@@ -122,137 +168,47 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
   <div class="p-3 flex items-center gap-2 cursor-pointer" onclick="showPage('home')">← <b>KEMBALI</b></div>
   <div class="p-3 pb-10">
     <span class="badge">BEST SELLER</span>
-    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border-blue-500 mt-2">
+    <img id="detailImg" class="w-full h-48 object-cover bg-black rounded-2xl border-yellow-500 mt-2">
     <h2 id="detailNama" class="text-2xl font-bold mt-2 italic"></h2>
-    <p id="detailGame" class="text-cyan-400 text-sm font-bold"></p>
+    <p id="detailGame" class="text-yellow-400 text-sm font-bold"></p>
     <p id="detailDesc" class="text-xs text-gray-300 mt-2"></p>
     <div id="detailStatus" class="mt-2"></div>
-    <div class="mt-3"><label class="text-sm font-bold">1. NO WHATSAPP AKTIF</label><input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1"></div>
-    <div class="mt-3"><label class="text-sm font-bold">2. PILIH DURASI</label><div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div></div>
-    <button onclick="orderWA()" class="w-full bg-green-500 py-3 rounded mt-4 font-bold text-lg">💬 ORDER VIA WHATSAPP</button>
+    <div class="mt-3"><label class="text-sm font-bold"><span class="icon-emas">1.</span> NO WHATSAPP AKTIF</label><input id="nohp" type="number" placeholder="0812xxxx" class="input mt-1"></div>
+    <div class="mt-3"><label class="text-sm font-bold"><span class="icon-emas">2.</span> PILIH DURASI</label><div id="durasiGrid" class="grid grid-cols-2 gap-2 mt-1"></div></div>
+    <button onclick="orderWA()" class="w-full btn-emas py-3 rounded mt-4 font-bold text-lg">💬 ORDER VIA WHATSAPP</button>
   </div>
 </div>
 
 <div id="status" class="page">
   <div class="p-3 flex items-center gap-2 cursor-pointer" onclick="showPage('home')">← <b>KEMBALI</b></div>
   <div class="p-3 pb-10">
-    <h2 class="text-2xl font-bold mb-2 italic text-center glow-text">📊 STATUS PRODUK</h2>
+    <h2 class="text-2xl font-bold mb-2 italic text-center glow-text"><span class="icon-emas">📊</span>STATUS PRODUK</h2>
     <p class="text-xs text-center text-gray-400 mb-4" id="lastUpdate">Loading...</p>
-    <div class="legend">
-      <span><span class="status-dot status-online"></span> ONLINE</span>
-      <span><span class="status-dot status-offline"></span> OFFLINE</span>
-      <span><span class="status-dot status-patch"></span> PATCH</span>
-    </div>
+    <div class="legend"><span><span class="status-dot status-online"></span> ONLINE</span><span><span class="status-dot status-offline"></span> OFFLINE</span><span><span class="status-dot status-patch"></span> PATCH</span></div>
     <div class="status-grid" id="statusGrid"><div class="loading col-span-2">⏳ Loading status...</div></div>
   </div>
 </div>
 
 <script>
-const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq"; // GANTI LINK SHEETDB KAMU
-let produk = {};
-let produkAktif = ""; let durasiAktif = {};
-const NO_WA = "6285194336082";
+const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
+let produk = {};let produkAktif = ""; let durasiAktif = {};
+const NO_WA = "6285194336082";const BOT_TOKEN = "8953718075:AAFDOrkjFhT9AD844g1Jr1RXlvb1HWblAeQ";const CHAT_ID = "8606966194";
 
-// SETTING BOT TELEGRAM
-const BOT_TOKEN = "8953718075:AAFDOrkjFhT9AD844g1Jr1RXlvb1HWblAeQ";
-const CHAT_ID = "8606966194";
-
+function formatKategori(kat){if(kat == 'ios') return 'SERTIFIKAT IOS';if(kat == 'freefire') return 'FREE FIRE';if(kat == 'pubg') return 'PUBG MOBILE';return kat.toUpperCase();}
+function checkScroll() {const elements = document.querySelectorAll('.animate-on-scroll');elements.forEach(el => {const rect = el.getBoundingClientRect();if(rect.top < window.innerHeight - 100) {el.classList.add('show');}});}
+window.addEventListener('scroll', checkScroll);window.addEventListener('load', checkScroll);
 function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-  if(id == 'status') loadStatus();
-}
-function filterProduk(kategori){ document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById('btn-'+kategori).classList.add('active'); renderProduk(kategori); }
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id == 'status') loadStatus();setTimeout(checkScroll, 100);}
+function filterProduk(kategori){document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));document.getElementById('btn-'+kategori).classList.add('active');renderProduk(kategori);}
 function pilihDurasi(el, i){ if(el.classList.contains('disabled')) return; document.querySelectorAll('.durasi-btn').forEach(e=>e.classList.remove('active')); el.classList.add('active'); durasiAktif = produk[produkAktif].durasi[i]; }
-
-function getStatusBadge(status){
-  if(status == "online") return '<span class="status-badge" style="background:#22C55E20;color:#4ADE80;border:1px solid #22C55E">ONLINE</span>';
-  if(status == "patch") return '<span class="status-badge" style="background:#3B82F620;color:#60A5FA;border:1px solid #3B82F6">PATCH</span>';
-  return '<span class="status-badge" style="background:#EF444420;color:#F87171;border:1px solid #EF4444">OFFLINE</span>';
-}
-
-function renderProduk(kategori = 'semua'){
-  const grid = document.getElementById('produkGrid'); grid.innerHTML = "";
-  for(let key in produk){
-    if(kategori == 'semua' || produk[key].kategori == kategori){
-      grid.innerHTML += `<div class="card" onclick="showProduct('${key}')">${getStatusBadge(produk[key].status)}<img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${produk[key].game}</p></div>`;
-    }
-  }
-}
-function showProduct(key){
-  produkAktif = key;
-  const p = produk[key];
-  document.getElementById('detailImg').src = p.img;
-  document.getElementById('detailNama').innerText = p.nama;
-  document.getElementById('detailGame').innerText = p.game;
-  document.getElementById('detailDesc').innerText = p.desc;
-  document.getElementById('detailStatus').innerHTML = "Status: " + getStatusBadge(p.status);
-  let grid = "";
-  p.durasi.forEach((d,i)=>{
-    if(d.harga == "habis"){
-      grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`;
-    } else {
-      grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;
-    }
-  });
-  document.getElementById('durasiGrid').innerHTML = grid;
-  durasiAktif = {};
-  showPage('detail');
-}
-
-async function orderWA(){
-  const nohp = document.getElementById('nohp').value;
-  if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }
-  if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }
-  let pesan = `Halo Admin NIELofc%0AProduk: ${produk[produkAktif].nama}%0ADurasi: ${durasiAktif.label}%0ANo WA: ${nohp}`;
-  window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');
-}
-
-async function loadStatus(){
-  const grid = document.getElementById('statusGrid');
-  grid.innerHTML = '<div class="loading col-span-2">⏳ Loading status...</div>';
-  grid.innerHTML = "";
-  let namaProduk = [];
-  for(let key in produk){
-    if(!namaProduk.includes(produk[key].nama)){
-      namaProduk.push(produk[key].nama);
-      let statusClass = produk[key].status == "online"? "status-online" : produk[key].status == "patch"? "status-patch" : "status-offline";
-      grid.innerHTML += `<div class="status-card ${statusClass}"><span class="status-dot"></span> ${produk[key].nama}</div>`;
-    }
-  }
-  document.getElementById('lastUpdate').innerText = 'Update terakhir: ' + new Date().toLocaleString('id');
-}
-
-async function loadProdukDariSheet() {
-  try {
-    let res = await fetch(SHEET_URL); let rows = await res.json(); produk = {};
-    rows.forEach(row => {
-      let nama = row.Produk; let durasi = row.Durasi; let harga = row.Harga; let stok = row.Stok;
-      let kategori = row.Kategori || "freefire"; let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
-      let deskripsi = row.Deskripsi || "Produk digital"; let status = row.Status || "online";
-      let keyProduk = nama.toLowerCase().replace(/ /g, "");
-      if(!produk[keyProduk]){
-        produk[keyProduk] = {
-          nama: nama, img: gambar, kategori: kategori.toLowerCase(),
-          game: kategori.toUpperCase(), desc: deskripsi, status: status.toLowerCase(), durasi: []
-        }
-      }
-      produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})
-    });
-    renderProduk('semua');
-  } catch(err){ document.getElementById('produkGrid').innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek sheetdb.io</p>'; }
-}
-
-let slideIndex = 0; function showSlide(){ const slides = document.querySelectorAll('.banner img'); const dots = document.querySelectorAll('.dot'); if(slides.length==0)return; slides.forEach(s=>s.classList.remove('active')); dots.forEach(d=>d.classList.remove('active')); slideIndex = (slideIndex + 1) % slides.length; slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active'); } setInterval(showSlide, 3000);
-
-// NOTIF TELEGRAM PAS ADA YG BUKA WEB
-window.onload = function(){
-  loadProdukDariSheet();
-  let pesan = `🔥 ADA YANG BUKA WEB NIELofc 🔥%0AWaktu: ${new Date().toLocaleString('id')}%0ALokasi: Indonesia`;
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);
-};
+function getStatusBadge(status){if(status == "online") return '<span class="status-badge" style="background:#22C55E20;color:#4ADE80;border:1px solid #22C55E">ONLINE</span>';if(status == "patch") return '<span class="status-badge" style="background:#FFD70020;color:#FFC700;border:1px solid #FFD700">PATCH</span>';return '<span class="status-badge" style="background:#EF444420;color:#F87171;border:1px solid #EF4444">OFFLINE</span>';}
+function buatTombolKategori(){const menu = document.getElementById('filterMenu');menu.innerHTML = `<button id="btn-semua" class="filter-btn active" onclick="filterProduk('semua')">SEMUA</button>`;let kategori = [...new Set(Object.values(produk).map(p => p.kategori))];kategori.forEach(kat => {let nama = formatKategori(kat);menu.innerHTML += `<button id="btn-${kat}" class="filter-btn" onclick="filterProduk('${kat}')">${nama}</button>`;});}
+function renderProduk(kategori = 'semua'){const grid = document.getElementById('produkGrid'); grid.innerHTML = "";for(let key in produk){if(kategori == 'semua' || produk[key].kategori == kategori){grid.innerHTML += `<div class="card animate-on-scroll" onclick="showProduct('${key}')">${getStatusBadge(produk[key].status)}<img src="${produk[key].img}"><p class="text-base font-bold italic">${produk[key].nama}</p><p class="text-xs text-gray-400">${formatKategori(produk[key].kategori)}</p></div>`;}}setTimeout(checkScroll, 100);}
+function showProduct(key){produkAktif = key;const p = produk[key];document.getElementById('detailImg').src = p.img;document.getElementById('detailNama').innerText = p.nama;document.getElementById('detailGame').innerText = formatKategori(p.kategori);document.getElementById('detailDesc').innerText = p.desc;document.getElementById('detailStatus').innerHTML = "Status: " + getStatusBadge(p.status);let grid = "";p.durasi.forEach((d,i)=>{if(d.harga == "habis"){grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`;} else {grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;}});document.getElementById('durasiGrid').innerHTML = grid;durasiAktif = {};showPage('detail');}
+async function orderWA(){const nohp = document.getElementById('nohp').value;if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }let pesan = `Halo Admin NIELofc%0AProduk: ${produk[produkAktif].nama}%0ADurasi: ${durasiAktif.label}%0ANo WA: ${nohp}`;window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');}
+async function loadStatus(){const grid = document.getElementById('statusGrid');grid.innerHTML = '<div class="loading col-span-2">⏳ Loading status...</div>';grid.innerHTML = "";let namaProduk = [];for(let key in produk){if(!namaProduk.includes(produk[key].nama)){namaProduk.push(produk[key].nama);let statusClass = produk[key].status == "online"? "status-online" : produk[key].status == "patch"? "status-patch" : "status-offline";grid.innerHTML += `<div class="status-card ${statusClass} animate-on-scroll"><span class="status-dot"></span> ${produk[key].nama} <span style="font-size:10px">- ${formatKategori(produk[key].kategori)}</span></div>`;}}document.getElementById('lastUpdate').innerText = 'Update terakhir: ' + new Date().toLocaleString('id');setTimeout(checkScroll, 100);}
+async function loadProdukDariSheet() {try {let res = await fetch(SHEET_URL); let rows = await res.json(); produk = {};rows.forEach(row => {let nama = row.Produk; let durasi = row.Durasi; let harga = row.Harga; let stok = row.Stok;let kategori = (row.Kategori || "freefire").toLowerCase();let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";let deskripsi = row.Deskripsi || "Produk digital"; let status = (row.Status || "online").toLowerCase();let keyProduk = nama.toLowerCase().replace(/ /g, "");if(!produk[keyProduk]){produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori,game: formatKategori(kategori), desc: deskripsi, status: status, durasi: []}}produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})});renderProduk('semua');buatTombolKategori();} catch(err){ document.getElementById('produkGrid').innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek sheetdb.io</p>'; }}
+window.onload = function(){loadProdukDariSheet();let pesan = `🔥 ADA YANG BUKA WEB NIELofc 🔥%0AWaktu: ${new Date().toLocaleString('id')}%0ALokasi: Indonesia`;fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);}
 </script>
 </body>
 </html>
