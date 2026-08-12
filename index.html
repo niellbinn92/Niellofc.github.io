@@ -45,6 +45,7 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .filter-btn{background:var(--abu);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:800;white-space:nowrap;border:1px solid var(--emas);cursor:pointer;transition:0.2s}
 .filter-btn.active{background:var(--gradient);color:var(--hitam);box-shadow:0 0 8px var(--emas-glow)}
 .input{width:100%;background:var(--abu);padding:12px;border-radius:10px;border:1px solid var(--emas);color:var(--putih)}
+.input:focus{outline:none;border-color:var(--emas-glow);box-shadow:0 0 8px var(--emas-glow)}
 .menu-btn{background:none;border:none;color:var(--emas-glow);font-size:24px;cursor:pointer;font-weight:900}
 .side-menu{position:fixed;top:0;right:-300px;width:280px;height:100%;background:var(--hitam);border-left:2px solid var(--emas);z-index:100;transition:0.3s;padding:20px;display:flex;flex-direction:column;gap:10px}
 .side-menu.active{right:0}
@@ -68,6 +69,12 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 .testi-nama{font-weight:800;font-size:15px}
 .testi-bintang{color:var(--emas);font-size:14px}
 .testi-komentar{font-size:14px;color:#D1D5DB;line-height:1.6;font-style:italic}
+
+/* FORM TESTIMONI BARU */
+.form-testi{background:var(--abu);border:2px solid var(--emas);border-radius:16px;padding:18px;margin-top:20px}
+.bintang-pilih{display:flex;gap:8px;font-size:28px;cursor:pointer}
+.bintang-pilih span{transition:0.2s}
+.bintang-pilih span:hover{transform:scale(1.3)}
 
 .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .status-card{border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:700;border:2px solid;transition:0.3s}
@@ -127,10 +134,12 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
 
   <div class="section-divider animate-on-scroll"></div>
 
-  <!-- TESTIMONI 1 ORANG TANPA FOTO -->
+  <!-- TESTIMONI + FORM BARU -->
   <div class="p-3 animate-on-scroll" id="testi">
     <h2 class="text-2xl font-bold mb-4 italic text-center glow-text"><span class="icon-emas">⭐</span>TESTIMONI PELANGGAN</h2>
-    <div class="testi-card">
+
+    <!-- TESTIMONI YANG UDAH ADA -->
+    <div class="testi-card mb-4">
       <div class="testi-header">
         <div class="testi-icon">D</div>
         <div>
@@ -139,6 +148,26 @@ h1, h2, h3,.font-black{font-family:'Rajdhani', sans-serif;letter-spacing:1.5px;t
         </div>
       </div>
       <p class="testi-komentar">"mantap"</p>
+    </div>
+
+    <!-- FORM KIRIM TESTIMONI -->
+    <div class="form-testi">
+      <h3 class="text-lg font-bold mb-3 text-center glow-text"><span class="icon-emas">✍️</span>KIRIM TESTIMONI KAMU</h3>
+      <input id="namaTesti" type="text" placeholder="Nama kamu / IG" class="input mb-3">
+
+      <label class="text-sm font-bold mb-2 block"><span class="icon-emas">⭐</span>Beri Rating:</label>
+      <div id="bintang" class="bintang-pilih mb-3">
+        <span onclick="pilihBintang(1)">⭐</span>
+        <span onclick="pilihBintang(2)">⭐</span>
+        <span onclick="pilihBintang(3)">⭐</span>
+        <span onclick="pilihBintang(4)">⭐</span>
+        <span onclick="pilihBintang(5)">⭐</span>
+      </div>
+
+      <textarea id="komenTesti" placeholder="Gimana pengalaman order di NIELofc?" rows="3" class="input mb-3"></textarea>
+
+      <button onclick="kirimTestimoni()" class="w-full btn-emas py-3 rounded font-bold text-lg">KIRIM TESTIMONI</button>
+      <p id="statusTesti" class="text-center text-xs mt-2 text-yellow-400"></p>
     </div>
   </div>
 
@@ -194,6 +223,9 @@ const SHEET_URL = "https://sheetdb.io/api/v1/nic3xbjpcwkqq";
 let produk = {};let produkAktif = ""; let durasiAktif = {};
 const NO_WA = "6285194336082";const BOT_TOKEN = "8953718075:AAFDOrkjFhT9AD844g1Jr1RXlvb1HWblAeQ";const CHAT_ID = "8606966194";
 
+// === VARIABEL TESTIMONI ===
+let bintangPilih = 5;
+
 function formatKategori(kat){if(kat == 'ios') return 'SERTIFIKAT IOS';if(kat == 'freefire') return 'FREE FIRE';if(kat == 'pubg') return 'PUBG MOBILE';return kat.toUpperCase();}
 function checkScroll() {const elements = document.querySelectorAll('.animate-on-scroll');elements.forEach(el => {const rect = el.getBoundingClientRect();if(rect.top < window.innerHeight - 100) {el.classList.add('show');}});}
 window.addEventListener('scroll', checkScroll);window.addEventListener('load', checkScroll);
@@ -207,8 +239,37 @@ function renderProduk(kategori = 'semua'){const grid = document.getElementById('
 function showProduct(key){produkAktif = key;const p = produk[key];document.getElementById('detailImg').src = p.img;document.getElementById('detailNama').innerText = p.nama;document.getElementById('detailGame').innerText = formatKategori(p.kategori);document.getElementById('detailDesc').innerText = p.desc;document.getElementById('detailStatus').innerHTML = "Status: " + getStatusBadge(p.status);let grid = "";p.durasi.forEach((d,i)=>{if(d.harga == "habis"){grid += `<div class="durasi-btn disabled">${d.label}<br><b class="stok-habis">STOK HABIS</b></div>`;} else {grid += `<div class="durasi-btn" onclick="pilihDurasi(this, ${i})">${d.label}<br><b>Rp${d.harga.toLocaleString('id')}</b></div>`;}});document.getElementById('durasiGrid').innerHTML = grid;durasiAktif = {};showPage('detail');}
 async function orderWA(){const nohp = document.getElementById('nohp').value;if(!nohp || nohp.length < 10){ alert('Isi No WA yang bener!'); return; }if(!durasiAktif.label){ alert('Pilih Durasi dulu!'); return; }let pesan = `Halo Admin NIELofc%0AProduk: ${produk[produkAktif].nama}%0ADurasi: ${durasiAktif.label}%0ANo WA: ${nohp}`;window.open(`https://wa.me/${NO_WA}?text=${pesan}`, '_blank');}
 async function loadStatus(){const grid = document.getElementById('statusGrid');grid.innerHTML = '<div class="loading col-span-2">⏳ Loading status...</div>';grid.innerHTML = "";let namaProduk = [];for(let key in produk){if(!namaProduk.includes(produk[key].nama)){namaProduk.push(produk[key].nama);let statusClass = produk[key].status == "online"? "status-online" : produk[key].status == "patch"? "status-patch" : "status-offline";grid.innerHTML += `<div class="status-card ${statusClass} animate-on-scroll"><span class="status-dot"></span> ${produk[key].nama} <span style="font-size:10px">- ${formatKategori(produk[key].kategori)}</span></div>`;}}document.getElementById('lastUpdate').innerText = 'Update terakhir: ' + new Date().toLocaleString('id');setTimeout(checkScroll, 100);}
+
+// === FUNGSI TESTIMONI BARU ===
+function pilihBintang(n){
+  bintangPilih = n;
+  document.querySelectorAll('#bintang span').forEach((s,i)=>{
+    s.style.opacity = i < n? '1' : '0.3';
+    s.style.transform = i < n? 'scale(1.3)' : 'scale(1)';
+  })
+}
+
+async function kirimTestimoni(){
+  const nama = document.getElementById('namaTesti').value;
+  const komen = document.getElementById('komenTesti').value;
+  const status = document.getElementById('statusTesti');
+
+  if(!nama || nama.length < 2){ status.innerText = "⚠️ Nama wajib diisi!"; return; }
+  if(!komen || komen.length < 5){ status.innerText = "⚠️ Komentar minimal 5 huruf!"; return; }
+
+  status.innerText = "⏳ Mengirim ke admin...";
+
+  let pesan = `🔥 TESTIMONI BARU MASUK 🔥%0A%0ANama: ${nama}%0ARating: ${'⭐'.repeat(bintangPilih)}%0AKomentar: ${komen}%0A%0AApprove? Copy ke web`;
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);
+
+  status.innerText = "✅ Makasih! Testimoni akan muncul setelah diapprove admin";
+  document.getElementById('namaTesti').value = "";
+  document.getElementById('komenTesti').value = "";
+  pilihBintang(5);
+}
+
 async function loadProdukDariSheet() {try {let res = await fetch(SHEET_URL); let rows = await res.json(); produk = {};rows.forEach(row => {let nama = row.Produk; let durasi = row.Durasi; let harga = row.Harga; let stok = row.Stok;let kategori = (row.Kategori || "freefire").toLowerCase();let gambar = row.Gambar || "https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";let deskripsi = row.Deskripsi || "Produk digital"; let status = (row.Status || "online").toLowerCase();let keyProduk = nama.toLowerCase().replace(/ /g, "");if(!produk[keyProduk]){produk[keyProduk] = {nama: nama, img: gambar, kategori: kategori,game: formatKategori(kategori), desc: deskripsi, status: status, durasi: []}}produk[keyProduk].durasi.push({label: durasi, harga: parseInt(stok) === 0? "habis" : parseInt(harga)})});renderProduk('semua');buatTombolKategori();} catch(err){ document.getElementById('produkGrid').innerHTML = '<p class="col-span-2 text-center text-red-400">Error: Cek sheetdb.io</p>'; }}
-window.onload = function(){loadProdukDariSheet();let pesan = `🔥 ADA YANG BUKA WEB NIELofc 🔥%0AWaktu: ${new Date().toLocaleString('id')}%0ALokasi: Indonesia`;fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);}
+window.onload = function(){loadProdukDariSheet();pilihBintang(5);let pesan = `🔥 ADA YANG BUKA WEB NIELofc 🔥%0AWaktu: ${new Date().toLocaleString('id')}%0ALokasi: Indonesia`;fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);}
 </script>
 </body>
 </html>
