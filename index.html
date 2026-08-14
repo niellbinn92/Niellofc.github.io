@@ -598,6 +598,11 @@ body {
   transition: 0.2s;
 }
 .btn-order:active { transform: scale(0.98); }
+.btn-order:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
 
 /* Status */
 .status-grid {
@@ -829,15 +834,16 @@ body {
       <h2>🔥 Produk Terlaris</h2>
       <span>SEMUA →</span>
     </div>
-    <div class="produk-grid" id="produkGrid">
-      <!-- Skeleton akan muncul di sini -->
-    </div>
+    <div class="produk-grid" id="produkGrid"></div>
   </div>
 
+  <!-- TESTIMONI -->
   <div style="padding:0 16px 24px" id="testi">
     <div class="section-title" style="padding:0 0 12px">
       <h2>⭐ Testimoni</h2>
     </div>
+
+    <!-- Testimoni 1 -->
     <div class="testi-card">
       <div class="testi-header">
         <div class="testi-avatar">D</div>
@@ -849,6 +855,19 @@ body {
       <p style="font-size:13px;color:#D1D5DB;margin:0;font-style:italic">"mantap"</p>
     </div>
 
+    <!-- Testimoni 2 - BARU -->
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div style="font-weight:700;font-size:14px">Rendi</div>
+          <div style="color:#FBBF24;font-size:13px">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#D1D5DB;margin:0;font-style:italic">"Mantap deh pokok nya"</p>
+    </div>
+
+    <!-- Form Testimoni -->
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-top:12px">
       <div style="font-weight:700;margin-bottom:12px;text-align:center">✍️ Kirim Testimoni</div>
       <input id="namaTesti" class="input" placeholder="Nama / IG kamu" style="margin-bottom:10px">
@@ -861,7 +880,7 @@ body {
         <span onclick="pilihBintang(5)">⭐</span>
       </div>
       <textarea id="komenTesti" class="input" rows="3" placeholder="Ceritain pengalamanmu..." style="margin-bottom:12px;resize:none"></textarea>
-      <button onclick="kirimTestimoni()" class="btn-order" style="margin-top:0;padding:12px;font-size:14px">KIRIM TESTIMONI</button>
+      <button id="btnKirimTesti" onclick="kirimTestimoni()" class="btn-order" style="margin-top:0;padding:12px;font-size:14px">KIRIM TESTIMONI</button>
       <p id="statusTesti" style="text-align:center;font-size:12px;margin-top:8px;color:#C084FC"></p>
     </div>
   </div>
@@ -947,27 +966,21 @@ body {
 </div>
 
 <!-- STICKY WA BUTTON -->
-<a href="https://wa.me/6285194336082" target="_blank" class="wa-float" title="Chat WhatsApp">
-  💬
-</a>
+<a href="https://wa.me/6285194336082" target="_blank" class="wa-float" title="Chat WhatsApp">💬</a>
 
 <!-- BOTTOM NAVIGATION -->
 <div class="bottom-nav">
   <button class="nav-item active" onclick="showPage('home');setActiveNav(this)">
-    <span>🏠</span>
-    Home
+    <span>🏠</span>Home
   </button>
   <button class="nav-item" onclick="showPage('home');document.getElementById('produkSection').scrollIntoView({behavior:'smooth'});setActiveNav(this)">
-    <span>🛒</span>
-    Produk
+    <span>🛒</span>Produk
   </button>
   <button class="nav-item" onclick="showPage('status');setActiveNav(this)">
-    <span>📊</span>
-    Status
+    <span>📊</span>Status
   </button>
   <a href="https://wa.me/6285194336082" target="_blank" class="nav-item">
-    <span>💬</span>
-    WA
+    <span>💬</span>WA
   </a>
 </div>
 
@@ -980,6 +993,7 @@ const NO_WA = "6285194336082";
 const BOT_TOKEN = "8953718075:AAFDOrkjFhT9AD844g1Jr1RXlvb1HWblAeQ";
 const CHAT_ID = "8606966194";
 let bintangPilih = 5;
+const COOLDOWN_MINUTES = 5;
 
 function formatKategori(kat) {
   if (kat == 'ios') return 'SERTIFIKAT IOS';
@@ -989,7 +1003,6 @@ function formatKategori(kat) {
 }
 
 function randomSold() {
-  // Semua produk di bawah 100 terjual (15 - 89)
   return Math.floor(Math.random() * 75) + 15;
 }
 
@@ -1009,7 +1022,6 @@ function showPage(id) {
   window.scrollTo(0, 0);
   if (id == 'status') loadStatus();
   
-  // Update bottom nav active state
   document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   if (id === 'home') {
     document.querySelectorAll('.nav-item')[0].classList.add('active');
@@ -1153,19 +1165,74 @@ function pilihBintang(n) {
   });
 }
 
+// ========== COOLDOWN 5 MENIT ==========
+function cekCooldown() {
+  const lastSubmit = localStorage.getItem('niel_testi_cooldown');
+  const btn = document.getElementById('btnKirimTesti');
+  const status = document.getElementById('statusTesti');
+
+  if (!lastSubmit) {
+    btn.disabled = false;
+    btn.innerText = 'KIRIM TESTIMONI';
+    return;
+  }
+
+  const now = Date.now();
+  const diff = now - parseInt(lastSubmit);
+  const sisa = (COOLDOWN_MINUTES * 60 * 1000) - diff;
+
+  if (sisa > 0) {
+    const menit = Math.ceil(sisa / 60000);
+    btn.disabled = true;
+    btn.innerText = `Tunggu ${menit} menit lagi`;
+    status.innerText = `⏳ Kamu harus menunggu ${menit} menit sebelum kirim testimoni lagi`;
+    
+    // Update setiap 30 detik
+    setTimeout(cekCooldown, 30000);
+  } else {
+    btn.disabled = false;
+    btn.innerText = 'KIRIM TESTIMONI';
+    status.innerText = '';
+    localStorage.removeItem('niel_testi_cooldown');
+  }
+}
+
 async function kirimTestimoni() {
   const nama = document.getElementById('namaTesti').value;
   const komen = document.getElementById('komenTesti').value;
   const status = document.getElementById('statusTesti');
+  const btn = document.getElementById('btnKirimTesti');
+
+  // Cek cooldown dulu
+  const lastSubmit = localStorage.getItem('niel_testi_cooldown');
+  if (lastSubmit) {
+    const sisa = (COOLDOWN_MINUTES * 60 * 1000) - (Date.now() - parseInt(lastSubmit));
+    if (sisa > 0) {
+      const menit = Math.ceil(sisa / 60000);
+      status.innerText = `⏳ Tunggu ${menit} menit lagi sebelum bisa kirim lagi`;
+      return;
+    }
+  }
+
   if (!nama || nama.length < 2) return status.innerText = '⚠️ Nama wajib diisi';
   if (!komen || komen.length < 5) return status.innerText = '⚠️ Komentar minimal 5 huruf';
+
   status.innerText = '⏳ Mengirim...';
+  btn.disabled = true;
+
   let pesan = `🔥 TESTIMONI BARU%0ANama: ${nama}%0ARating: ${'⭐'.repeat(bintangPilih)}%0AKomentar: ${komen}`;
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesan}`);
-  status.innerText = '✅ Makasih! Akan muncul setelah diapprove';
+
+  // Simpan waktu kirim
+  localStorage.setItem('niel_testi_cooldown', Date.now().toString());
+
+  status.innerText = '✅ Makasih! Testimoni berhasil dikirim. Tunggu 5 menit untuk kirim lagi.';
   document.getElementById('namaTesti').value = '';
   document.getElementById('komenTesti').value = '';
   pilihBintang(5);
+
+  // Mulai cooldown
+  cekCooldown();
 }
 
 async function loadProdukDariSheet() {
@@ -1213,6 +1280,7 @@ setTimeout(() => {
 window.onload = function() {
   loadProdukDariSheet();
   pilihBintang(5);
+  cekCooldown(); // Cek cooldown saat halaman dibuka
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=🔥 Ada yang buka web NIELofc%0A${new Date().toLocaleString('id')}`);
 };
 </script>
