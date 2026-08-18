@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>NIELofc - Premium Panel</title>
+<title>NIEL STORE - Premium Panel</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -67,7 +67,7 @@ body {
   width: 36px; height: 36px; border-radius: 9px;
   background: rgba(124,58,237,0.15); border: 1px solid var(--border);
   color: var(--ungu3); display: flex; align-items: center; justify-content: center;
-  font-size: 15px; text-decoration: none;
+  font-size: 15px; text-decoration: none; cursor: pointer;
 }
 .hero { padding: 12px 14px 8px; }
 .hero-banner {
@@ -100,7 +100,6 @@ body {
 .section-title { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
 .section-title span { color: var(--ungu2); }
 
-/* FILTER */
 .filter-scroll {
   display: flex; gap: 7px; overflow-x: auto; padding-bottom: 10px;
   scrollbar-width: none; margin-bottom: 4px;
@@ -137,7 +136,8 @@ body {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .produk-kat { font-size: 10px; color: #9CA3AF; margin-bottom: 4px; }
-.produk-price { font-size: 12px; font-weight: 700; color: #4ADE80; margin-bottom: 6px; }
+.produk-price { font-size: 12px; font-weight: 700; color: #4ADE80; margin-bottom: 2px; }
+.produk-sold { font-size: 10px; color: #9CA3AF; margin-bottom: 6px; }
 .produk-btn {
   width: 100%; background: linear-gradient(135deg,#7C3AED,#A855F7); color: white;
   font-weight: 700; font-size: 11px; padding: 7px; border-radius: 8px; border: none;
@@ -161,12 +161,6 @@ body {
 .footer-logo { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
 .footer-logo span { color: var(--ungu2); }
 .footer p { font-size: 11px; color: #6B7280; margin-bottom: 12px; }
-.footer-sosmed { display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; }
-.footer-sosmed a {
-  width: 38px; height: 38px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; text-decoration: none; color: var(--ungu3);
-}
 .copyright { font-size: 10px; color: #555; }
 .wa-float {
   position: fixed; bottom: 82px; right: 16px; width: 52px; height: 52px;
@@ -257,6 +251,12 @@ body {
   margin-top: 10px; padding: 7px 14px; background: #7C3AED; color: white;
   border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 12px;
 }
+.chat-option {
+  display: flex; align-items: center; gap: 12px;
+  background: #1a1a28; border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px; text-decoration: none; color: white; margin-bottom: 10px;
+}
+.chat-option:active { background: rgba(124,58,237,0.15); }
 </style>
 </head>
 <body>
@@ -269,11 +269,10 @@ body {
 <div class="header">
   <div class="logo">
     <div class="logo-icon">N</div>
-    NIEL<span>ofc</span>
+    NIEL <span>STORE</span>
   </div>
   <div class="header-right">
-    <a href="https://wa.me/message/WJ5IVCIPK4DBP1" class="header-btn">💬</a>
-    <a href="https://t.me/VIPNIEL" class="header-btn">✈️</a>
+    <a href="javascript:void(0)" class="header-btn" onclick="bukaPilihanChat()">💬</a>
   </div>
 </div>
 
@@ -282,7 +281,7 @@ body {
   <div class="hero">
     <div class="hero-banner">
       <div class="hero-badge">🔥 PREMIUM PANEL</div>
-      <h1>NIELofc<br><span>Premium Panel</span></h1>
+      <h1>NIEL <span>STORE</span></h1>
       <p>Sultan Quality • Student Price<br>Free Fire • PUBG • iOS Certificate</p>
       <button class="hero-btn" onclick="document.getElementById('produkSection').scrollIntoView({behavior:'smooth'})">
         🛒 Shop Now
@@ -293,7 +292,6 @@ body {
   <div class="section" id="produkSection">
     <div class="section-title">Our <span>Products</span></div>
 
-    <!-- FILTER -->
     <div class="filter-scroll" id="filterMenu">
       <button class="filter-btn active" onclick="filterProduk('all')">All</button>
     </div>
@@ -331,13 +329,9 @@ body {
   </div>
 
   <div class="footer">
-    <div class="footer-logo">NIEL<span>ofc</span></div>
+    <div class="footer-logo">NIEL <span>STORE</span></div>
     <p>Premium Panel • Trusted by Experience</p>
-    <div class="footer-sosmed">
-      <a href="https://wa.me/message/WJ5IVCIPK4DBP1">💬</a>
-      <a href="https://t.me/VIPNIEL">✈️</a>
-    </div>
-    <div class="copyright">© 2026 NIELofc — Powered by NIELofc Team</div>
+    <div class="copyright">© 2026 NIEL STORE</div>
   </div>
 </div>
 
@@ -357,7 +351,7 @@ body {
   </div>
 </div>
 
-<a href="https://wa.me/message/WJ5IVCIPK4DBP1" class="wa-float">💬</a>
+<a href="javascript:void(0)" class="wa-float" onclick="bukaPilihanChat()">💬</a>
 
 <div class="bottom-nav">
   <button class="nav-item active" onclick="showPage('home')">
@@ -369,11 +363,12 @@ body {
   <button class="nav-item" onclick="showPage('status')">
     <span>📊</span>Status
   </button>
-  <a href="https://wa.me/message/WJ5IVCIPK4DBP1" class="nav-item">
-    <span>💬</span>WA
-  </a>
+  <button class="nav-item" onclick="bukaPilihanChat()">
+    <span>💬</span>Chat
+  </button>
 </div>
 
+<!-- Modal Order -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
@@ -389,9 +384,68 @@ body {
   </div>
 </div>
 
+<!-- Modal Pilihan Chat -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal" style="padding-bottom:30px;">
+    <div class="modal-header">
+      <h3>Hubungi Admin</h3>
+      <button class="modal-close" onclick="tutupChatModal()">✕</button>
+    </div>
+    <a href="https://wa.me/message/WJ5IVCIPK4DBP1" target="_blank" class="chat-option">
+      <span style="font-size:26px;">💬</span>
+      <div>
+        <div style="font-weight:700;font-size:14px;">WhatsApp</div>
+        <div style="font-size:11px;color:#9CA3AF;">Chat langsung via WA</div>
+      </div>
+    </a>
+    <a href="https://t.me/VIPNIEL" target="_blank" class="chat-option">
+      <span style="font-size:26px;">✈️</span>
+      <div>
+        <div style="font-weight:700;font-size:14px;">Telegram</div>
+        <div style="font-size:11px;color:#9CA3AF;">Chat via Telegram</div>
+      </div>
+    </a>
+  </div>
+</div>
+
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbxW-PkL5z5t86orqw6SzPV40_XRVXRttl0iPQLI2NaR-HBbBGaFNlCM6x2qKACJhunGcQ/exec";
 const WA_LINK = "https://wa.me/message/WJ5IVCIPK4DBP1";
+
+// ====================== GAMBAR + TERJUAL ======================
+const GAMBAR_PRODUK = {
+  "dripclient":        "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png",
+  "dripclientproxy":   "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png",
+  "hgcheat":           "https://i.ibb.co/Gv20LMPL/IMG-7800.png",
+  "hgproxy":           "https://i.ibb.co/Gv20LMPL/IMG-7800.png",
+  "silentcheat":       "https://i.ibb.co/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png",
+  "fluorite":          "https://i.ibb.co/Kcjdk9JR/E9132-D38-89-ED-44-D7-BCEA-13138480-B078.png",
+  "migullite":         "https://i.ibb.co/6Jg5Q0Xt/7923-D964-2-E60-428-E-933-C-1-C26448809-AB.png",
+  "migulpro":          "https://i.ibb.co/VcbqRLYt/4-EEFC341-68-A3-4-FD8-894-B-EFDEDD855211.png",
+  "kingmodios":        "https://i.ibb.co/TxqRk0R2/IMG-7257.webp",
+  "kingmodandro":      "https://i.ibb.co/sdp3stw7/IMG-7256.webp",
+  "zoonmod":           "https://i.ibb.co/ccB04jYc/IMG-7789.webp",
+  "solanahax":         "https://i.ibb.co/B2ZqTFYf/IMG-7788.webp",
+  "sertifikatios":     "https://i.ibb.co/kV1djpdw/IMG-7808.png"
+};
+
+const SOLD_PRODUK = {
+  "dripclient":        42,
+  "dripclientproxy":   37,
+  "hgcheat":           58,
+  "hgproxy":           49,
+  "silentcheat":       31,
+  "fluorite":          67,
+  "migullite":         29,
+  "migulpro":          74,
+  "kingmodios":        53,
+  "kingmodandro":      46,
+  "zoonmod":           38,
+  "solanahax":         61,
+  "sertifikatios":     82
+};
+// =============================================================
+
 let produk = {};
 let produkAktif = "";
 let durasiAktif = {};
@@ -470,18 +524,28 @@ async function loadProduk() {
       if (!nama) return;
       const key = nama.toLowerCase().replace(/\s+/g, '');
       const kategori = (row.Kategori || 'freefire').toLowerCase();
-      const status = (row.Status || 'online').toLowerCase() || 'online';
-      const gambar = row.Gambar || 'https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png';
+      const status = (row.Status || row.status || 'online').toLowerCase() || 'online';
       const deskripsi = row.Deskripsi || 'Premium digital product';
       const durasi = row.Durasi || '-';
       const harga = parseInt(row.Harga) || 0;
       const stok = parseInt(row.Stok);
 
+      const gambar = GAMBAR_PRODUK[key] || "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
+
       if (!produk[key]) {
-        produk[key] = { nama, img: gambar, kategori, desc: deskripsi, status: status === '' ? 'online' : status, durasi: [] };
+        produk[key] = { 
+          nama, 
+          img: gambar, 
+          kategori, 
+          desc: deskripsi, 
+          status: status === '' ? 'online' : status, 
+          durasi: [] 
+        };
       }
-      if (gambar && gambar.length > 10) produk[key].img = gambar;
+      
       if (row.Status && row.Status !== '') produk[key].status = row.Status.toLowerCase();
+      if (row.status && row.status !== '') produk[key].status = row.status.toLowerCase();
+      
       produk[key].durasi.push({ label: durasi, harga: stok === 0 ? 'habis' : harga });
     });
 
@@ -506,11 +570,12 @@ function renderProduk() {
     grid.innerHTML += `
       <div class="produk-card" onclick="openModal('${key}')">
         ${getBadge(p.status)}
-        <img class="produk-img" src="${p.img}" alt="${p.nama}" onerror="this.src='https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png'">
+        <img class="produk-img" src="${p.img}" alt="${p.nama}" loading="lazy">
         <div class="produk-body">
           <div class="produk-nama">${p.nama}</div>
           <div class="produk-kat">${formatKategori(p.kategori)}</div>
           <div class="produk-price">${getHargaTerendah(p.durasi)}</div>
+          <div class="produk-sold">Terjual ${SOLD_PRODUK[key] || 25}+</div>
           <button class="produk-btn">🛒 Buy</button>
         </div>
       </div>`;
@@ -574,12 +639,24 @@ function orderWA() {
   const nohp = document.getElementById('nohp').value;
   if (!nohp || nohp.length < 10) return alert('Please enter a valid WhatsApp number!');
   if (!durasiAktif.label) return alert('Please select a duration!');
-  const pesan = `Hello Admin NIELofc%0AProduct: ${produk[produkAktif].nama}%0ADuration: ${durasiAktif.label}%0AWA Number: ${nohp}`;
+  const pesan = `Hello Admin NIEL STORE%0AProduct: ${produk[produkAktif].nama}%0ADuration: ${durasiAktif.label}%0AWA Number: ${nohp}`;
   window.open(`${WA_LINK}?text=${pesan}`, '_blank');
+}
+
+function bukaPilihanChat() {
+  document.getElementById('chatModal').classList.add('show');
+}
+
+function tutupChatModal() {
+  document.getElementById('chatModal').classList.remove('show');
 }
 
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
+});
+
+document.getElementById('chatModal').addEventListener('click', function(e) {
+  if (e.target === this) tutupChatModal();
 });
 </script>
 </body>
