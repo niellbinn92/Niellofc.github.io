@@ -471,7 +471,7 @@ async function loadProduk() {
       const key = nama.toLowerCase().replace(/\s+/g, '');
       const kategori = (row.Kategori || 'freefire').toLowerCase();
       const status = (row.Status || 'online').toLowerCase() || 'online';
-      const gambar = row.Gambar || 'https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png';
+      const gambar = row.Gambar || 'https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png';
       const deskripsi = row.Deskripsi || 'Premium digital product';
       const durasi = row.Durasi || '-';
       const harga = parseInt(row.Harga) || 0;
@@ -506,7 +506,7 @@ function renderProduk() {
     grid.innerHTML += `
       <div class="produk-card" onclick="openModal('${key}')">
         ${getBadge(p.status)}
-        <img class="produk-img" src="${p.img}" alt="${p.nama}" onerror="this.src='https://i.ibb.co.com/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png'">
+        <img class="produk-img" src="${p.img}" alt="${p.nama}" onerror="this.src='https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png'">
         <div class="produk-body">
           <div class="produk-nama">${p.nama}</div>
           <div class="produk-kat">${formatKategori(p.kategori)}</div>
