@@ -1,2232 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>NIEL STORE - Premium Panel</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIELofc - Sedang Maintenance</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --bg: #0a0a12;
-  --card: #12121c;
-  --ungu: #7C3AED;
-  --ungu2: #A855F7;
-  --ungu3: #C084FC;
-  --border: rgba(168,85,247,0.25);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--bg);
-  color: #F1F0FF;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  min-height: 100vh;
-  padding-bottom: 75px;
-}
-
-/* LOADING */
-#loadingScreen {
-  position: fixed;
-  inset: 0;
-  background: #07070F;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.7s ease;
-}
-
-#loadingScreen.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loader-line {
-  width: 160px;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #A855F7,
-    transparent
-  );
-  border-radius: 10px;
-  margin-bottom: 20px;
-  animation: glowLine 1.4s ease-in-out infinite;
-}
-
-@keyframes glowLine {
-  0%,100% {
-    opacity: 0.3;
-    width: 100px;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: #07070F;
+    color: #F1F0FF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
   }
 
-  50% {
-    opacity: 1;
-    width: 180px;
-  }
-}
-
-.loader-text {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 5px;
-  background: linear-gradient(
-    135deg,
-    #C084FC,
-    #A855F7
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* HEADER */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(10,10,18,0.94);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 11px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-weight: 800;
-  font-size: 17px;
-}
-
-.logo-icon {
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(
-    135deg,
-    #7C3AED,
-    #A855F7
-  );
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.logo span {
-  color: var(--ungu2);
-}
-
-.header-right {
-  display: flex;
-  gap: 7px;
-}
-
-.header-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: rgba(124,58,237,0.15);
-  border: 1px solid var(--border);
-  color: var(--ungu3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* HERO */
-.hero {
-  padding: 12px 14px 8px;
-}
-
-.hero-banner {
-  background:
-    linear-gradient(
-      135deg,
-      #1a0b2e 0%,
-      #2d1b4e 50%,
-      #1a0b2e 100%
-    );
-  border-radius: 16px;
-  padding: 22px 16px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(168,85,247,0.35);
-  box-shadow:
-    0 0 35px rgba(124,58,237,0.18);
-}
-
-.hero-banner::before {
-  content: '';
-  position: absolute;
-  top: -40%;
-  right: -20%;
-  width: 220px;
-  height: 220px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(168,85,247,0.28),
-      transparent 70%
-    );
-}
-
-.hero-badge {
-  display: inline-block;
-  background: rgba(124,58,237,0.3);
-  color: var(--ungu3);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
-
-.hero h1 {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 6px;
-  position: relative;
-}
-
-.hero h1 span {
-  background:
-    linear-gradient(
-      135deg,
-      #C084FC,
-      #A855F7
-    );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  font-size: 12px;
-  color: #C4B5FD;
-  margin-bottom: 14px;
-  position: relative;
-}
-
-.hero-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #A855F7
-    );
-  color: white;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 10px 18px;
-  border-radius: 11px;
-  border: none;
-  box-shadow:
-    0 5px 18px rgba(124,58,237,0.4);
-  position: relative;
-  cursor: pointer;
-}
-
-/* SECTION */
-.section {
-  padding: 6px 14px 14px;
-}
-
-.section-title {
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.section-title span {
-  color: var(--ungu2);
-}
-
-/* FILTER */
-.filter-scroll {
-  display: flex;
-  gap: 7px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scrollbar-width: none;
-  margin-bottom: 4px;
-}
-
-.filter-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-btn {
-  flex-shrink: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: #D1D5DB;
-  font-weight: 600;
-  font-size: 12px;
-  padding: 7px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: 0.2s;
-}
-
-.filter-btn.active {
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #A855F7
-    );
-  border-color: transparent;
-  color: white;
-}
-
-/* PRODUCTS */
-.produk-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.produk-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: 0.2s;
-  position: relative;
-  cursor: pointer;
-}
-
-.produk-card:active {
-  transform: scale(0.97);
-}
-
-.produk-img {
-  width: 100%;
-  height: 110px;
-  object-fit: cover;
-  background: #0d0d18;
-}
-
-.produk-body {
-  padding: 8px 10px 10px;
-}
-
-.produk-badge {
-  position: absolute;
-  top: 7px;
-  left: 7px;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 5px;
-}
-
-.badge-online {
-  background: rgba(34,197,94,0.2);
-  color: #4ADE80;
-  border: 1px solid #22C55E;
-}
-
-.badge-offline {
-  background: rgba(239,68,68,0.2);
-  color: #F87171;
-  border: 1px solid #EF4444;
-}
-
-.badge-patch {
-  background: rgba(168,85,247,0.25);
-  color: #C084FC;
-  border: 1px solid #A855F7;
-}
-
-.produk-nama {
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 2px;
-  line-height: 1.3;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  overflow: hidden;
-}
-
-.produk-kat {
-  font-size: 10px;
-  color: #9CA3AF;
-  margin-bottom: 4px;
-}
-
-.produk-price {
-  font-size: 12px;
-  font-weight: 700;
-  color: #4ADE80;
-  margin-bottom: 2px;
-}
-
-.produk-sold {
-  font-size: 10px;
-  color: #9CA3AF;
-  margin-bottom: 6px;
-}
-
-.produk-btn {
-  width: 100%;
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #A855F7
-    );
-  color: white;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 7px;
-  border-radius: 8px;
-  border: none;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-/* WHY */
-.why-grid {
-  display: grid;
-  gap: 8px;
-}
-
-.why-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.why-icon {
-  width: 40px;
-  height: 40px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #A855F7
-    );
-
-  border-radius: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.why-item h4 {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 1px;
-}
-
-.why-item p {
-  font-size: 11px;
-  color: #9CA3AF;
-}
-
-/* FOOTER */
-.footer {
-  padding: 22px 16px;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  margin-top: 6px;
-}
-
-.footer-logo {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.footer-logo span {
-  color: var(--ungu2);
-}
-
-.footer p {
-  font-size: 11px;
-  color: #6B7280;
-  margin-bottom: 12px;
-}
-
-.copyright {
-  font-size: 10px;
-  color: #555;
-}
-
-/* FLOATING CHAT */
-.wa-float {
-  position: fixed;
-  bottom: 82px;
-  right: 16px;
-  width: 52px;
-  height: 52px;
-
-  background: #25D366;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 26px;
-  color: white;
-
-  box-shadow:
-    0 5px 18px rgba(37,211,102,0.45);
-
-  z-index: 40;
-  text-decoration: none;
-}
-
-/* BOTTOM NAV */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  height: 64px;
-
-  background: rgba(10,10,18,0.96);
-  backdrop-filter: blur(16px);
-
-  border-top: 1px solid var(--border);
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  z-index: 50;
-
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-
-  font-size: 10px;
-  font-weight: 600;
-  color: #6B7280;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  padding: 5px 10px;
-
-  text-decoration: none;
-}
-
-.nav-item.active {
-  color: var(--ungu3);
-}
-
-.nav-item span {
-  font-size: 18px;
-}
-
-/* PAGE */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* STATUS */
-.status-header {
-  padding: 16px 14px 8px;
-  text-align: center;
-}
-
-.status-header h2 {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.status-header p {
-  font-size: 11px;
-  color: #9CA3AF;
-}
-
-.status-legend {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-
-  font-size: 11px;
-  font-weight: 600;
-
-  margin: 10px 0 12px;
-}
-
-.status-legend span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding: 0 14px 24px;
-}
-
-.status-card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  border: 1px solid;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.status-online {
-  border-color: #22C55E;
-  color: #4ADE80;
-}
-
-.status-online .status-dot {
-  background: #22C55E;
-  box-shadow: 0 0 7px #22C55E;
-}
-
-.status-offline {
-  border-color: #EF4444;
-  color: #F87171;
-}
-
-.status-offline .status-dot {
-  background: #EF4444;
-  box-shadow: 0 0 7px #EF4444;
-}
-
-.status-patch {
-  border-color: #A855F7;
-  color: #C084FC;
-}
-
-.status-patch .status-dot {
-  background: #A855F7;
-  box-shadow: 0 0 7px #A855F7;
-}
-
-/* MODAL */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0,0,0,0.75);
-
-  z-index: 100;
-
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.modal-overlay.show {
-  display: flex;
-}
-
-.modal {
-  background: #12121c;
-  width: 100%;
-  max-width: 480px;
-
-  border-radius: 18px 18px 0 0;
-
-  padding: 18px;
-
-  max-height: 85vh;
-  overflow-y: auto;
-
-  animation: slideUp 0.28s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
+  body::before {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
   }
 
-  to {
-    transform: translateY(0);
+  .content {
+    position: relative;
+    z-index: 1;
   }
-}
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
+  .spinner-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 28px;
+  }
+  .spinner {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid #A855F7;
+    border-right: 3px solid #7C3AED;
+    animation: spin 1.1s linear infinite;
+  }
+  .spinner-inner {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-bottom: 3px solid #C084FC;
+    animation: spin 0.8s linear infinite reverse;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 
-.modal-header h3 {
-  font-size: 15px;
-  font-weight: 800;
-}
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #C084FC, #A855F7, #7C3AED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.modal-close {
-  width: 30px;
-  height: 30px;
+  p {
+    font-size: 15px;
+    color: #9CA3AF;
+    line-height: 1.7;
+    max-width: 360px;
+    margin: 0 auto 28px;
+  }
 
-  border-radius: 50%;
+  /* Countdown */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .time-box {
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 14px;
+    padding: 12px 10px;
+    min-width: 70px;
+  }
+  .time-box .number {
+    font-size: 26px;
+    font-weight: 800;
+    color: #C084FC;
+    line-height: 1.2;
+  }
+  .time-box .label {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 600;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-  background: rgba(255,255,255,0.08);
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #7C3AED, #A855F7);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
+    transition: all 0.25s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(124, 58, 237, 0.55);
+  }
+  .btn .dot {
+    width: 8px;
+    height: 8px;
+    background: #4ADE80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4ADE80;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
 
-  border: none;
-
-  color: #aaa;
-
-  font-size: 15px;
-
-  cursor: pointer;
-}
-
-.durasi-list {
-  display: grid;
-  gap: 7px;
-  margin: 10px 0 14px;
-}
-
-.durasi-item {
-  background: #1a1a28;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-
-  padding: 12px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  font-size: 13px;
-}
-
-.durasi-item.active {
-  border-color: var(--ungu2);
-  background: rgba(124,58,237,0.15);
-}
-
-.durasi-item.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.input-wa {
-  width: 100%;
-
-  background: #1a1a28;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-
-  padding: 12px 13px;
-
-  color: white;
-
-  font-size: 13px;
-
-  outline: none;
-
-  margin-bottom: 12px;
-
-  font-family: inherit;
-}
-
-.btn-order {
-  width: 100%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #A855F7
-    );
-
-  color: white;
-
-  font-weight: 700;
-
-  font-size: 14px;
-
-  padding: 13px;
-
-  border-radius: 12px;
-
-  border: none;
-
-  box-shadow:
-    0 5px 18px rgba(124,58,237,0.4);
-
-  cursor: pointer;
-}
-
-/* LOADING */
-.loading-text {
-  text-align: center;
-  padding: 30px;
-  color: var(--ungu3);
-  grid-column: 1 / -1;
-  font-size: 13px;
-}
-
-.retry-btn {
-  margin-top: 10px;
-
-  padding: 7px 14px;
-
-  background: #7C3AED;
-
-  color: white;
-
-  border: none;
-
-  border-radius: 8px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  font-size: 12px;
-}
-
-/* CHAT */
-.chat-option {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  background: #1a1a28;
-
-  border: 1px solid var(--border);
-
-  border-radius: 12px;
-
-  padding: 14px;
-
-  text-decoration: none;
-
-  color: white;
-
-  margin-bottom: 10px;
-}
-
-.chat-option:active {
-  background: rgba(124,58,237,0.15);
-}
+  .footer {
+    position: absolute;
+    bottom: 28px;
+    font-size: 12px;
+    color: #6B7280;
+    z-index: 1;
+    line-height: 1.6;
+  }
+  .footer span {
+    color: #A855F7;
+    font-weight: 600;
+  }
 </style>
 </head>
-
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <div class="loader-line"></div>
-  <div class="loader-text">NIEL STORE</div>
-</div>
-
-<!-- HEADER -->
-<div class="header">
-
-  <div class="logo">
-    <div class="logo-icon">N</div>
-    NIEL <span>STORE</span>
-  </div>
-
-  <div class="header-right">
-    <a
-      href="javascript:void(0)"
-      class="header-btn"
-      onclick="bukaPilihanChat()"
-    >
-      💬
-    </a>
-  </div>
-
-</div>
-
-<!-- HOME -->
-<div id="home" class="page active">
-
-  <div class="hero">
-
-    <div class="hero-banner">
-
-      <div class="hero-badge">
-        🔥 PREMIUM PANEL
-      </div>
-
-      <h1>
-        NIEL <span>STORE</span>
-      </h1>
-
-      <p>
-        Sultan Quality • Student Price<br>
-        Free Fire • PUBG • iOS Certificate
-      </p>
-
-      <button
-        class="hero-btn"
-        onclick="document.getElementById('produkSection').scrollIntoView({behavior:'smooth'})"
-      >
-        🛒 Shop Now
-      </button>
-
+  <div class="content">
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+      <div class="spinner-inner"></div>
     </div>
 
-  </div>
-
-  <div class="section" id="produkSection">
-
-    <div class="section-title">
-      Our <span>Products</span>
-    </div>
-
-    <div
-      class="filter-scroll"
-      id="filterMenu"
-    >
-      <button
-        class="filter-btn active"
-        onclick="filterProduk('all', this)"
-      >
-        All
-      </button>
-    </div>
-
-    <div
-      class="produk-grid"
-      id="produkGrid"
-    >
-      <div class="loading-text">
-        Loading products...
-      </div>
-    </div>
-
-  </div>
-
-  <!-- WHY CHOOSE US -->
-  <div class="section">
-
-    <div class="section-title">
-      Why Choose <span>Us?</span>
-    </div>
-
-    <div class="why-grid">
-
-      <div class="why-item">
-
-        <div class="why-icon">
-          ⚡
-        </div>
-
-        <div>
-          <h4>Fast Process</h4>
-          <p>
-            Key delivered in 1-5 minutes after payment
-          </p>
-        </div>
-
-      </div>
-
-      <div class="why-item">
-
-        <div class="why-icon">
-          🛡️
-        </div>
-
-        <div>
-          <h4>Full Warranty</h4>
-          <p>
-            Warranty during active period
-          </p>
-        </div>
-
-      </div>
-
-      <div class="why-item">
-
-        <div class="why-icon">
-          🕐
-        </div>
-
-        <div>
-          <h4>24/7 Admin</h4>
-          <p>
-            Ready to serve anytime
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-
-    <div class="footer-logo">
-      NIEL <span>STORE</span>
-    </div>
+    <h1>Sedang Maintenance</h1>
 
     <p>
-      Premium Panel • Trusted by Experience
+      Kami sedang melakukan pemeliharaan sistem<br>
+      untuk pengalaman yang lebih baik.<br>
+      Mohon bersabar — kami akan segera kembali!
     </p>
 
-    <div class="copyright">
-      © 2026 NIEL STORE
-    </div>
-
-  </div>
-
-</div>
-
-<!-- STATUS PAGE -->
-<div id="status" class="page">
-
-  <div class="status-header">
-
-    <h2>
-      📊 Product Status
-    </h2>
-
-    <p id="lastUpdate">
-      Loading...
-    </p>
-
-    <div class="status-legend">
-
-      <span>
-        <span style="
-          width:8px;
-          height:8px;
-          background:#22C55E;
-          border-radius:50%;
-          display:inline-block
-        "></span>
-        ONLINE
-      </span>
-
-      <span>
-        <span style="
-          width:8px;
-          height:8px;
-          background:#EF4444;
-          border-radius:50%;
-          display:inline-block
-        "></span>
-        OFFLINE
-      </span>
-
-      <span>
-        <span style="
-          width:8px;
-          height:8px;
-          background:#A855F7;
-          border-radius:50%;
-          display:inline-block
-        "></span>
-        PATCH
-      </span>
-
-    </div>
-
-  </div>
-
-  <div
-    class="status-grid"
-    id="statusGrid"
-  >
-    <div class="loading-text">
-      Loading status...
-    </div>
-  </div>
-
-</div>
-
-<!-- FLOAT CHAT -->
-<a
-  href="javascript:void(0)"
-  class="wa-float"
-  onclick="bukaPilihanChat()"
->
-  💬
-</a>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-
-  <button
-    class="nav-item active"
-    onclick="showPage('home')"
-  >
-    <span>🏠</span>
-    Home
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="showPage('home');setTimeout(()=>document.getElementById('produkSection').scrollIntoView({behavior:'smooth'}),100)"
-  >
-    <span>🛒</span>
-    Products
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="showPage('status')"
-  >
-    <span>📊</span>
-    Status
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="bukaPilihanChat()"
-  >
-    <span>💬</span>
-    Chat
-  </button>
-
-</div>
-
-<!-- ORDER MODAL -->
-<div
-  class="modal-overlay"
-  id="modal"
->
-
-  <div class="modal">
-
-    <div class="modal-header">
-
-      <h3 id="modalNama">
-        Product
-      </h3>
-
-      <button
-        class="modal-close"
-        onclick="closeModal()"
-      >
-        ✕
-      </button>
-
-    </div>
-
-    <div
-      id="modalStatus"
-      style="margin-bottom:10px"
-    ></div>
-
-    <label
-      style="
-        font-size:12px;
-        font-weight:600;
-        margin-bottom:5px;
-        display:block
-      "
-    >
-      Active WhatsApp Number
-    </label>
-
-    <input
-      type="number"
-      id="nohp"
-      class="input-wa"
-      placeholder="08xxxxxxxxxx"
-    >
-
-    <label
-      style="
-        font-size:12px;
-        font-weight:600;
-        margin-bottom:5px;
-        display:block
-      "
-    >
-      Select Duration
-    </label>
-
-    <div
-      class="durasi-list"
-      id="durasiList"
-    ></div>
-
-    <button
-      class="btn-order"
-      onclick="orderWA()"
-    >
-      💬 Order via WhatsApp
-    </button>
-
-  </div>
-
-</div>
-
-<!-- CHAT MODAL -->
-<div
-  class="modal-overlay"
-  id="chatModal"
->
-
-  <div
-    class="modal"
-    style="padding-bottom:30px;"
-  >
-
-    <div class="modal-header">
-
-      <h3>
-        Hubungi Admin
-      </h3>
-
-      <button
-        class="modal-close"
-        onclick="tutupChatModal()"
-      >
-        ✕
-      </button>
-
-    </div>
-
-    <a
-      href="https://wa.me/message/WJ5IVCIPK4DBP1"
-      target="_blank"
-      class="chat-option"
-    >
-
-      <span style="font-size:26px;">
-        💬
-      </span>
-
-      <div>
-
-        <div
-          style="
-            font-weight:700;
-            font-size:14px;
-          "
-        >
-          WhatsApp
-        </div>
-
-        <div
-          style="
-            font-size:11px;
-            color:#9CA3AF;
-          "
-        >
-          Chat langsung via WA
-        </div>
-
+    <!-- COUNTDOWN -->
+    <div class="countdown">
+      <div class="time-box">
+        <div class="number" id="hours">00</div>
+        <div class="label">Jam</div>
       </div>
-
-    </a>
-
-    <a
-      href="https://t.me/VIPNIEL"
-      target="_blank"
-      class="chat-option"
-    >
-
-      <span style="font-size:26px;">
-        ✈️
-      </span>
-
-      <div>
-
-        <div
-          style="
-            font-weight:700;
-            font-size:14px;
-          "
-        >
-          Telegram
-        </div>
-
-        <div
-          style="
-            font-size:11px;
-            color:#9CA3AF;
-          "
-        >
-          Chat via Telegram
-        </div>
-
+      <div class="time-box">
+        <div class="number" id="minutes">00</div>
+        <div class="label">Menit</div>
       </div>
+      <div class="time-box">
+        <div class="number" id="seconds">00</div>
+        <div class="label">Detik</div>
+      </div>
+    </div>
 
+    <a href="https://wa.me/6285194336082" class="btn">
+      <span class="dot"></span>
+      AKAN SEGERA KEMBALI
     </a>
-
   </div>
 
-</div>
+  <div class="footer">
+    © 2026 <span>NIELofc</span> — Powered by <span>NIELofc Team</span>
+  </div>
 
 <script>
-
-/* =========================
-   API
-========================= */
-
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxW-PkL5z5t86orqw6SzPV40_XRVXRttl0iPQLI2NaR-HBbBGaFNlCM6x2qKACJhunGcQ/exec";
-
-const WA_LINK =
-"https://wa.me/message/WJ5IVCIPK4DBP1";
-
-
-/* =========================
-   GAMBAR PRODUK
-========================= */
-
-const GAMBAR_PRODUK = {
-
-  "dripclient":
-  "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png",
-
-  "dripclientproxy":
-  "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png",
-
-  "hgcheat":
-  "https://i.ibb.co/Gv20LMPL/IMG-7800.png",
-
-  "hgproxy":
-  "https://i.ibb.co/Gv20LMPL/IMG-7800.png",
-
-  "silentcheat":
-  "https://i.ibb.co/GQftwrFn/45-B72-ECF-DB49-4486-A96-A-B9961-A56-C215.png",
-
-  "fluorite":
-  "https://i.ibb.co/Kcjdk9JR/E9132-D38-89-ED-44-D7-BCEA-13138480-B078.png",
-
-  "migullite":
-  "https://i.ibb.co/6Jg5Q0Xt/7923-D964-2-E60-428-E-933-C-1-C26448809-AB.png",
-
-  "migulpro":
-  "https://i.ibb.co/VcbqRLYt/4-EEFC341-68-A3-4-FD8-894-B-EFDEDD855211.png",
-
-  "kingmodios":
-  "https://i.ibb.co/TxqRk0R2/IMG-7257.webp",
-
-  "kingmodandro":
-  "https://i.ibb.co/sdp3stw7/IMG-7256.webp",
-
-  "zoonmod":
-  "https://i.ibb.co/ccB04jYc/IMG-7789.webp",
-
-  "solanahax":
-  "https://i.ibb.co/B2ZqTFYf/IMG-7788.webp",
-
-  "sertifikatios":
-  "https://i.ibb.co/kV1djpdw/IMG-7808.png",
-
-  /* FOTO BALA MOD */
-  "balamod":
-  "https://i.ibb.co.com/LzPYfwwn/IMG-8363.jpg"
-
-};
-
-
-/* =========================
-   PRODUK TERJUAL
-========================= */
-
-const SOLD_PRODUK = {
-
-  "dripclient": 42,
-  "dripclientproxy": 37,
-  "hgcheat": 58,
-  "hgproxy": 49,
-  "silentcheat": 31,
-  "fluorite": 67,
-  "migullite": 29,
-  "migulpro": 74,
-  "kingmodios": 53,
-  "kingmodandro": 46,
-  "zoonmod": 38,
-  "solanahax": 61,
-  "sertifikatios": 82,
-
-  /* BALA MOD */
-  "balamod": 25
-
-};
-
-
-/* =========================
-   VARIABLE
-========================= */
-
-let produk = {};
-let produkAktif = "";
-let durasiAktif = {};
-let filterAktif = "all";
-
-
-/* =========================
-   LOAD
-========================= */
-
-window.addEventListener("load", () => {
-
-  setTimeout(() => {
-
-    document
-      .getElementById("loadingScreen")
-      .classList.add("hide");
-
-  }, 1600);
-
-  loadProduk();
-
-});
-
-
-/* =========================
-   PAGE
-========================= */
-
-function showPage(id) {
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p => p.classList.remove("active"));
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-  window.scrollTo(0,0);
-
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item => item.classList.remove("active"));
-
-  if (id === "home") {
-
-    document
-      .querySelectorAll(".nav-item")[0]
-      .classList.add("active");
-
-  } else if (id === "status") {
-
-    document
-      .querySelectorAll(".nav-item")[2]
-      .classList.add("active");
-
-    loadStatus();
-
-  }
-
-}
-
-
-/* =========================
-   KATEGORI
-========================= */
-
-function formatKategori(kat) {
-
-  if (!kat) return "Other";
-
-  kat = kat.toLowerCase();
-
-  if (
-    kat.includes("ios") ||
-    kat.includes("sertifikat")
-  ) {
-    return "iOS Certificate";
-  }
-
-  if (kat === "freefire") {
-    return "Free Fire";
-  }
-
-  if (kat === "pubg") {
-    return "PUBG Mobile";
-  }
-
-  return kat;
-
-}
-
-
-/* =========================
-   BADGE
-========================= */
-
-function getBadge(status) {
-
-  status =
-    (status || "online").toLowerCase();
-
-  if (status === "online") {
-
-    return `
-      <span class="produk-badge badge-online">
-        ONLINE
-      </span>
-    `;
-
-  }
-
-  if (status === "patch") {
-
-    return `
-      <span class="produk-badge badge-patch">
-        PATCH
-      </span>
-    `;
-
-  }
-
-  if (status === "offline") {
-
-    return `
-      <span class="produk-badge badge-offline">
-        OFFLINE
-      </span>
-    `;
-
-  }
-
-  return `
-    <span class="produk-badge badge-online">
-      ONLINE
-    </span>
-  `;
-
-}
-
-
-/* =========================
-   HARGA
-========================= */
-
-function getHargaTerendah(durasi) {
-
-  let harga =
-    durasi
-      .filter(
-        d =>
-          d.harga !== "habis" &&
-          !isNaN(d.harga)
-      )
-      .map(d => d.harga);
-
-  if (harga.length === 0) {
-    return "Sold Out";
-  }
-
-  return (
-    "From Rp" +
-    Math.min(...harga)
-      .toLocaleString("id")
-  );
-
-}
-
-
-/* =========================
-   FILTER
-========================= */
-
-function buatFilter() {
-
-  const menu =
-    document.getElementById("filterMenu");
-
-  const kategori =
-    [
-      ...new Set(
-        Object.values(produk)
-          .map(p => p.kategori)
-      )
-    ];
-
-  let html = `
-    <button
-      class="filter-btn active"
-      onclick="filterProduk('all', this)"
-    >
-      All
-    </button>
-  `;
-
-  kategori.forEach(kat => {
-
-    html += `
-      <button
-        class="filter-btn"
-        onclick="filterProduk('${kat}', this)"
-      >
-        ${formatKategori(kat)}
-      </button>
-    `;
-
-  });
-
-  menu.innerHTML = html;
-
-}
-
-
-function filterProduk(kat, btn) {
-
-  filterAktif = kat;
-
-  document
-    .querySelectorAll(".filter-btn")
-    .forEach(b =>
-      b.classList.remove("active")
-    );
-
-  if (btn) {
-    btn.classList.add("active");
-  }
-
-  renderProduk();
-
-}
-
-
-/* =========================
-   LOAD PRODUK
-========================= */
-
-async function loadProduk() {
-
-  const grid =
-    document.getElementById("produkGrid");
-
-  grid.innerHTML = `
-    <div class="loading-text">
-      Loading products...
-    </div>
-  `;
-
-  try {
-
-    const res =
-      await fetch(
-        API_URL +
-        "?t=" +
-        Date.now(),
-        {
-          method: "GET",
-          redirect: "follow"
-        }
-      );
-
-    if (!res.ok) {
-      throw new Error("Failed");
+  // ==============================
+  // ATUR WAKTU SELESAI MAINTENANCE DI SINI
+  // Format: Tahun, Bulan (0-11), Tanggal, Jam, Menit
+  // Contoh di bawah = 2 jam dari sekarang
+  // ==============================
+  const selesai = new Date().getTime() + (2 * 60 * 60 * 1000); // 2 jam dari sekarang
+
+  // Kalau mau set waktu pasti, contoh:
+  // const selesai = new Date(2026, 7, 17, 20, 0, 0).getTime(); // 17 Agustus 2026 jam 20:00
+
+  function updateCountdown() {
+    const sekarang = new Date().getTime();
+    const jarak = selesai - sekarang;
+
+    if (jarak <= 0) {
+      document.getElementById("hours").innerText = "00";
+      document.getElementById("minutes").innerText = "00";
+      document.getElementById("seconds").innerText = "00";
+      return;
     }
 
-    const rows =
-      await res.json();
+    const jam = Math.floor(jarak / (1000 * 60 * 60));
+    const menit = Math.floor((jarak % (1000 * 60 * 60)) / (1000 * 60));
+    const detik = Math.floor((jarak % (1000 * 60)) / 1000);
 
-    produk = {};
-
-    rows.forEach(row => {
-
-      const nama =
-        (row.Produk || "")
-          .trim();
-
-      if (!nama) return;
-
-      const key =
-        nama
-          .toLowerCase()
-          .replace(/\s+/g, "");
-
-      const kategori =
-        (
-          row.Kategori ||
-          "freefire"
-        ).toLowerCase();
-
-      const status =
-        (
-          row.Status ||
-          row.status ||
-          "online"
-        ).toLowerCase() || "online";
-
-      const deskripsi =
-        row.Deskripsi ||
-        "Premium digital product";
-
-      const durasi =
-        row.Durasi || "-";
-
-      const harga =
-        parseInt(row.Harga) || 0;
-
-      const stok =
-        parseInt(row.Stok);
-
-      /*
-       * Jika produk Bala Mod:
-       * otomatis menggunakan foto Bala Mod.
-       */
-
-      const gambar =
-        GAMBAR_PRODUK[key] ||
-        "https://i.ibb.co/fdSbRZws/D59-B08-CC-71-D9-4-CAC-9-A24-68-F271078-F7-B.png";
-
-
-      if (!produk[key]) {
-
-        produk[key] = {
-
-          nama,
-
-          img: gambar,
-
-          kategori,
-
-          desc: deskripsi,
-
-          status:
-            status === ""
-              ? "online"
-              : status,
-
-          durasi: []
-
-        };
-
-      }
-
-
-      if (
-        row.Status &&
-        row.Status !== ""
-      ) {
-
-        produk[key].status =
-          row.Status.toLowerCase();
-
-      }
-
-
-      if (
-        row.status &&
-        row.status !== ""
-      ) {
-
-        produk[key].status =
-          row.status.toLowerCase();
-
-      }
-
-
-      produk[key].durasi.push({
-
-        label: durasi,
-
-        harga:
-          stok === 0
-            ? "habis"
-            : harga
-
-      });
-
-    });
-
-
-    buatFilter();
-
-    renderProduk();
-
+    document.getElementById("hours").innerText = jam.toString().padStart(2, "0");
+    document.getElementById("minutes").innerText = menit.toString().padStart(2, "0");
+    document.getElementById("seconds").innerText = detik.toString().padStart(2, "0");
   }
 
-  catch (e) {
-
-    console.error(e);
-
-    grid.innerHTML = `
-      <div class="loading-text">
-
-        Failed to load products
-
-        <br>
-
-        <button
-          class="retry-btn"
-          onclick="loadProduk()"
-        >
-          Try Again
-        </button>
-
-      </div>
-    `;
-
-  }
-
-}
-
-
-/* =========================
-   RENDER PRODUK
-========================= */
-
-function renderProduk() {
-
-  const grid =
-    document.getElementById("produkGrid");
-
-  grid.innerHTML = "";
-
-  let ada = false;
-
-
-  for (let key in produk) {
-
-    const p = produk[key];
-
-    if (
-      filterAktif !== "all" &&
-      p.kategori !== filterAktif
-    ) {
-      continue;
-    }
-
-    ada = true;
-
-
-    grid.innerHTML += `
-
-      <div
-        class="produk-card"
-        onclick="openModal('${key}')"
-      >
-
-        ${getBadge(p.status)}
-
-        <img
-          class="produk-img"
-          src="${p.img}"
-          alt="${p.nama}"
-          loading="lazy"
-        >
-
-        <div class="produk-body">
-
-          <div class="produk-nama">
-            ${p.nama}
-          </div>
-
-          <div class="produk-kat">
-            ${formatKategori(p.kategori)}
-          </div>
-
-          <div class="produk-price">
-            ${getHargaTerendah(p.durasi)}
-          </div>
-
-          <div class="produk-sold">
-            Terjual ${SOLD_PRODUK[key] || 25}+
-          </div>
-
-          <button class="produk-btn">
-            🛒 Buy
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  if (!ada) {
-
-    grid.innerHTML = `
-      <div class="loading-text">
-        No products in this category
-      </div>
-    `;
-
-  }
-
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-function loadStatus() {
-
-  const grid =
-    document.getElementById("statusGrid");
-
-  grid.innerHTML = "";
-
-  if (
-    Object.keys(produk).length === 0
-  ) {
-
-    grid.innerHTML = `
-      <div class="loading-text">
-        No data
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  for (let key in produk) {
-
-    const p = produk[key];
-
-    let cls =
-      "status-online";
-
-    if (p.status === "offline") {
-      cls = "status-offline";
-    }
-
-    if (p.status === "patch") {
-      cls = "status-patch";
-    }
-
-
-    grid.innerHTML += `
-
-      <div
-        class="status-card ${cls}"
-      >
-
-        <span class="status-dot"></span>
-
-        <div>
-
-          <div>
-            ${p.nama}
-          </div>
-
-          <div
-            style="
-              font-size:10px;
-              opacity:0.7
-            "
-          >
-            ${formatKategori(p.kategori)}
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  document
-    .getElementById("lastUpdate")
-    .innerText =
-      "Updated: " +
-      new Date().toLocaleString("en");
-
-}
-
-
-/* =========================
-   OPEN MODAL
-========================= */
-
-function openModal(key) {
-
-  const p = produk[key];
-
-  produkAktif = key;
-
-  durasiAktif = {};
-
-  document
-    .getElementById("modalNama")
-    .innerText = p.nama;
-
-  document
-    .getElementById("modalStatus")
-    .innerHTML =
-      getBadge(p.status);
-
-  document
-    .getElementById("nohp")
-    .value = "";
-
-  let html = "";
-
-
-  p.durasi.forEach((d, i) => {
-
-    if (d.harga === "habis") {
-
-      html += `
-
-        <div
-          class="durasi-item disabled"
-        >
-
-          <span>
-            ${d.label}
-          </span>
-
-          <span
-            style="color:#ef4444"
-          >
-            Sold Out
-          </span>
-
-        </div>
-
-      `;
-
-    }
-
-    else {
-
-      html += `
-
-        <div
-          class="durasi-item"
-          onclick="pilihDurasi(this,${i})"
-        >
-
-          <span>
-            ${d.label}
-          </span>
-
-          <span
-            style="
-              color:#4ADE80;
-              font-weight:700
-            "
-          >
-            Rp${Number(d.harga)
-              .toLocaleString("id")}
-          </span>
-
-        </div>
-
-      `;
-
-    }
-
-  });
-
-
-  document
-    .getElementById("durasiList")
-    .innerHTML = html;
-
-  document
-    .getElementById("modal")
-    .classList.add("show");
-
-}
-
-
-function closeModal() {
-
-  document
-    .getElementById("modal")
-    .classList.remove("show");
-
-}
-
-
-/* =========================
-   DURASI
-========================= */
-
-function pilihDurasi(el, i) {
-
-  document
-    .querySelectorAll(".durasi-item")
-    .forEach(e =>
-      e.classList.remove("active")
-    );
-
-  el.classList.add("active");
-
-  durasiAktif =
-    produk[produkAktif]
-      .durasi[i];
-
-}
-
-
-/* =========================
-   ORDER WA
-========================= */
-
-function orderWA() {
-
-  const nohp =
-    document
-      .getElementById("nohp")
-      .value;
-
-  if (
-    !nohp ||
-    nohp.length < 10
-  ) {
-
-    return alert(
-      "Please enter a valid WhatsApp number!"
-    );
-
-  }
-
-
-  if (!durasiAktif.label) {
-
-    return alert(
-      "Please select a duration!"
-    );
-
-  }
-
-
-  const pesan =
-    `Hello Admin NIEL STORE%0A` +
-    `Product: ${produk[produkAktif].nama}%0A` +
-    `Duration: ${durasiAktif.label}%0A` +
-    `WA Number: ${nohp}`;
-
-
-  window.open(
-    `${WA_LINK}?text=${pesan}`,
-    "_blank"
-  );
-
-}
-
-
-/* =========================
-   CHAT
-========================= */
-
-function bukaPilihanChat() {
-
-  document
-    .getElementById("chatModal")
-    .classList.add("show");
-
-}
-
-
-function tutupChatModal() {
-
-  document
-    .getElementById("chatModal")
-    .classList.remove("show");
-
-}
-
-
-/* =========================
-   CLOSE MODAL OUTSIDE
-========================= */
-
-document
-  .getElementById("modal")
-  .addEventListener(
-    "click",
-    function(e) {
-
-      if (e.target === this) {
-        closeModal();
-      }
-
-    }
-  );
-
-
-document
-  .getElementById("chatModal")
-  .addEventListener(
-    "click",
-    function(e) {
-
-      if (e.target === this) {
-        tutupChatModal();
-      }
-
-    }
-  );
-
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 </script>
 
 </body>
