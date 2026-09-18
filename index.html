@@ -1,951 +1,211 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIEL STORE — Profit Calculator</title>
-
-<style>
-*{box-sizing:border-box}
-
-:root{
-  --bg:#08070d;
-  --card:#12101a;
-  --line:#29243a;
-  --purple:#7c3aed;
-  --purple2:#a855f7;
-  --text:#f8f7fb;
-  --muted:#9e97ad;
-  --green:#4ade80;
-  --red:#fb7185;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  padding:22px 14px;
-  background:
-    radial-gradient(circle at 50% 0,#2b1250 0,#0d0915 38%,#08070d 72%);
-  font-family:Arial,sans-serif;
-  color:var(--text);
-}
-
-.wrap{
-  max-width:500px;
-  margin:auto;
-}
-
-.head{
-  text-align:center;
-  margin:8px 0 20px;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:2px;
-  background:linear-gradient(
-    90deg,
-    var(--purple),
-    var(--purple2),
-    #d8b4fe
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.head p{
-  color:var(--muted);
-  font-size:12px;
-  margin:7px 0;
-}
-
-.card{
-  background:rgba(18,16,26,.96);
-  border:1px solid var(--line);
-  border-radius:21px;
-  padding:18px;
-  margin-bottom:12px;
-  box-shadow:0 18px 50px #0006;
-}
-
-h2{
-  font-size:15px;
-  margin:0 0 15px;
-}
-
-.field{
-  margin-bottom:14px;
-}
-
-label{
-  display:block;
-  color:#cbc5d5;
-  font-size:12px;
-  margin-bottom:7px;
-}
-
-input{
-  width:100%;
-  background:#0b0910;
-  border:1px solid #302a40;
-  color:white;
-  border-radius:12px;
-  padding:13px;
-  font-size:15px;
-  outline:none;
-}
-
-input:focus{
-  border-color:var(--purple2);
-  box-shadow:0 0 0 3px #a855f71c;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.targets{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:7px;
-}
-
-.targets button{
-  padding:10px 4px;
-  background:#211d2c;
-  color:#ddd6ea;
-  border:1px solid #302a42;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.targets button:hover{
-  border-color:var(--purple2);
-}
-
-.targets button.active{
-  background:linear-gradient(
-    135deg,
-    var(--purple),
-    var(--purple2)
-  );
-  color:#fff;
-  border-color:transparent;
-}
-
-.big{
-  background:
-    linear-gradient(
-      135deg,
-      #7c3aed24,
-      #a855f710
-    );
-  border:1px solid #a855f740;
-  border-radius:16px;
-  padding:16px;
-}
-
-.small{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.price{
-  font-size:28px;
-  font-weight:900;
-  margin-top:4px;
-}
-
-.green{
-  color:var(--green);
-}
-
-.red{
-  color:var(--red);
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  margin-top:10px;
-}
-
-.stat{
-  background:#ffffff07;
-  border:1px solid #2b2637;
-  border-radius:12px;
-  padding:11px;
-}
-
-.stat b{
-  display:block;
-  margin-top:4px;
-  font-size:14px;
-}
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:13px;
-}
-
-button.action{
-  border-radius:12px;
-  padding:12px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.primary{
-  background:linear-gradient(
-    135deg,
-    var(--purple),
-    var(--purple2)
-  );
-  color:white;
-  border:0;
-}
-
-.secondary{
-  background:#211d2c;
-  color:#ddd6ea;
-  border:1px solid #302a42;
-}
-
-.history{
-  font-size:12px;
-  color:#bcb4c8;
-}
-
-.history-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  padding:10px 0;
-  border-bottom:1px solid #24202f;
-}
-
-.history-row:last-child{
-  border:0;
-}
-
-.empty{
-  text-align:center;
-  color:#6f687b;
-  padding:12px;
-}
-
-.note{
-  text-align:center;
-  color:#777083;
-  font-size:10px;
-  margin-top:12px;
-}
-
-.clear-history{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  background:#1b1723;
-  border:1px solid #302a42;
-  color:#aaa2b5;
-  cursor:pointer;
-  font-size:11px;
-}
-
-@media(max-width:380px){
-  .targets{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .row,
-  .actions{
-    grid-template-columns:1fr;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nielstore | Official Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0b0614;
+            background-image: radial-gradient(circle at 50% 20%, #2b104a 0%, #0b0614 70%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .profile-img-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            padding: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #1a102f;
+        }
+        h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .info-card {
+            background: rgba(25, 15, 45, 0.6);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 14px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+        .info-card p {
+            font-size: 13px;
+            color: #d8b4fe;
+            margin-bottom: 5px;
+        }
+        .info-card span {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(30, 18, 55, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .btn-link:hover {
+            background: rgba(50, 25, 90, 0.9);
+            border-color: rgba(168, 85, 247, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+        }
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+        }
+        .icon-box {
+            width: 36px;
+            height: 36px;
+            background: rgba(168, 85, 247, 0.15);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #c084fc;
+            font-size: 16px;
+        }
+        .btn-text h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .btn-text span {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+        .arrow {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="wrap">
+    <div class="container">
+        <!-- Foto Profil / Logo -->
+        <div class="profile-img-container">
+            <img src="https://i.ibb.co.com/Kxntppch/FE9-DA9-EC-77-A5-420-F-9-D2-B-1-E17-E790-B225.png" alt="Logo" class="profile-img">
+        </div>
+        
+        <h1>nielstore.dev</h1>
 
-  <div class="head">
-    <div class="logo">NIEL STORE</div>
-    <p>Premium Profit & Pricing Calculator</p>
-  </div>
-
-
-  <!-- DATA PRODUK -->
-  <div class="card">
-
-    <h2>💰 Data Produk</h2>
-
-    <div class="field">
-      <label>Nama Produk</label>
-
-      <input
-        id="name"
-        type="text"
-        placeholder="Contoh: Panel 30 Hari"
-      >
-    </div>
-
-
-    <div class="row">
-
-      <div class="field">
-
-        <label>Harga Modal</label>
-
-        <input
-          id="modal"
-          inputmode="numeric"
-          placeholder="6.880"
-          oninput="calc()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Jumlah Terjual</label>
-
-        <input
-          id="qty"
-          inputmode="numeric"
-          value="1"
-          oninput="calc()"
-        >
-
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Target Keuntungan</label>
-
-      <div class="targets">
-
-        <button onclick="target(10,this)">
-          10%
-        </button>
-
-        <button onclick="target(20,this)">
-          20%
-        </button>
-
-        <button onclick="target(30,this)">
-          30%
-        </button>
-
-        <button onclick="target(50,this)">
-          50%
-        </button>
-
-        <button onclick="target(100,this)">
-          100%
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Harga Jual</label>
-
-      <input
-        id="jual"
-        inputmode="numeric"
-        placeholder="18.000"
-        oninput="manual=true;calc()"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- HASIL -->
-  <div class="card">
-
-    <h2>📊 Hasil Perhitungan</h2>
-
-    <div class="big">
-
-      <div class="small">
-        Harga jual yang disarankan
-      </div>
-
-      <div
-        class="price"
-        id="suggest"
-      >
-        Rp0
-      </div>
-
-
-      <div class="stats">
-
-        <div class="stat">
-
-          <span class="small">
-            Untung / Produk
-          </span>
-
-          <b
-            class="green"
-            id="profit"
-          >
-            Rp0
-          </b>
-
+        <!-- Kotak Info / Komunitas -->
+        <div class="info-card">
+            <p>🟣 Update, file download & komunitas resmi.</p>
+            <span>+ Member aktif & terpercaya</span>
         </div>
 
+        <div class="section-title">Canais Oficiais & Download</div>
 
-        <div class="stat">
+        <!-- Tombol Download Drip APKMOD -->
+        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
+            <div class="btn-left">
+                <div class="icon-box">📥</div>
+                <div class="btn-text">
+                    <h3>Download Drip APKMOD</h3>
+                    <span>Unduh versi resmi via MediaFire</span>
+                </div>
+            </div>
+            <div class="arrow">➔</div>
+        </a>
 
-          <span class="small">
-            Margin
-          </span>
+        <!-- Tombol Download Drip Wire -->
+        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
+            <div class="btn-left">
+                <div class="icon-box">📥</div>
+                <div class="btn-text">
+                    <h3>Download DRIP WIRE</h3>
+                    <span>Unduh versi resmi via MediaFire</span>
+                </div>
+            </div>
+            <div class="arrow">➔</div>
+        </a>
 
-          <b id="margin">
-            0%
-          </b>
+        <!-- Tombol Download Drip Root -->
+        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
+            <div class="btn-left">
+                <div class="icon-box">📥</div>
+                <div class="btn-text">
+                    <h3>Download DRIP ROOT</h3>
+                    <span>Unduh versi resmi via MediaFire</span>
+                </div>
+            </div>
+            <div class="arrow">➔</div>
+        </a>
 
-        </div>
+        <!-- Tombol Download Drip Proxy -->
+        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
+            <div class="btn-left">
+                <div class="icon-box">📥</div>
+                <div class="btn-text">
+                    <h3>Download DRIP PROXY</h3>
+                    <span>Unduh versi resmi via MediaFire</span>
+                </div>
+            </div>
+            <div class="arrow">➔</div>
+        </a>
 
-
-        <div class="stat">
-
-          <span class="small">
-            Total Modal
-          </span>
-
-          <b id="totalModal">
-            Rp0
-          </b>
-
-        </div>
-
-
-        <div class="stat">
-
-          <span class="small">
-            Total Untung
-          </span>
-
-          <b
-            class="green"
-            id="totalProfit"
-          >
-            Rp0
-          </b>
-
-        </div>
-
-      </div>
+        <!-- Tombol TikTok Resmi -->
+        <a href="URL_TIKTOK_KAMU_DISINI" target="_blank" class="btn-link">
+            <div class="btn-left">
+                <div class="icon-box">🎵</div>
+                <div class="btn-text">
+                    <h3>TikTok Resmi Nielstore</h3>
+                    <span>Tonton video & testimoni terbaru</span>
+                </div>
+            </div>
+            <div class="arrow">➔</div>
+        </a>
 
     </div>
-
-
-    <div class="actions">
-
-      <button
-        class="action secondary"
-        onclick="resetAll()"
-      >
-        Reset
-      </button>
-
-      <button
-        class="action primary"
-        onclick="saveResult()"
-      >
-        Simpan
-      </button>
-
-    </div>
-
-
-    <div
-      class="note"
-      id="note"
-    >
-      Pilih target keuntungan atau masukkan harga jual sendiri.
-    </div>
-
-  </div>
-
-
-  <!-- RIWAYAT -->
-  <div class="card">
-
-    <h2>🧾 Riwayat Perhitungan</h2>
-
-    <div
-      id="history"
-      class="history"
-    >
-      <div class="empty">
-        Belum ada riwayat.
-      </div>
-    </div>
-
-    <button
-      class="clear-history"
-      onclick="clearHistory()"
-    >
-      Hapus Semua Riwayat
-    </button>
-
-  </div>
-
-</div>
-
-
-<script>
-
-let targetPct = 0;
-let manual = false;
-
-
-/* SHORTCUT */
-const $ = id =>
-  document.getElementById(id);
-
-
-/* ANGKA */
-function num(value){
-
-  return Number(
-    String(value)
-      .replace(/\D/g,'')
-  ) || 0;
-
-}
-
-
-/* RUPIAH */
-function rp(number){
-
-  return 'Rp' +
-    Math.round(number)
-      .toLocaleString('id-ID');
-
-}
-
-
-/* TARGET PROFIT */
-function target(percent, element){
-
-  targetPct = percent;
-
-  manual = false;
-
-  document
-    .querySelectorAll('.targets button')
-    .forEach(button =>
-      button.classList.remove('active')
-    );
-
-  element.classList.add('active');
-
-  calc();
-
-}
-
-
-/* HITUNG */
-function calc(){
-
-  const modal =
-    num($('modal').value);
-
-  const qty =
-    Math.max(
-      1,
-      num($('qty').value)
-    );
-
-  const currentSell =
-    num($('jual').value);
-
-
-  /*
-    Target profit dihitung
-    berdasarkan modal.
-
-    Contoh:
-
-    Modal 6.880
-    Target 50%
-
-    6.880 + 50%
-    = 10.320
-  */
-
-  const suggested =
-    targetPct
-      ? modal + (
-          modal * targetPct / 100
-        )
-      : currentSell;
-
-
-  /*
-    Kalau memilih target,
-    otomatis isi harga jual.
-  */
-
-  if(
-    !manual &&
-    targetPct &&
-    modal
-  ){
-
-    $('jual').value =
-      Math.round(
-        suggested
-      ).toLocaleString('id-ID');
-
-  }
-
-
-  const sell =
-    num($('jual').value);
-
-
-  const profit =
-    sell - modal;
-
-
-  const margin =
-    sell
-      ? (profit / sell) * 100
-      : 0;
-
-
-  const totalModal =
-    modal * qty;
-
-
-  const totalProfit =
-    profit * qty;
-
-
-  $('suggest').textContent =
-    rp(sell || suggested);
-
-
-  $('profit').textContent =
-    rp(profit);
-
-
-  $('margin').textContent =
-    margin.toFixed(2) + '%';
-
-
-  $('totalModal').textContent =
-    rp(totalModal);
-
-
-  $('totalProfit').textContent =
-    rp(totalProfit);
-
-
-  if(profit < 0){
-
-    $('profit').className =
-      'red';
-
-    $('totalProfit').className =
-      'red';
-
-    $('note').textContent =
-      '⚠️ Harga jual lebih rendah dari modal.';
-
-  }
-
-  else if(
-    profit === 0 &&
-    sell
-  ){
-
-    $('profit').className =
-      '';
-
-    $('totalProfit').className =
-      '';
-
-    $('note').textContent =
-      'Harga jual sama dengan modal.';
-
-  }
-
-  else{
-
-    $('profit').className =
-      'green';
-
-    $('totalProfit').className =
-      'green';
-
-    $('note').textContent =
-      'Perhitungan keuntungan kotor.';
-
-  }
-
-}
-
-
-/* RESET */
-function resetAll(){
-
-  $('name').value = '';
-
-  $('modal').value = '';
-
-  $('jual').value = '';
-
-  $('qty').value = 1;
-
-  targetPct = 0;
-
-  manual = false;
-
-  document
-    .querySelectorAll('.targets button')
-    .forEach(button =>
-      button.classList.remove('active')
-    );
-
-  calc();
-
-}
-
-
-/* SIMPAN */
-function saveResult(){
-
-  const name =
-    $('name').value ||
-    'Produk';
-
-  const modal =
-    num($('modal').value);
-
-  const jual =
-    num($('jual').value);
-
-  const qty =
-    Math.max(
-      1,
-      num($('qty').value)
-    );
-
-
-  if(!modal || !jual){
-
-    $('note').textContent =
-      '⚠️ Isi harga modal dan harga jual terlebih dahulu.';
-
-    return;
-
-  }
-
-
-  const item = {
-
-    name:name,
-
-    modal:modal,
-
-    jual:jual,
-
-    qty:qty,
-
-    profit:(jual - modal) * qty,
-
-    date:new Date().toLocaleString('id-ID')
-
-  };
-
-
-  let history =
-    JSON.parse(
-      localStorage.getItem(
-        'nielHistory'
-      ) || '[]'
-    );
-
-
-  history.unshift(item);
-
-
-  /*
-    Maksimal 10 riwayat
-  */
-
-  history =
-    history.slice(0,10);
-
-
-  localStorage.setItem(
-    'nielHistory',
-    JSON.stringify(history)
-  );
-
-
-  renderHistory();
-
-
-  $('note').textContent =
-    '✓ Perhitungan berhasil disimpan.';
-
-}
-
-
-/* TAMPILKAN RIWAYAT */
-function renderHistory(){
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        'nielHistory'
-      ) || '[]'
-    );
-
-
-  if(!history.length){
-
-    $('history').innerHTML =
-      '<div class="empty">Belum ada riwayat.</div>';
-
-    return;
-
-  }
-
-
-  $('history').innerHTML =
-    history.map(item => {
-
-      const profitClass =
-        item.profit >= 0
-          ? 'green'
-          : 'red';
-
-
-      return `
-
-        <div class="history-row">
-
-          <span>
-
-            <b>
-              ${escapeHTML(item.name)}
-            </b>
-
-            <br>
-
-            <span class="small">
-              ${rp(item.modal)}
-              →
-              ${rp(item.jual)}
-              ×
-              ${item.qty}
-            </span>
-
-          </span>
-
-
-          <span
-            class="${profitClass}"
-          >
-
-            ${item.profit >= 0 ? '+' : ''}
-            ${rp(item.profit)}
-
-          </span>
-
-        </div>
-
-      `;
-
-    }).join('');
-
-}
-
-
-/* HAPUS RIWAYAT */
-function clearHistory(){
-
-  if(
-    !confirm(
-      'Hapus semua riwayat perhitungan?'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  localStorage.removeItem(
-    'nielHistory'
-  );
-
-
-  renderHistory();
-
-}
-
-
-/* AMANKAN TEKS NAMA PRODUK */
-function escapeHTML(text){
-
-  return String(text)
-    .replace(
-      /[&<>"']/g,
-      function(character){
-
-        return {
-
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#039;'
-
-        }[character];
-
-      }
-    );
-
-}
-
-
-/* LOAD */
-renderHistory();
-
-calc();
-
-</script>
 
 </body>
 </html>
