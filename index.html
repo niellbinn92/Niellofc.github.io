@@ -1,211 +1,311 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nielstore | Official Links</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Telegram Mini App Store</title>
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Tailwind CSS & FontAwesome Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkBg: '#121316',
+            cardBg: '#1a1c23',
+            borderBg: '#2a2d37',
+            accentGold: '#f59e0b',
+            accentGreen: '#10b981'
+          }
         }
-        body {
-            background-color: #0b0614;
-            background-image: radial-gradient(circle at 50% 20%, #2b104a 0%, #0b0614 70%);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-        }
-        .profile-img-container {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px auto;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
-            padding: 3px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
-        }
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #1a102f;
-        }
-        h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        .info-card {
-            background: rgba(25, 15, 45, 0.6);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 14px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-        }
-        .info-card p {
-            font-size: 13px;
-            color: #d8b4fe;
-            margin-bottom: 5px;
-        }
-        .info-card span {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-        .section-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #6b7280;
-            margin-bottom: 15px;
-        }
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(30, 18, 55, 0.7);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            border-radius: 14px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-        .btn-link:hover {
-            background: rgba(50, 25, 90, 0.9);
-            border-color: rgba(168, 85, 247, 0.8);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
-        }
-        .btn-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-align: left;
-        }
-        .icon-box {
-            width: 36px;
-            height: 36px;
-            background: rgba(168, 85, 247, 0.15);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #c084fc;
-            font-size: 16px;
-        }
-        .btn-text h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-        .btn-text span {
-            font-size: 11px;
-            color: #9ca3af;
-        }
-        .arrow {
-            color: #9ca3af;
-            font-size: 14px;
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #121316;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
-<body>
+<body class="bg-darkBg min-h-screen text-slate-200 pb-20">
 
-    <div class="container">
-        <!-- Foto Profil / Logo -->
-        <div class="profile-img-container">
-            <img src="https://i.ibb.co.com/Kxntppch/FE9-DA9-EC-77-A5-420-F-9-D2-B-1-E17-E790-B225.png" alt="Logo" class="profile-img">
+  <!-- 1. LOADING SCREEN -->
+  <div id="loadingScreen" class="fixed inset-0 bg-darkBg z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative w-16 h-16 border-4 border-slate-700 border-t-accentGold rounded-full animate-spin mb-6"></div>
+    <p class="text-sm tracking-wider font-semibold text-slate-300">LOADING SYSTEM</p>
+    <p id="loadingProgress" class="text-xs text-slate-500 mt-2">MENGAMBIL DATA... 0%</p>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="appContainer" class="hidden max-w-md mx-auto px-4 pt-4">
+
+    <!-- 2. USER PROFILE HEADER -->
+    <div class="bg-cardBg border border-borderBg rounded-2xl p-3 flex items-center justify-between mb-4 shadow-lg">
+      <div class="flex items-center space-x-3">
+        <img id="userAvatar" src="https://via.placeholder.com/45" class="w-11 h-11 rounded-full border border-slate-600 object-cover" alt="User Avatar">
+        <div>
+          <div class="flex items-center space-x-1.5">
+            <span id="userName" class="font-bold text-white text-sm">#USER</span>
+            <span class="bg-slate-800 text-[10px] text-amber-400 font-bold px-1.5 py-0.5 rounded border border-amber-500/30">VIP</span>
+          </div>
+          <p id="userId" class="text-[11px] text-slate-400">ID: 00000000</p>
         </div>
-        
-        <h1>nielstore.dev</h1>
-
-        <!-- Kotak Info / Komunitas -->
-        <div class="info-card">
-            <p>🟣 Update, file download & komunitas resmi.</p>
-            <span>+ Member aktif & terpercaya</span>
-        </div>
-
-        <div class="section-title">Canais Oficiais & Download</div>
-
-        <!-- Tombol Download Drip APKMOD -->
-        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
-            <div class="btn-left">
-                <div class="icon-box">📥</div>
-                <div class="btn-text">
-                    <h3>Download Drip APKMOD</h3>
-                    <span>Unduh versi resmi via MediaFire</span>
-                </div>
-            </div>
-            <div class="arrow">➔</div>
-        </a>
-
-        <!-- Tombol Download Drip Wire -->
-        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
-            <div class="btn-left">
-                <div class="icon-box">📥</div>
-                <div class="btn-text">
-                    <h3>Download DRIP WIRE</h3>
-                    <span>Unduh versi resmi via MediaFire</span>
-                </div>
-            </div>
-            <div class="arrow">➔</div>
-        </a>
-
-        <!-- Tombol Download Drip Root -->
-        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
-            <div class="btn-left">
-                <div class="icon-box">📥</div>
-                <div class="btn-text">
-                    <h3>Download DRIP ROOT</h3>
-                    <span>Unduh versi resmi via MediaFire</span>
-                </div>
-            </div>
-            <div class="arrow">➔</div>
-        </a>
-
-        <!-- Tombol Download Drip Proxy -->
-        <a href="URL_MEDIAFIRE_KAMU_DISINI" target="_blank" class="btn-link">
-            <div class="btn-left">
-                <div class="icon-box">📥</div>
-                <div class="btn-text">
-                    <h3>Download DRIP PROXY</h3>
-                    <span>Unduh versi resmi via MediaFire</span>
-                </div>
-            </div>
-            <div class="arrow">➔</div>
-        </a>
-
-        <!-- Tombol TikTok Resmi -->
-        <a href="URL_TIKTOK_KAMU_DISINI" target="_blank" class="btn-link">
-            <div class="btn-left">
-                <div class="icon-box">🎵</div>
-                <div class="btn-text">
-                    <h3>TikTok Resmi Nielstore</h3>
-                    <span>Tonton video & testimoni terbaru</span>
-                </div>
-            </div>
-            <div class="arrow">➔</div>
-        </a>
-
+      </div>
+      <div class="text-right">
+        <p class="text-[10px] text-slate-400 uppercase font-semibold">Saldo</p>
+        <p id="userBalance" class="text-sm font-extrabold text-accentGold">Rp 0</p>
+      </div>
     </div>
 
+    <!-- TAB 1: MUA KEY (Beli Key & Mod) -->
+    <div id="tabMuaKey" class="tab-content space-y-4">
+      
+      <!-- HERO BANNER -->
+      <div class="bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 rounded-2xl p-4 flex items-center space-x-3">
+        <i class="fa-solid fa-key text-accentGold text-2xl"></i>
+        <div>
+          <h2 class="font-bold text-sm text-white uppercase tracking-wide">MUA KEY GAME / TOOL</h2>
+          <p class="text-xs text-slate-400">Layanan otomatis & terpercaya</p>
+        </div>
+      </div>
+
+      <!-- KATEGORI GAME -->
+      <div>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pilih Game</p>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="selectGame('ff')" id="btnFF" class="bg-cardBg border-2 border-amber-500 rounded-xl p-3 flex items-center space-x-3 transition">
+            <i class="fa-solid fa-fire text-amber-500 text-lg"></i>
+            <span class="text-xs font-bold text-white">FREE FIRE</span>
+          </button>
+          <button onclick="selectGame('aov')" id="btnAOV" class="bg-cardBg border border-borderBg rounded-xl p-3 flex items-center space-x-3 opacity-60">
+            <i class="fa-solid fa-shield-halved text-slate-400 text-lg"></i>
+            <span class="text-xs font-bold text-slate-300">AOV</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KATEGORI PRODUK (PLANTOM / PHANTOM) -->
+      <div>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pilih Produk</p>
+        <div class="bg-cardBg border border-borderBg rounded-xl p-3 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-ghost text-slate-300"></i>
+            <span class="text-sm font-semibold text-white">PHANTOM MOD</span>
+          </div>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-bold">READY STOCK</span>
+        </div>
+      </div>
+
+      <!-- PAKET LISENSI -->
+      <div>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pilih Paket Durasi</p>
+        <div class="space-y-2">
+          <label class="bg-cardBg border border-borderBg rounded-xl p-3 flex items-center justify-between cursor-pointer hover:border-amber-500/50">
+            <div class="flex items-center space-x-3">
+              <input type="radio" name="package" value="1Hari" checked class="accent-amber-500">
+              <div>
+                <p class="text-xs font-bold text-white">PHANTOM - 1 HARI</p>
+                <p class="text-[11px] text-slate-400">Lisensi Aktif 24 Jam</p>
+              </div>
+            </div>
+            <span class="text-xs font-extrabold text-accentGold">Rp 15.000</span>
+          </label>
+
+          <label class="bg-cardBg border border-borderBg rounded-xl p-3 flex items-center justify-between cursor-pointer hover:border-amber-500/50">
+            <div class="flex items-center space-x-3">
+              <input type="radio" name="package" value="7Hari" class="accent-amber-500">
+              <div>
+                <p class="text-xs font-bold text-white">PHANTOM - 7 HARI</p>
+                <p class="text-[11px] text-slate-400">Lisensi Aktif 7 Hari</p>
+              </div>
+            </div>
+            <span class="text-xs font-extrabold text-accentGold">Rp 50.000</span>
+          </label>
+
+          <label class="bg-cardBg border border-borderBg rounded-xl p-3 flex items-center justify-between cursor-pointer hover:border-amber-500/50">
+            <div class="flex items-center space-x-3">
+              <input type="radio" name="package" value="30Hari" class="accent-amber-500">
+              <div>
+                <p class="text-xs font-bold text-white">PHANTOM - 30 HARI</p>
+                <p class="text-[11px] text-slate-400">Lisensi Aktif 30 Hari</p>
+              </div>
+            </div>
+            <span class="text-xs font-extrabold text-accentGold">Rp 150.000</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- TOMBOL BELI -->
+      <button onclick="buyProduct()" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-extrabold py-3.5 rounded-xl text-sm transition tracking-wider shadow-lg shadow-amber-500/10">
+        BELI SEKARANG
+      </button>
+    </div>
+
+    <!-- TAB 2: TOP UP SALDO (MANUAL) -->
+    <div id="tabTopUp" class="tab-content hidden space-y-4">
+      <div class="bg-cardBg border border-borderBg rounded-2xl p-4 text-center">
+        <i class="fa-solid fa-wallet text-amber-500 text-3xl mb-2"></i>
+        <h3 class="text-sm font-bold text-white">TOP UP SALDO MANUAL</h3>
+        <p class="text-xs text-slate-400 mt-1">Silakan hubungi Admin untuk melakukan deposit saldo via QRIS / E-Wallet / Transfer Bank.</p>
+        
+        <div class="mt-4 bg-darkBg p-3 rounded-xl border border-borderBg text-left space-y-2">
+          <p class="text-[11px] text-slate-400">Sebutkan ID Telegram Anda saat deposit:</p>
+          <div class="bg-cardBg p-2 rounded border border-slate-700 flex justify-between items-center">
+            <span id="depositUserId" class="text-xs font-mono font-bold text-amber-400">ID: -</span>
+            <button onclick="copyID()" class="text-xs text-slate-300 hover:text-white"><i class="fa-regular fa-copy"></i> Salin</button>
+          </div>
+        </div>
+
+        <a href="https://t.me/admin" target="_blank" class="mt-4 inline-block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition">
+          <i class="fa-brands fa-telegram mr-1.5 text-base"></i> HUBUNGI ADMIN TOP UP
+        </a>
+      </div>
+    </div>
+
+    <!-- TAB 3: PROFILE / AKUN -->
+    <div id="tabProfile" class="tab-content hidden space-y-4">
+      <div class="bg-cardBg border border-borderBg rounded-2xl p-4 space-y-3">
+        <h3 class="text-xs font-bold text-slate-400 uppercase">Informasi Akun</h3>
+        <div class="flex justify-between text-xs py-1 border-b border-slate-800">
+          <span class="text-slate-400">Nama User</span>
+          <span id="profName" class="font-bold text-white">-</span>
+        </div>
+        <div class="flex justify-between text-xs py-1 border-b border-slate-800">
+          <span class="text-slate-400">ID Telegram</span>
+          <span id="profId" class="font-bold text-white">-</span>
+        </div>
+        <div class="flex justify-between text-xs py-1">
+          <span class="text-slate-400">Total Saldo</span>
+          <span id="profBalance" class="font-bold text-amber-400">Rp 0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. BOTTOM NAVIGATION BAR -->
+  <div class="fixed bottom-0 left-0 right-0 bg-cardBg border-t border-borderBg max-w-md mx-auto flex justify-around py-2.5 z-40">
+    <button onclick="switchTab('tabMuaKey', this)" class="nav-btn flex flex-col items-center text-amber-500">
+      <i class="fa-solid fa-key text-base"></i>
+      <span class="text-[10px] font-bold mt-1">MUA KEY</span>
+    </button>
+    <button onclick="switchTab('tabTopUp', this)" class="nav-btn flex flex-col items-center text-slate-400">
+      <i class="fa-solid fa-wallet text-base"></i>
+      <span class="text-[10px] font-bold mt-1">TOP NAP</span>
+    </button>
+    <button onclick="switchTab('tabProfile', this)" class="nav-btn flex flex-col items-center text-slate-400">
+      <i class="fa-solid fa-user text-base"></i>
+      <span class="text-[10px] font-bold mt-1">CÁ NHÂN</span>
+    </button>
+  </div>
+
+  <!-- JAVASCRIPT INTEGRATION -->
+  <script>
+    // Initialize Telegram WebApp
+    const tg = window.Telegram ? window.Telegram.WebApp : null;
+
+    if (tg) {
+      tg.ready();
+      tg.expand(); // Fullscreen
+    }
+
+    // SIMULASI LOADING SCREEN
+    window.addEventListener('DOMContentLoaded', () => {
+      let progress = 0;
+      const progressElem = document.getElementById('loadingProgress');
+      const interval = setInterval(() => {
+        progress += 25;
+        progressElem.innerText = `MENGAMBIL DATA... ${progress}%`;
+        if (progress >= 100) {
+          clearInterval(interval);
+          document.getElementById('loadingScreen').classList.add('opacity-0');
+          setTimeout(() => {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('appContainer').classList.remove('hidden');
+          }, 500);
+        }
+      }, 200);
+
+      // INTEGRASI AKUN TELEGRAM REAL
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        const user = tg.initDataUnsafe.user;
+        const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.username || "User";
+        
+        document.getElementById('userName').innerText = fullName;
+        document.getElementById('profName').innerText = fullName;
+        
+        document.getElementById('userId').innerText = `ID: ${user.id}`;
+        document.getElementById('profId').innerText = user.id;
+        document.getElementById('depositUserId').innerText = `ID: ${user.id}`;
+
+        if (user.photo_url) {
+          document.getElementById('userAvatar').src = user.photo_url;
+        }
+      }
+    });
+
+    // NAVIGASI TAB MENU
+    function switchTab(tabId, btnElem) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-amber-500');
+        btn.classList.add('text-slate-400');
+      });
+      btnElem.classList.remove('text-slate-400');
+      btnElem.classList.add('text-amber-500');
+    }
+
+    // PEMILIHAN GAME
+    function selectGame(game) {
+      const btnFF = document.getElementById('btnFF');
+      const btnAOV = document.getElementById('btnAOV');
+      if (game === 'ff') {
+        btnFF.className = "bg-cardBg border-2 border-amber-500 rounded-xl p-3 flex items-center space-x-3 transition opacity-100";
+        btnAOV.className = "bg-cardBg border border-borderBg rounded-xl p-3 flex items-center space-x-3 opacity-60";
+      } else {
+        btnAOV.className = "bg-cardBg border-2 border-amber-500 rounded-xl p-3 flex items-center space-x-3 transition opacity-100";
+        btnFF.className = "bg-cardBg border border-borderBg rounded-xl p-3 flex items-center space-x-3 opacity-60";
+      }
+    }
+
+    // SALIN ID TELEGRAM
+    function copyID() {
+      const idText = document.getElementById('profId').innerText;
+      navigator.clipboard.writeText(idText);
+      if (tg && tg.showAlert) {
+        tg.showAlert("ID Telegram berhasil disalin!");
+      } else {
+        alert("ID Telegram berhasil disalin!");
+      }
+    }
+
+    // PROSES BELI
+    function buyProduct() {
+      const selectedPkg = document.querySelector('input[name="package"]:checked').value;
+      if (tg && tg.showPopup) {
+        tg.showPopup({
+          title: "Konfirmasi Pembelian",
+          message: `Apakah Anda yakin ingin membeli paket Phantom ${selectedPkg}?`,
+          buttons: [
+            { type: "ok", text: "Beli" },
+            { type: "cancel", text: "Batal" }
+          ]
+        });
+      } else {
+        alert(`Membeli paket Phantom - ${selectedPkg}`);
+      }
+    }
+  </script>
 </body>
 </html>
